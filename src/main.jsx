@@ -15,7 +15,7 @@ if (!window.__REACT_ROOT__) {
 
 window.__REACT_ROOT__.render(
   <StrictMode>
-    <BrowserRouter basename="/frontend-upload">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </StrictMode>,

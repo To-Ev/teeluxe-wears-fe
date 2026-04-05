@@ -1,71 +1,64 @@
-import React, { useState } from 'react';
-import axios from 'axios'
-import { server } from '../main'
-import toast from 'react-hot-toast'
+import React, { useState } from 'react'
+import LoginImg from '../assets/login.webp';
 import { Link } from 'react-router-dom';
-import styles from './styles.module.css';
 
-function Login() {
+const Login = () => {
 
-    const [data, setData] = useState({
-        username: "",
-        password: ""
-    })
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    function handleChange({currentTarget: input}) {
-        setData({...data, [input.name]: input.value})
-    }
-
-    async function handleSubmit(e) {
+    const handleSubmit = (e) =>{
         e.preventDefault();
-        try {
-            const {data: res} = await axios.post(`${server}/api/login`, data, {withCredentials: true});
-            toast.success(res.msg);
+        console.log(`User loggedIn:`, {email, password});
 
-            // store token
-            sessionStorage.setItem(`token`, res.accessToken);
-
-        } catch (err) {
-            console.error(err);
-            if (err.response?.data?.err) {
-                toast.error(err.response.data.err);
-            } else {
-                toast.error(err.message || "Login failed. Please try again.");
-            }
-        }finally{
-            setData({
-                username: "",
-                password: ""
-            })
-        }
-        
+        setEmail("");
+        setPassword("");
     }
 
-    return(
-        <div className="container">
-            
-            <form onSubmit={handleSubmit} className="form">
-                <input type="text" 
-                    name="username" 
-                    placeholder="Username" 
-                    value={data.username}
-                    onChange={handleChange}
-                />
-                <input type="password" 
-                    name="password" 
-                    placeholder="Password" 
-                    value={data.password}
-                    onChange={handleChange}
-                />
-                <div className={styles.sign}>
-                    <p>Don't have an account?</p>
-                    <Link to="/register" >Sign up</Link>
+  return (
+    <section className='flex m-6'>
+        <div className='w-full md:w-1/2 flex justify-center items-center flex-col text-gray-700'>
+            <form onSubmit={handleSubmit} className='w-full max-w-md p-8 shadow-md justify-center'>
+                <div className='flex justify-center items-center mb-4'>
+                    <h1 className='text-xl font-semibold text-gray-800'>Teeluxe Wears</h1>
                 </div>
-                <button type="submit">Login</button>
-                
+                <h2 className='text-center text-2xl mb-2'>Hey there 👋🏻</h2>
+                <p className='text-center tracking-tighter mb-4'>Enter your email and password to Login</p>
+                <div className='mb-4'>
+                    <label className='text-sm font-semibold block mb-2'>Email</label>
+                    <input 
+                        type="email" 
+                        value={email}
+                        onChange={(e) =>setEmail(e.target.value)}
+                        className='w-full p-2 text-gray-700 bg-gray-200 rounded  focus:outline-green-200'
+                        placeholder='Enter your email'
+                    />
+                </div>
+                <div className='mb-6'>
+                    <label className='text-sm font-semibold block mb-2'>Password</label>
+                    <input 
+                        type="password" 
+                        value={password}
+                        onChange={(e) =>setPassword(e.target.value)}
+                        className='w-full p-2 text-gray-700 bg-gray-200 rounded  focus:outline-green-200'
+                        placeholder='Enter your password'
+                    />
+                </div>
+                <button type='submit' className='bg-black w-full p-2 text-white rounded hover:bg-gray-800 transition cursor-pointer font-semibold mb-4'>Sign in</button>
+                <p className='text-sm text-center font-semibold'>Don't have an account?
+                    <Link to="/register" className='text-yellow-300 ml-1'>Register</Link>
+                </p>
             </form>
         </div>
-    )
+        <div className='hidden md:block w-1/2'>
+            <img 
+                src={LoginImg} 
+                alt="Login image" 
+                className='w-full h-188 object-cover'
+            />
+        </div>
+    </section>
+  )
 }
 
 export default Login
