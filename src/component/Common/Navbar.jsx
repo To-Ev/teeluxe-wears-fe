@@ -42,7 +42,7 @@ const Navbar = () => {
             </div>
             {/* Right Icons */}
             <div className='flex items-center space-x-4'>
-                <Link to="/admin" className='block bg-black rounded text-sm px-2 text-white'>Admin</Link>
+                <Link to="/admin" className='block bg-black rounded text-sm px-3 py-1 text-white'>Admin</Link>
                 <Link to='/profile' className='hover:text-black'>
                     <HiOutlineUser className='h-6 w-6 text-gray-700'/>
                 </Link>
