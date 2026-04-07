@@ -7,28 +7,23 @@ import { FiPhoneCall } from 'react-icons/fi'
 
 const Footer = () => {
   return (
-    <footer className='py-12 border-t border-gray-300'>
-        <div className='container mx-auto grid grid-cols-1 text-center md:grid-cols-4 md:text-left gap-8 px-4 lg:px-0'>
-            <div>
+    <footer className='py-12 border-t border-gray-300 bg-gray-50'>
+        <div className='container mx-auto grid grid-cols-1 text-center md:grid-cols-3 gap-8 px-4 lg:px-0'>
+            <div className='md:pl-3'>
                 <h3 className='text-lg text-gray-800 mb-4'>Newsletter</h3>
                 <p className='text-gray-500 mb-4'>Be the first to hear about New product, Exclusive events and Online offers</p>
-                <form className='flex justify-center md:justify-start'>
-                    <input 
-                    type="email" 
-                    placeholder='Enter your email'
-                    className='w-full p-2 text-sm border-l border-t border-b border-gray-500 font-medium text-gray-700 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gray-500 transition-all' required
-                    />
-                    <button 
-                    type='submit'
-                    className='bg-black text-white px-5 py-2.5 rounded-r-md hover:bg-gray-800 cursor-pointer'>Subscribe</button>
+                <form className='flex justify-center'>
+                   <label className='flex w-full relative'>
+                        <input 
+                            type="email" 
+                            placeholder='Enter your email'
+                            className='w-full p-4 text-sm bg-gray-200 font-medium text-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-green-200 transition-all' required
+                        />
+                        <button 
+                        type='submit'
+                        className='bg-black text-white absolute top-1.5 right-2 rounded-md p-2 hover:bg-gray-800 cursor-pointer'>Subscribe</button>
+                   </label>
                 </form>
-            </div>
-            <div>
-                <h3 className="text-lg text-gray-800 mb-4">Shop</h3>
-                <Link to="#" className='text-gray-500 mb-4 block'>Jewelries</Link>
-                <Link to="#" className='text-gray-500 mb-4 block'>Wears</Link>
-                <Link to="#" className='text-gray-500 mb-4 block'>Top wears</Link>
-                <Link to="#" className='text-gray-500 mb-4 block'>Bottom wears</Link>
             </div>
             <div>
                 <h3 className="text-lg text-gray-800 mb-4">Support</h3>
@@ -39,7 +34,7 @@ const Footer = () => {
             </div>
             <div>
                 <h3 className="text-lg text-gray-800 mb-4">Follow us</h3>
-                <div className='flex space-x-3 space-y-4 justify-center md:justify-start'>
+                <div className='flex space-x-3 space-y-4 justify-center'>
                     <a 
                     href="#"
                     target='_blank'

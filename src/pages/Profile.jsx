@@ -9,7 +9,7 @@ const Profile = () => {
           {/* left section */}
           <div className='w-full md:w-1/3 shadow p-6'> 
             <h1 className='text-2xl md:text-3xl font-semibold mb-3'>Zaynab Tinuola</h1>
-            <p className='text-lg mb-4 tracking-tight'>John@example.com</p>
+            <p className='text-lg mb-4 tracking-tight'>zaynab@example.com</p>
             <button className='w-full bg-red-500 text-white hover:bg-red-600 transition cursor-pointer rounded-lg py-2 font-semibold tracking-wide'>Logout</button>
           </div>
           {/* Left section  */}

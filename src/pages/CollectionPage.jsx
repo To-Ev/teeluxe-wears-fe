@@ -89,14 +89,14 @@ const CollectionPage = () => {
     <section className='flex flex-col lg:flex-row mx-auto'>
         <button 
             onClick={toggleSidebar}
-            className='flex p-2 lg:hidden border border-gray-300 text-gray-700 justify-center items-center cursor-pointer'>
+            className='flex p-2 lg:hidden border-b border-l border-r border-gray-300 text-gray-700 justify-center items-center cursor-pointer'>
             <RiFilter2Fill className='w-5 h-5 mr-1'/> <span className=' tracking-wider'>Filters</span>
         </button>
 
         {/* Filter section */}
         <div 
             ref={sideBarRef}
-            className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} z-50 bg-white w-2/3 sm:w-86 fixed left-0 inset-y-0 overflow-y-auto transition duration-300 lg:static lg:translate-x-0 lg:w-64`}>
+            className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} z-50 bg-white w-2/3 sm:w-100 fixed left-0 inset-y-0 overflow-y-auto transition duration-300 lg:static lg:translate-x-0`}>
             <FilterSideBar />
         </div>  
         <div className='grow p-4'>

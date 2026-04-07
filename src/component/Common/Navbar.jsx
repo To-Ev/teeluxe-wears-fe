@@ -33,7 +33,7 @@ const Navbar = () => {
                 <Link to='/collections/all' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
                     Wears
                 </Link>
-                <Link to='/' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
+                <Link to='/login' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
                     Top wear
                 </Link>
                 <Link to='/' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
@@ -69,8 +69,8 @@ const Navbar = () => {
             </div>
             <div className='space-y-4 ml-4'>
                 <h2 className="text-gray-700 text-2xl font-semibold">Menu</h2>
-                <Link to="#" className='block font-semibold text-gray-700 hover:text-black'>Jewelries</Link>
-                <Link to="#" className='block font-semibold text-gray-700 hover:text-black'>Wears</Link>
+                <Link to="/collections/all" className='block font-semibold text-gray-700 hover:text-black'>Jewelries</Link>
+                <Link to="/collections/all" className='block font-semibold text-gray-700 hover:text-black'>Wears</Link>
                 <Link to="#" className='block font-semibold text-gray-700 hover:text-black'>Top Wear</Link>
                 <Link to="#" className='block font-semibold text-gray-700 hover:text-black'>Bottom Wear</Link>
             </div>
