@@ -21,7 +21,7 @@ const Navbar = () => {
         <nav className='container flex mx-auto justify-between items-center py-4 px-6'>
             {/* Start Bar */}
             <div>
-                <Link to='/' className='text-2xl font-semibold text-gray-700'>
+                <Link to='/' className='text-md md:text-2xl font-semibold text-gray-700'>
                     Teeluxe Wears
                 </Link>
             </div>
@@ -41,8 +41,8 @@ const Navbar = () => {
                 </Link>
             </div>
             {/* Right Icons */}
-            <div className='flex items-center space-x-4'>
-                <Link to="/admin" className='block bg-black rounded text-sm px-3 py-1 text-white'>Admin</Link>
+            <div className='flex items-center space-x-2.5 sm:space-x-4'>
+                <Link to="/admin" className='block bg-black rounded px-2 py-0.5 text-sm sm:px-3 sm:py-1 text-white'>Admin</Link>
                 <Link to='/profile' className='hover:text-black'>
                     <HiOutlineUser className='h-6 w-6 text-gray-700'/>
                 </Link>

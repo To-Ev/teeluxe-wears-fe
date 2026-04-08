@@ -22,26 +22,5 @@ export default defineConfig({
   base: '/teeluxe-wears-fe/'
 })
 
-
-
-// {plugin: [
-//    react(), 
-//    tailwindcss({ 
-//     theme: { 
-//       extend: { 
-//         colors: { 
-//           brand: { light: '#3ab7ff', DEFAULT: '#0077cc', dark: '#004a80', }, 
-//         }, 
-//         fontFamily: { 
-//           sans: ['Inter', 'system-ui', 'sans-serif'], 
-//           heading: ['Poppins', 'sans-serif'], 
-//         }, 
-//       }, 
-//     }, 
-//   }), 
-// ]}
-
-
-// <div className="bg-brand text-brand-dark font-heading">
-//   Hello with custom Tailwind theme!
-// </div>
+// git remote -v 
+// git remote set-url origin  https://github.com/To-Ev/teeluxe-wears-fe.git

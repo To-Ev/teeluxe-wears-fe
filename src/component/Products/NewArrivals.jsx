@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 const NewArrivals = () => {
+    const scrollRef = useRef(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
     const NewArrivals = [
         {
             _id: 1,
@@ -103,24 +107,44 @@ const NewArrivals = () => {
             ]
         },
     ]
+
+    const scroll = (direction) =>{
+        const scrollamount = direction === "left" ? -300 : 300;
+        scrollRef.current.scrollBy({ left: scrollamount, behavior: "smooth"})
+    }
+
+    // Update Scroll Buttons 
+    const updateScrollButtons = () =>{
+        const container = scrollRef.current;
+
+        if(container) {
+            const leftScroll = container.scrollLeft;
+            const rightScrollable = 
+                container.scrollWidth > leftScroll + container.clientWidth;
+
+            setCanScrollLeft(leftScroll > 0);
+            setCanScrollRight(rightScrollable)
+        }
+    };
+
+    useEffect(() => {
+        const container = scrollRef.current;
+        if(container) {
+            container.addEventListener("scroll", updateScrollButtons)
+            updateScrollButtons();
+        }
+    });
+
   return (
-    <section className='px-4 py-12 lg:px-0'>
+    <section className='px-4 py-12 lg:px-0 relative'>
         <div className='container mx-auto text-center relative'>
             <h1 className='font-semibold text-2xl mb-4 text-gray-700'>Explore New Arrivals</h1>
             <p className='mb-10 text-gray-700 text-sm tracking-tight'>Discover the latest style straight off the Runaway, freshly added to keep your wardrobe at the cutting edge of fashion.</p>
-
-            {/* Scrollable button */}
-            {/* <div className='absolute -bottom-8 right-0 flex'>
-                <button className='text-gray-600 p-2 shadow-md cursor-pointer'>
-                    <FiChevronLeft className='text-2xl '/>
-                </button>
-                <button className='text-gray-600 p-2 shadow-md cursor-pointer'>
-                    <FiChevronRight className='text-2xl'/>
-                </button>
-            </div> */}
         </div>
         {/* Scrollable area */}
-        <div className='container mx-auto flex overflow-x-scroll space-x-6 relative'>
+        <div 
+            ref={scrollRef}
+            className='container mx-auto flex overflow-x-scroll space-x-6 relative'>
             {
                 NewArrivals.map((product) =>
                     <div key={product._id} className='min-w-full sm:min-w-[50%] lg:min-w-[30%] mt-2 relative'>
@@ -141,6 +165,20 @@ const NewArrivals = () => {
                     </div>
                 )
             }
+        </div> 
+        {/* Scrollable button */}
+        <div className='absolute bottom-45 sm:top-1/2 right-0 flex justify-between w-full p-2'>
+            <button 
+                disabled={!canScrollLeft}
+                onClick={() => scroll("left")}
+                className={` rounded-sm py-4 p-2 shadow-md cursor-pointer ${canScrollLeft ? "text-gray-600  bg-white/80" : "text-gray-50/0"}`}>
+                <FiChevronLeft className='text-2xl '/>
+            </button>
+            <button 
+                onClick={() => scroll("right")}
+                className={` rounded-sm py-4 p-2 shadow-md cursor-pointer transition ${canScrollRight ? "text-gray-600 bg-white/80" : "text-gray-50/0"}`}>
+                <FiChevronRight className='text-2xl'/>
+            </button>
         </div>
     </section>
   )
