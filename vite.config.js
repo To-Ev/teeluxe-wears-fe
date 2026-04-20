@@ -23,4 +23,4 @@ export default defineConfig({
 })
 
 // git remote -v 
-// git remote set-url origin  https://github.com/To-Ev/teeluxe-wears-fe.git
+// git remote set-url origin  https://github.com/To-Ev/teeluxe-wears-be.git
