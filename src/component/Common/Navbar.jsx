@@ -71,7 +71,7 @@ const Navbar = () => {
                 <h2 className="text-gray-700 text-2xl font-semibold">Menu</h2>
                 <Link to="/collections/all" className='block font-semibold text-gray-700 hover:text-black'>Jewelries</Link>
                 <Link to="/collections/all" className='block font-semibold text-gray-700 hover:text-black'>Wears</Link>
-                <Link to="#" className='block font-semibold text-gray-700 hover:text-black'>Top Wear</Link>
+                <Link to="/login" className='block font-semibold text-gray-700 hover:text-black'>Top Wear</Link>
                 <Link to="#" className='block font-semibold text-gray-700 hover:text-black'>Bottom Wear</Link>
             </div>
         </div>

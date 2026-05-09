@@ -32,7 +32,7 @@ const OrderConfirmationPage = () => {
             },
         ],
         shippingAddress: {
-            address: "N0 38 polyfarm Nariya",
+            address: "N0 38 poly farm Nariya",
             city: "Kaduna",
             country: "Nigeria",
         }
