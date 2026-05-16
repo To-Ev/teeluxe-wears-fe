@@ -1,16 +1,23 @@
 import React, { useState } from 'react'
 import LoginImg from '../assets/login.webp';
 import { Link } from 'react-router-dom';
+import { loginUser } from '../redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        console.log(`User loggedIn:`, {email, password});
+    const dispatch = useDispatch();
 
+    const handleSubmit = (e) =>{
+        try {
+            e.preventDefault();
+            dispatch(loginUser({ email, password }));
+        } catch (error) {
+            console.error('Login failed:', error);
+        }
         setEmail("");
         setPassword("");
     }

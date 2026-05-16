@@ -1,16 +1,23 @@
 import React, { useState } from 'react'
-import REgisterImg from '../assets/register.webp';
+import RegisterImg from '../assets/register.webp';
 import { Link } from 'react-router-dom';
+import { registerUser } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
     
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) =>{
-        e.preventDefault();
-        console.log(`User Registered:`, {name, email, password});
+        try{
+            e.preventDefault();
+            dispatch(registerUser(name, email, password));
+        }catch(err) {
+            console.error(err);
+        };
 
         setName("");
         setEmail("");
@@ -64,7 +71,7 @@ const Register = () => {
         </div>
         <div className='hidden md:block w-1/2'>
             <img 
-                src={REgisterImg} 
+                src={RegisterImg} 
                 alt="Login image" 
                 className='w-full h-188 object-cover'
             />
