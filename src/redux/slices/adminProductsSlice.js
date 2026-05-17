@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api`;
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 // async thunk to fetch products for admin dashboard
 export const fetchAdminProducts = createAsyncThunk(

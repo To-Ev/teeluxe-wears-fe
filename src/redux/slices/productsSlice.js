@@ -32,7 +32,7 @@ export const fetchByFilters = createAsyncThunk(
         if (brand) queryParams.append("brand", brand);
         if (limit) queryParams.append("limit", limit);
 
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products?${queryParams.toString()}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products?${queryParams.toString()}`);
         return response.data; 
     });
 
@@ -40,13 +40,13 @@ export const fetchByFilters = createAsyncThunk(
     export const fetchProductDetails = createAsyncThunk(
         "products/fetchProductDetails",
         async (productId) => {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${productId}`);
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${productId}`);
             return response.data;
         });
 
 // Async thunk to update based on category
 export const updateProduct = createAsyncThunk("products/updateProduct", async ({ productId, updatedData }) => {
-    const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/products/${productId}`, updatedData, {
+    const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/products/${productId}`, updatedData, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const updateProduct = createAsyncThunk("products/updateProduct", async ({
 export const fetchSimilarProducts = createAsyncThunk(
     "products/fetchSimilarProducts",
     async (productId) => {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/similar/${productId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${productId}`);
         return response.data;
     }
 );

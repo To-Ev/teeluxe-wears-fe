@@ -1,112 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 const NewArrivals = () => {
     const scrollRef = useRef(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
 
-    const NewArrivals = [
-        {
-            _id: 1,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=1",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-        {
-            _id: 2,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=2",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-        {
-            _id: 3,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=3",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-        {
-            _id: 4,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=4",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-        {
-            _id: 5,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=5",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-        {
-            _id: 6,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=6",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-        {
-            _id: 7,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=7",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-        {
-            _id: 8,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=8",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-        {
-            _id: 9,
-            name: "Spaghetti top",
-            price: 120,
-            image: [
-                {
-                    url: "https://picsum.photos/500/500?random=9",
-                    altText: "Spaghetti top",
-                },
-            ]
-        },
-    ]
+    const [NewArrivals, setNewArrivals] = useState([]);
+
+    useEffect(() => {
+        const fetchNewArrivals = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/new-arrivals`);
+                const data = await response.data;
+                setNewArrivals(data);
+            } catch (error) {
+                console.error('Error fetching new arrivals:', error);
+            }
+        };
+
+        fetchNewArrivals();
+    }, []);
 
     const scroll = (direction) =>{
         const scrollamount = direction === "left" ? -300 : 300;
@@ -132,8 +48,9 @@ const NewArrivals = () => {
         if(container) {
             container.addEventListener("scroll", updateScrollButtons)
             updateScrollButtons();
+            return () => container.removeEventListener("scroll", updateScrollButtons);
         }
-    });
+    }, [NewArrivals]);
 
   return (
     <section className='px-4 py-12 lg:px-0 relative'>
@@ -149,8 +66,8 @@ const NewArrivals = () => {
                 NewArrivals.map((product) =>
                     <div key={product._id} className='min-w-full sm:min-w-[50%] lg:min-w-[30%] mt-2 relative'>
                         <img 
-                            src={product?.image[0].url || ''} 
-                            alt={product?.image[0].altText || product.name} 
+                            src={product?.images[0].url || ''} 
+                            alt={product?.images[0].altText || product.name} 
                             className='w-full h-80 object-cover rounded-lg'
                             draggable="false"
                         />
