@@ -135,20 +135,6 @@ const productsSlice = createSlice({
                 state.error = action.error.message;
                 state.selectedProduct = null;
             })
-            // handle fetchSimilarProducts lifecycle actions
-            .addCase(fetchSimilarProducts.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
-                state.loading = false;
-                state.similarProducts = action.payload;
-            })
-            .addCase(fetchSimilarProducts.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
-                state.similarProducts = [];
-            })
             // handle updateProduct lifecycle actions
             .addCase(updateProduct.pending, (state) => {
                 state.loading = true;
