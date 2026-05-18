@@ -42,7 +42,8 @@ export const fetchByFilters = createAsyncThunk(
         async (productId) => {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${productId}`);
             return response.data;
-        });
+        }
+    );
 
 // Async thunk to update based on category
 export const updateProduct = createAsyncThunk("products/updateProduct", async ({ productId, updatedData }) => {
@@ -133,7 +134,6 @@ const productsSlice = createSlice({
             .addCase(fetchProductDetails.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-                state.selectedProduct = null;
             })
             // handle updateProduct lifecycle actions
             .addCase(updateProduct.pending, (state) => {
@@ -163,8 +163,7 @@ const productsSlice = createSlice({
             })
             .addCase(fetchSimilarProducts.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message;
-                state.similarProducts = [];
+                state.error = action.error.err;
             });
     },
 });

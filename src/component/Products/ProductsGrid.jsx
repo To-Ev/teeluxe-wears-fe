@@ -1,16 +1,24 @@
 import {Link} from 'react-router-dom'
 
-const ProductGrid = ({products}) => {
+const ProductGrid = ({products, loading, error}) => {
+    if(loading) {
+        return <p className='text-center text-gray-500'>Loading products...</p>
+    }
+
+    if(error) {
+        return <p className='text-center text-red-500'>Error fetching products.</p>
+    }
+
   return (
     <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
         {
             products.map((product, index) =>
-                <Link to={`/products/${product._id}`} key={index} className='block'>
+                <Link to={`/product/${product._id}`} key={index} className='block'>
                     <div className='text-gray-700 rounded-lg bg-white shadow-sm px-1 mx-2 mb-4'>
                         <div className='w-full h-96 mb-2'>
                             <img 
-                                src={product.image[0].url} 
-                                alt={product.image[0].altText || product.name} 
+                                src={product.images[0].url} 
+                                alt={product.images[0].altText || product.name} 
                                 className='w-full h-full object-cover rounded-lg'
                             />
                         </div>
@@ -20,7 +28,6 @@ const ProductGrid = ({products}) => {
                 </Link>
             )
         }
-        
     </section>
   )
 }
