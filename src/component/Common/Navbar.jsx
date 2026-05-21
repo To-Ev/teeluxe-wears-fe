@@ -4,10 +4,15 @@ import { HiBars3BottomRight, HiOutlineShoppingBag, HiOutlineUser } from 'react-i
 import SearchBar from './SearchBar';
 import CartDrawer from '../Layout/CartDrawer';
 import { IoMdClose } from 'react-icons/io';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+    const { cart } = useSelector(state => state.cart);
+
+    const cartItemCount = 
+    cart?.products?.reduce((total, product) => total + product.quantity, 0) || 0;
 
     const toggleCartDrawer = () =>{
         setDrawerOpen(!drawerOpen)
@@ -27,16 +32,16 @@ const Navbar = () => {
             </div>
             {/* Middle bar */}
             <div className='hidden md:flex space-x-6'>
-                <Link to='/collections/all' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
+                <Link to='/collections/all?section=Jewelries' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
                     Jewelries
                 </Link>
-                <Link to='/collections/all' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
+                <Link to='/collections/all?section=Wears' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
                     Wears
                 </Link>
-                <Link to='/login' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
+                <Link to='/collections/all?category=Top Wear' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
                     Top wear
                 </Link>
-                <Link to='/' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
+                <Link to='/collections/all?category=Bottom Wear' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
                     Bottom wear
                 </Link>
             </div>
@@ -46,9 +51,13 @@ const Navbar = () => {
                 <Link to='/profile' className='hover:text-black'>
                     <HiOutlineUser className='h-6 w-6 text-gray-700'/>
                 </Link>
-                <button onClick={toggleCartDrawer} className='relative hover:text-black cursor-pointer'>
-                    <HiOutlineShoppingBag className='h-6 w-6 text-gray-700'/>
-                    <span className='absolute -top-1 text-xs bg-[#ea2e0e] rounded-full px-2 py-0.5 text-white'>4</span>
+                <button 
+                    onClick={toggleCartDrawer} className='relative hover:text-black cursor-pointer'>
+                        <HiOutlineShoppingBag className='h-6 w-6 text-gray-700'/>
+                        {cartItemCount > 0 && (<span className='absolute -top-1 text-xs bg-[#ea2e0e] rounded-full px-2 py-0.5 text-white'>
+                            {cartItemCount}
+                        </span>)
+                    }
                 </button>
                 {/* SearchBar */}
                 <SearchBar />
@@ -69,10 +78,26 @@ const Navbar = () => {
             </div>
             <div className='space-y-4 ml-4'>
                 <h2 className="text-gray-700 text-2xl font-semibold">Menu</h2>
-                <Link to="/collections/all" className='block font-semibold text-gray-700 hover:text-black'>Jewelries</Link>
-                <Link to="/collections/all" className='block font-semibold text-gray-700 hover:text-black'>Wears</Link>
-                <Link to="/login" className='block font-semibold text-gray-700 hover:text-black'>Top Wear</Link>
-                <Link to="#" className='block font-semibold text-gray-700 hover:text-black'>Bottom Wear</Link>
+                <Link 
+                    to="/collections/all?section=Jewelries" 
+                    className='block font-semibold text-gray-700 hover:text-black'
+                    onClick={toggleNavDrawer}
+                >Jewelries</Link>
+                <Link 
+                    to="/collections/all?section=Wears" 
+                    className='block font-semibold text-gray-700 hover:text-black'
+                    onClick={toggleNavDrawer}
+                >Wears</Link>
+                <Link 
+                    to="/collections/all?category=Top Wear" 
+                    className='block font-semibold text-gray-700 hover:text-black'
+                    onClick={toggleNavDrawer}
+                >Top Wear</Link>
+                <Link 
+                    to="/collections/all?category=Bottom Wear" 
+                    className='block font-semibold text-gray-700 hover:text-black'
+                    onClick={toggleNavDrawer}
+                >Bottom Wear</Link>
             </div>
         </div>
     </div>

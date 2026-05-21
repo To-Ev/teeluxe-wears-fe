@@ -3,12 +3,23 @@ import FilterSideBar from '../component/Products/FilterSideBar'
 import { RiFilter2Fill } from 'react-icons/ri'
 import SortOptions from '../component/Products/SortOptions';
 import ProductsGrid from '../component/Products/ProductsGrid';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchByFilters } from '../redux/slices/productsSlice';
 
 const CollectionPage = () => {
+    const { collection } = useParams();
+    const [searchParams] = useSearchParams();
+    const dispatch = useDispatch();
+    const { products, loading, error } = useSelector(state => state.products);
+    const queryParams = Object.fromEntries([...searchParams])
 
-    const [products, setProducts] = useState([]);
     const sideBarRef = useRef(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    useEffect(() => {
+        dispatch(fetchByFilters({ collection, ...queryParams }));
+    }, [dispatch, collection, searchParams]);
 
     const toggleSidebar = () =>{
         setIsSidebarOpen(!isSidebarOpen);
@@ -30,61 +41,6 @@ const CollectionPage = () => {
         };
     }, []);
 
-    useEffect(() =>{
-        setTimeout(() => {
-            const fetchProducts = [
-                {
-                    _id: 1,
-                    name: "product 1",
-                    price: 300,
-                    image: [{url: "https://picsum.photos/500/500?random=1"}]
-                },
-                {
-                    _id: 2,
-                    name: "product 2",
-                    price: 300,
-                    image: [{url: "https://picsum.photos/500/500?random=2"}]
-                },
-                {
-                    _id: 3,
-                    name: "product 3",
-                    price: 300,
-                    image: [{url: "https://picsum.photos/500/500?random=3"}]
-                },
-                {
-                    _id: 4,
-                    name: "product 4",
-                    price: 300,
-                    image:  [{url: "https://picsum.photos/500/500?random=4"}]
-                },
-                {
-                    _id: 5,
-                    name: "product 5",
-                    price: 300,
-                    image: [{url: "https://picsum.photos/500/500?random=5"}]
-                },
-                {
-                    _id: 6,
-                    name: "product 6",
-                    price: 300,
-                    image:  [{url: "https://picsum.photos/500/500?random=6"}]
-                },
-                {
-                    _id: 7,
-                    name: "product 7",
-                    price: 300,
-                    image:  [{url: "https://picsum.photos/500/500?random=7"}]
-                },
-                {
-                    _id: 8,
-                    name: "product 8",
-                    price: 300,
-                    image:  [{url: "https://picsum.photos/500/500?random=8"}]
-                },
-            ]
-            setProducts(fetchProducts)
-        }, 1000);
-    }, [])
   return (
     <section className='flex flex-col lg:flex-row mx-auto'>
         <button 
@@ -96,7 +52,7 @@ const CollectionPage = () => {
         {/* Filter section */}
         <div 
             ref={sideBarRef}
-            className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} z-50 bg-white w-2/3 sm:w-100 fixed left-0 inset-y-0 overflow-y-auto transition duration-300 lg:static lg:translate-x-0`}>
+            className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} z-50 bg-white w-2/5 sm:w-100 fixed left-0 inset-y-0 overflow-y-auto transition duration-300 lg:static lg:translate-x-0`}>
             <FilterSideBar />
         </div>  
         <div className='grow p-4'>
@@ -106,7 +62,7 @@ const CollectionPage = () => {
            <SortOptions />
 
            {/* Products Grid  */}
-           <ProductsGrid products={products}/>
+           <ProductsGrid products={products} loading={loading} error={error}/>
         </div>
     </section>
   )

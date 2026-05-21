@@ -13,7 +13,7 @@ const ProductsDetails = ({ productId }) => {
     const {selectedProduct, loading, error, similarProducts} = useSelector(state => state.products);
     const { user, guestId }= useSelector(state => state.auth);
 
-    const [mainImage, setMainImage] = useState(selectedProduct?.images?.[0]?.url || "");
+    const [mainImage, setMainImage] = useState(selectedProduct?.images?.[0]?.url);
     const [selectedColor, setSelectedColor] = useState("");
     const [selectedSize, setSelectedSize] = useState("");
     const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -123,15 +123,15 @@ const ProductsDetails = ({ productId }) => {
                     <div className='md:w-1/2 md:ml-10'>
                         <h1 className='font-semibold text-2xl md:text-3xl mb-2 text-gray-800'>{selectedProduct.name}</h1>
                         <p className='text-lg text-gray-500 line-through mb-1'>
-                            N{ selectedProduct.originalPrice && 
-                                `${selectedProduct.originalPrice}`
+                            { selectedProduct.originalPrice && 
+                                `N${selectedProduct.originalPrice}`
                             }
                         </p>
                         <p className='text-xl text-gray-800 font-semibold mb-2'>
                             N{selectedProduct.price}
                         </p>
                         <p className='text-gray-800 mb-2'>
-                            {selectedProduct.details}
+                            {selectedProduct.description}
                         </p>
                         {/* selected colors */}
                         <div className='mb-4'>

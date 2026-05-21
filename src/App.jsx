@@ -31,7 +31,7 @@ function App() {
           <Route path='register' element={<Register />}/>
           <Route path='profile' element={<Profile />}/>
           <Route path='collections/:collection' element={<CollectionPage />}/>
-          <Route path='products/:id' element={<ProductsDetails />}/>
+          <Route path='product/:id' element={<ProductsDetails />}/>
           <Route path='checkout' element={<CheckOut />}/>
           <Route path='order-confirmation' element={<OrderConfirmationPage />}/>
           <Route path='order/:id' element={<OrderDetailsPage />}/>

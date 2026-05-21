@@ -66,7 +66,7 @@ const NewArrivals = () => {
                 NewArrivals.map((product) =>
                     <div key={product._id} className='min-w-full sm:min-w-[50%] lg:min-w-[30%] mt-2 relative'>
                         <img 
-                            src={product?.images[0].url || ''} 
+                            src={product?.images[0].url} 
                             alt={product?.images[0].altText || product.name} 
                             className='w-full h-80 object-cover rounded-lg'
                             draggable="false"

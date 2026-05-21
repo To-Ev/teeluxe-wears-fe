@@ -15,7 +15,7 @@ const FilterSideBar = () => {
     minPrice: 0,
     maxPrice: 100,
   });
-  const category = ["Top", "Bottom"]
+  const category = ["Top Wear", "Bottom Wear"]
   const size = ["XS", "S", "M", "L", "XL", "XXL"]
   const materials = [
     "Cotton",
@@ -38,7 +38,7 @@ const FilterSideBar = () => {
   const section = ["Jewelries", "Wears"]
 
   useEffect(()=>{
-    const params = Object.fromEntries([...searchParams])
+    const params = Object.fromEntries([...searchParams]);
 
     setFilter({
       category: params.category || "",
@@ -47,8 +47,8 @@ const FilterSideBar = () => {
       brands: params.brands ? params.brands.split(",") : [],
       materials: params.materials ? params.materials.split(",") : [],
       color: params.color || "",
-      minPrice: params.minPrice || 0,
-      maxPrice: params.maxPrice || 100,
+      minPrice: params.minPrice ? Number(params.minPrice) : 0,
+      maxPrice: params.maxPrice ? Number(params.maxPrice) : 100,
     });
     setPriceRange([0, params.maxPrice || 100])
   }, [searchParams]);
@@ -77,14 +77,17 @@ const FilterSideBar = () => {
   const updateURLParams = (newFilters) =>{
     const params = new URLSearchParams();
 
-    Object.keys(newFilters).forEach((key) =>{
-      if(Array.isArray(newFilters[key]) && newFilters[key].length > 0) {
-        params.append(key, newFilters[key].join(","))
-      }
-      else if(newFilters[key]){
-        params.append(key, newFilters[key])
-      }
-    });
+    Object.keys(newFilters).forEach((key) => {
+    const value = newFilters[key];
+
+    if (Array.isArray(value) && value.length > 0) {
+      params.append(key, value.join(","));
+    } else if (typeof value === "string" && value.trim() !== "") {
+      params.append(key, value);
+    } else if (typeof value === "number") {
+      params.append(key, value.toString());
+    }
+  });
     setSearchParams(params)
     navigate(`?${params.toString()}`)
   }
@@ -107,8 +110,8 @@ const FilterSideBar = () => {
         <div className='p-3'>
           <label className='text-gray-600 text-md block mb-2'>Category</label>
           {
-            category.map((category) =>
-              <div key={category} className='flex items-center'>
+            category.map((category, index) =>
+              <div key={index} className='flex items-center'>
                 <input 
                   name='category'
                   type="radio" 
