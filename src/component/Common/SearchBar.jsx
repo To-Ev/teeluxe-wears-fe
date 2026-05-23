@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import { HiMagnifyingGlass, HiMiniXMark } from 'react-icons/hi2';
+import { useDispatch } from 'react-redux';
+import { fetchByFilters, setFilters } from '../../redux/slices/productsSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(`searchTerm:`, searchTerm);
+        dispatch(setFilters({ search: searchTerm }));
+        dispatch(fetchByFilters({ search: searchTerm }));
+        navigate(`/collections/all?search=${searchTerm}`);
         setIsOpen(false);
     }
   return (

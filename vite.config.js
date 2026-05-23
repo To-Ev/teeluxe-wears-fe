@@ -19,7 +19,21 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/teeluxe-wears-fe/'
+  build: {
+    // raise the warning threshold if you want
+    chunkSizeWarningLimit: 1000, // kB
+
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          reactVendor: ['react', 'react-dom'],
+          uiVendor: ['react-icons', 'boxicons'],
+          reduxVendor: ['@reduxjs/toolkit', 'react-redux'],
+        },
+      },
+    },
+  },
+  base: '/teeluxe-wears-fe'
 })
 
 // git remote -v 
