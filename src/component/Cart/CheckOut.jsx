@@ -1,30 +1,17 @@
-import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import PayStackButton from './PayStackButton';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCheckout } from '../../redux/slices/checkoutSlice';
+import axios from 'axios';
 
-const Cart = {
-  products: [
-    {
-      name: "T-shirt",
-      size: "M",
-      color: "Red",
-      price: 150,
-      image: "https://picsum.photos/200?random=1",
-    },
-    {
-      name: "Sneakers",
-      size: "43",
-      color: "Gray",
-      price: 15,
-      image: "https://picsum.photos/200?random=2",
-    },
-  ],
-  totalPrice: 165
-}
 const CheckOut = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { cart, loading, error } = useSelector(state => state.cart);
+  const { user } = useSelector(state => state.auth);
+
   const [shippingAddress, setShippingAddress] = useState({
     firstName: "",
     lastName: "",
@@ -36,13 +23,77 @@ const CheckOut = () => {
   })
   const [checkOutId, setCheckOutId] = useState(null);
 
-  const handleCheckOut = (e) =>{
+  // ensure cart is loaded before proceeding
+  useEffect(() => {
+    if(!cart || !cart.products || cart.products.length === 0) {
+      navigate("/")
+    }
+  }, [cart, navigate]);
+
+  const handleCheckOut = async (e) =>{
     e.preventDefault();
-    setCheckOutId(123);
-  }
-  const handlePaymentSuccess = (details) =>{
-    console.log(`Payment successful`, details);
-    navigate('/order-confirmation');
+    if (cart && cart.products.length > 0) {
+      const result = await dispatch(
+        createCheckout({
+          checkoutItems: cart.products,   // ✅ use orderItems if backend expects this
+          shippingAddress,
+          paymentMethod: "Paystack",
+          shippingMethod: "Standard",
+          totalPrice: cart.totalPrice,
+        })
+      );
+
+      if (createCheckout.fulfilled.match(result)) {
+        // Redux checkout slice is now populated
+        setCheckOutId(result.payload._id);
+      } else {
+        console.error("Checkout failed:", result.payload);
+      }
+    }
+  };
+
+  const handlePaymentSuccess = async (reference) =>{
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkOutId}/pay`,
+        { paymentStatus: "paid", paymentDetails: { reference } },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authData") ? JSON.parse(localStorage.getItem("authData")).token : ""}`,
+          },
+        }
+      );
+      await handleFinalizeCheckout(checkOutId); //Finalize checkout if payment is successful
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleFinalizeCheckout = async (checkOutId) => {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkOutId}/finalize`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem("authData")).token}`,
+          },
+        }
+      );
+
+      // ✅ update Redux checkout slice with finalized order
+      dispatch({ type: "checkout/createCheckout/fulfilled", payload: res.data });
+
+      navigate("/order-confirmation");
+    } catch (err) {
+      console.error(err)
+    }
+  };
+
+  if(loading) return <p>Loading cart...</p>
+  if(error) return <p className='p-4 text-2xl text-gray-400'>Error: {error}</p>
+  if(!cart || !cart.products || cart.products.length === 0) {
+    return <p>Your cart is empty</p>
   };
 
   return (
@@ -56,7 +107,7 @@ const CheckOut = () => {
             <label className='block text-gray-700'>Email</label>
             <input 
               type="email"
-              value="userexample@email"
+              value={user ? user.email : ""}
               className='w-full text-gray-800 bg-gray-200 rounded p-2'
               disabled
             />
@@ -175,8 +226,8 @@ const CheckOut = () => {
                 {/* PayPal Component  */}
                 {/* PayStack Component */}
                 <PayStackButton
-                  amount={500}
-                  email={'usertest@paystack.com'}
+                  amount={cart.totalPrice}
+                  email={user ? user.email : ""}
                   onSuccess={handlePaymentSuccess}
                 />
               </div>
@@ -189,7 +240,7 @@ const CheckOut = () => {
       <div className='bg-gray-50 p-6 rounded-lg text-gray-700'>
         <h3 className='text-xl mb-4 border-b pb-3 border-gray-300'>Order summary</h3>
         <div>
-          {Cart.products.map((product, index) =>(
+          {cart.products.map((product, index) =>(
             <div key={index}
               className='flex items-start justify-between py-2'>
               <div className='flex'>
@@ -211,7 +262,7 @@ const CheckOut = () => {
           ))}
           <div className='flex justify-between pt-3 border-t border-gray-300 text-lg mb-4'>
             <p className='font-semibold text-gray-600'>Subtotal</p>
-            <p className='font-semibold'>N{Cart.totalPrice?.toLocaleString()}</p>
+            <p className='font-semibold'>N{cart.totalPrice?.toLocaleString()}</p>
           </div>
           <div className='flex justify-between text-lg mb-4'>
             <p className='font-semibold text-gray-600'>Shipping</p>
@@ -219,7 +270,7 @@ const CheckOut = () => {
           </div>
           <div className='flex justify-between border-t border-gray-300 pt-3 text-lg mb-4'>
             <p className='font-semibold text-gray-600'>Total</p>
-            <p className='font-semibold'>N{Cart.totalPrice?.toLocaleString()}</p>
+            <p className='font-semibold'>N{cart.totalPrice?.toLocaleString()}</p>
           </div>
         </div>
       </div>

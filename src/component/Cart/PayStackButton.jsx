@@ -13,7 +13,7 @@ const PayStackButton = ({amount, email, onSuccess}) => {
             email: email,
             onSuccess(transaction){
                 alert(`Successful! Ref: ${transaction.reference}`);
-                onSuccess()
+                onSuccess(transaction.reference)
             },
             onCancel() {
                 alert(`You have Canceled the transaction`);

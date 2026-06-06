@@ -1,41 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom'
+import { fetchOrderDetails } from '../redux/slices/orderSlice';
 
 const OrderDetailsPage = () => {
 
     const {id} = useParams();
-    const [orderDetails, setOrderDetails] = useState("");
+    const dispatch = useDispatch();
+    const { orderDetails, loading, error, } = useSelector(state => state.orders)
 
-    useEffect(() =>{
-        const mockOrderDetails = {
-            _id: id,
-            createdAt: new Date(),
-            isPaid: true,
-            isDelivered: false,
-            paymentMethod: "Paystack",
-            shippingMethod: "Standard",
-            shippingAddress: { city: "Lagos", country: "Nigeria"},
-            orderItems: [
-                {
-                    productId: "1",
-                    name: "Jacket",
-                    price: 120,
-                    quantity: 1,
-                    image: "https://picsum.photos/200?random=1"
-                },
-                {
-                    productId: "2",
-                    name: "Shirt",
-                    price: 160,
-                    quantity: 2,
-                    image: "https://picsum.photos/200?random=2"
-                },
-            ],
-        };
+    useEffect(() => {
+        dispatch(fetchOrderDetails(id))
+    }, [id, dispatch]);
 
-        setOrderDetails(mockOrderDetails);
-    }, [id])
-
+    if(loading) return <p className='text-gray-400 text-2xl p-2'>Loading...</p>
+    if(error) return <p className='text-red-500 p-2'>Error: {error}</p>
+    console.log("Order Details:", orderDetails); // Debugging log
   return (
     <section className='max-w-7xl mx-auto p-4 sm:p-6 text-gray-700'>
         <h2 className='text-2xl md:text-3xl font-bold mb-6'>Order Details</h2>
@@ -88,11 +68,11 @@ const OrderDetailsPage = () => {
                 </div>
                 {/* Product list  */}
                 <div className='overflow-x-auto'>
-                    <h4 className="text-lg font-semibold mb-4">Products</h4>
+                    <h4 className="text-lg font-semibold mb-4">Orders</h4>
                     <table className='min-w-full text-gray-600 mb-4'>
                         <thead className='bg-gray-100'>
                             <tr>
-                                <th className='py-2 px-4'>None</th>
+                                <th className='py-2 px-4'>Products</th>
                                 <th className='py-2 px-4'>Unit Price</th>
                                 <th className='py-2 px-4'>Quantity</th>
                                 <th className='py-2 px-4'>Total</th>
@@ -116,7 +96,7 @@ const OrderDetailsPage = () => {
                     </table>
                 </div>
                 {/* Back to Orders Link  */}
-                <Link to="/my-orders" className='text-blue-500 hover:underline'>
+                <Link to={`/my-orders`} className='text-blue-500 hover:underline'>
                     Back to My Orders
                 </Link>
             </div>

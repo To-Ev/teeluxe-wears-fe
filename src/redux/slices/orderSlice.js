@@ -4,11 +4,13 @@ import axios from 'axios';
 // Async Thunk to fetch user orders
 export const fetchOrders = createAsyncThunk(
     "orders/fetchOrders", async (_, { rejectWithValue }) => {
-        try {
+        try {  
+            const authData = JSON.parse(localStorage.getItem("authData"));
+            const token = authData?.token;
             const response = await axios.get(
-                `${import.meta.env.VITE_BACKEND_URL}/api/orders`, {
+                `${import.meta.env.VITE_BACKEND_URL}/api/orders/my-orders`, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             return response.data; // Assuming the API returns an array of orders
@@ -22,10 +24,12 @@ export const fetchOrders = createAsyncThunk(
 export const fetchOrderDetails = createAsyncThunk(
     "orders/fetchOrderDetails", async (orderId, { rejectWithValue }) => {
         try {
+            const authData = JSON.parse(localStorage.getItem("authData"));
+            const token = authData?.token;
             const response = await axios.get(
                 `${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             return response.data; // Assuming the API returns an array of orders
@@ -40,7 +44,7 @@ const orderSlice = createSlice({
     initialState: {
         orders: [],
         totalOrders: 0,
-        OrderDetails: null,
+        orderDetails: null,
         loading: false,
         error: null,
     },
@@ -69,7 +73,7 @@ const orderSlice = createSlice({
                 })
                 .addCase(fetchOrderDetails.fulfilled, (state, action) => {
                     state.loading = false;
-                    state.orders = action.payload;
+                    state.orderDetails = action.payload;
                 })
                 .addCase(fetchOrderDetails.rejected, (state, action) => {
                     state.loading = false;

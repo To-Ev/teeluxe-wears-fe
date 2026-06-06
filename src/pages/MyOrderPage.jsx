@@ -1,50 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { fetchOrders } from '../redux/slices/orderSlice';
 
 const MyOrderPage = () => {
 
-    const [orders, setOrders] = useState([]);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { orders, loading, error } = useSelector(state => state.orders);
 
-    useEffect(()=>{
-        // Simulate orders 
-        setTimeout(() => {
-            const mockOrder = [
-                {
-                    _id: 123,
-                    createdAt: new Date(),
-                    shippingAddress: {city: 'Lagos', country: 'Nigeria'},
-                    orderedItems: [
-                        {
-                            name: 'product 1',
-                            image: 'https://picsum.photos/200?random=1'
-                        },
-                    ],
-                    totalPrice: 100,
-                    isPaid: true
-                },
-                {
-                    _id: 456,
-                    createdAt: new Date(),
-                    shippingAddress: {city: 'Kano', country: 'Nigeria'},
-                    orderedItems: [
-                        {
-                            name: 'product 2',
-                            image: 'https://picsum.photos/200?random=2'
-                        },
-                    ],
-                    totalPrice: 100,
-                    isPaid: false
-                },
-            ];
-
-            setOrders(mockOrder)
-        }, 1000);
-    }, [])
+    useEffect(() => {
+        dispatch(fetchOrders());
+    }, [dispatch]);
 
     const handleRowClick = (orderId) =>{
-        navigate(`/order/${orderId}`)
-    }
+        navigate(`/orders/${orderId}`)
+    };
+
+    if(loading) return <p className='text-gray-400 text-2xl'>Loading...</p>
+    if(error) return <p className='text-red-500'>{error}</p>
+
   return (
     <section className='max-w-7xl mx-auto p-4 sm:p-6'>
         <h1 className='text-xl sm:text-2xl text-gray-700 mb-6 font-semibold'>My Orders</h1>
@@ -68,11 +43,14 @@ const MyOrderPage = () => {
                             <tr key={order._id} 
                                 onClick={() => handleRowClick(order._id)}
                                 className='border-b border-gray-300 hover:border-gray-100 cursor-pointer'>
-                                <td className='p-2 sm:p-4'>
-                                    <img 
-                                     src={order.orderedItems[0].image} alt={order.orderedItems[0].name} 
-                                     className='w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-lg'
-                                    />
+                                <td className="p-2 sm:p-4">
+                                    <div className="flex flex-wrap gap-2">
+                                        <img 
+                                            src={order.orderItems[0]?.image}
+                                            alt={order.orderItems[0]?.name}
+                                            className="w-12 h-12 object-cover rounded-md" 
+                                        />
+                                    </div>
                                 </td>
                                 <td className='p-2 sm:p-4'>#{order._id}</td>
                                 <td className='p-2 sm:p-4'>
@@ -83,7 +61,7 @@ const MyOrderPage = () => {
                                     {order.shippingAddress ? 
                                     `${order.shippingAddress.city}, ${order.shippingAddress.country}` : 'N/A'}
                                 </td>
-                                <td className='p-2 sm:p-4'>{order.orderedItems.length}</td>
+                                <td className='p-2 sm:p-4'>{order.orderItems.length}</td>
                                 <td className='p-2 sm:p-4'>N{order.totalPrice}</td>
                                 <td className='p-2 sm:p-4'>
                                     <span 

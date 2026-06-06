@@ -8,7 +8,7 @@ const storedAuth = localStorage.getItem('authData')
 
 const initialGuestId =
   localStorage.getItem('guestId') || `guest_${new Date().getTime()}`;
-localStorage.setItem('guestId', initialGuestId);
+  localStorage.setItem('guestId', initialGuestId);
 
 // initial state
 const initialState = {
@@ -30,7 +30,6 @@ export const loginUser = createAsyncThunk(
       );
       const authData = { user: response.data.user, token: response.data.token };
       localStorage.setItem('authData', JSON.stringify(authData));
-      console.log(response.data);
       return authData;
     } catch (error) {
       return rejectWithValue(error.response?.data?.err || 'Login failed');

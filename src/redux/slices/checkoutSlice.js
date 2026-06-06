@@ -5,18 +5,24 @@ const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`; // Base URL for your 
 // Async thunk to handle checkout process
 export const createCheckout = createAsyncThunk(
   'checkout/createCheckout',
-    async (checkoutData, { rejectWithValue }) => {
+  async (checkoutData, { rejectWithValue }) => {
     try {
+      const authData = JSON.parse(localStorage.getItem("authData"));
+      const token = authData?.token;
+
       const response = await axios.post(`${API_URL}/checkout`, checkoutData, {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`, // Include token if required
+          Authorization: `Bearer ${token}`,
         },
       });
-      return response.data; // Assuming the API returns the order details
+
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data); // Return error message from API
-    }}
+      return rejectWithValue(error.response?.data || "Checkout failed");
+    }
+  }
 );
+
 
 const checkoutSlice = createSlice({
     name: 'checkout',
