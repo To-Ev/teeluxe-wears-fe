@@ -15,7 +15,7 @@ const OrderDetailsPage = () => {
 
     if(loading) return <p className='text-gray-400 text-2xl p-2'>Loading...</p>
     if(error) return <p className='text-red-500 p-2'>Error: {error}</p>
-    console.log("Order Details:", orderDetails); // Debugging log
+
   return (
     <section className='max-w-7xl mx-auto p-4 sm:p-6 text-gray-700'>
         <h2 className='text-2xl md:text-3xl font-bold mb-6'>Order Details</h2>
@@ -31,14 +31,14 @@ const OrderDetailsPage = () => {
                         </h3>
                         <p className='text-gray-600'>{new Date(orderDetails.createdAt).toLocaleDateString()}</p>
                     </div>
-                    <div className='flex flex-col items-start sm:items-end mt-4 sm:mt-0'>
+                    <div className='flex flex-col items-start sm:items-end mt-4 mb-3 sm:mt-0'>
                         <span 
                         className={`${
                             orderDetails.isPaid ?
                             "bg-green-100 text-green-700" : 
                             "bg-red-100 text-red-700"
-                        } px-3 py-1 rounded-full text-sm font-medium mb-2`}>
-                            {orderDetails.isPaid ? "Approved" : "Pending"}
+                        } px-3 py-1 rounded-full text-sm font-medium mb-3`}>
+                           Payment: {orderDetails.isPaid ? "Approved" : "Pending"}
                         </span>
                         <span 
                         className={`${
@@ -46,54 +46,57 @@ const OrderDetailsPage = () => {
                             "bg-green-100 text-green-700" : 
                             "bg-yellow-100 text-yellow-700"
                         } px-3 py-1 rounded-full text-sm font-medium mb-2`}>
-                            {orderDetails.isDelivered ? "Delivered" : "Pending"}
+                           Delivery: {orderDetails.isDelivered ? "Delivered" : "Pending"}
                         </span>
                     </div>
                 </div>
                 {/* customer, payment, shipping  */}
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8'>
                     <div>
-                        <h4 className="text-lg font-semibold mb-2">Payment Info</h4>
-                        <p>Payment Method: {orderDetails.paymentMethod}</p>
-                        <p>Status: {orderDetails.isPaid ? "Paid" : "Unpaid"}</p>
+                        <h4 className="text-xl font-semibold mb-2">Payment Info</h4>
+                        <p className='text-lg'>Payment Method: <span className='text-gray-400'>{orderDetails.paymentMethod}</span></p>
+                        <p className='text-lg'>Reference Id: <span className='text-gray-400'>{orderDetails.paymentDetails}</span></p>
+                        <p className='text-lg'>Status: <span className='text-gray-400'>{orderDetails.isPaid ? "Paid" : "Unpaid"}</span></p>
                     </div>
                     <div>
-                        <h4 className="text-lg font-semibold mb-2">Shipping Info</h4>
-                        <p>Shipping Method: {orderDetails.shippingMethod}</p>
-                        <p>
+                        <h4 className="text-xl font-semibold mb-2">Shipping Info</h4>
+                        <p className='text-lg'>Shipping Method: <span className='text-gray-400'>{orderDetails.shippingMethod}</span></p>
+                        <p className='text-lg'>
                             Address: {" "}
-                            {`${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.country}`}
+                            <span className='text-gray-400'>{`${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.country}`}</span>
                         </p>
                     </div>
                 </div>
                 {/* Product list  */}
-                <div className='overflow-x-auto'>
-                    <h4 className="text-lg font-semibold mb-4">Orders</h4>
-                    <table className='min-w-full text-gray-600 mb-4'>
-                        <thead className='bg-gray-100'>
-                            <tr>
-                                <th className='py-2 px-4'>Products</th>
-                                <th className='py-2 px-4'>Unit Price</th>
-                                <th className='py-2 px-4'>Quantity</th>
-                                <th className='py-2 px-4'>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {orderDetails.orderItems.map((item) => (
-                                <tr key={item.productId} className='border-b text-center border-gray-300'>
-                                    <td className='py-2 px-4 flex items-center'>
-                                        <img src={item.image} alt={item.name} className='w-12 h-12 object-cover rounded-lg mr-4'/>
-                                        <Link to={`/products/${item.productId}`} 
-                                            className='text-blue-500 hover:underline'>{item.name}
-                                        </Link>
-                                    </td>
-                                    <td className='py-2 px-4'>N{item.price}</td>
-                                    <td className='py-2 px-4'>{item.quantity}</td>
-                                    <td className='py-2 px-4'>N{item.price * item.quantity}</td>
+                <div className=''>
+                    <h4 className="text-2xl font-semibold mb-4">Orders</h4>
+                    <div className='overflow-x-auto sm:overflow-x-hidden'>
+                        <table className='min-w-[500px] md:min-w-0 w-full text-gray-600 mb-4'>
+                            <thead className='bg-gray-100'>
+                                <tr>
+                                    <th className='py-2 px-4'>Products</th>
+                                    <th className='py-2 px-4'>Unit Price</th>
+                                    <th className='py-2 px-4'>Quantity</th>
+                                    <th className='py-2 px-4'>Total</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {orderDetails.orderItems.map((item) => (
+                                    <tr key={item.productId} className='border-b text-center border-gray-300'>
+                                        <td className='py-2 px-4 flex items-center'>
+                                            <img src={item.image} alt={item.name} className='w-12 h-12 object-cover rounded-lg mr-4'/>
+                                            <Link to={`/product/${item.productId}`} 
+                                                className='text-blue-500 hover:underline'>{item.name}
+                                            </Link>
+                                        </td>
+                                        <td className='py-2 px-4'>N{item.price}</td>
+                                        <td className='py-2 px-4'>{item.quantity}</td>
+                                        <td className='py-2 px-4'>N{item.price * item.quantity}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 {/* Back to Orders Link  */}
                 <Link to={`/my-orders`} className='text-blue-500 hover:underline'>

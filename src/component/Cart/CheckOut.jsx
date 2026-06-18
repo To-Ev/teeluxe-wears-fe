@@ -56,7 +56,7 @@ const CheckOut = () => {
     try {
       await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkOutId}/pay`,
-        { paymentStatus: "paid", paymentDetails: { reference } },
+        { paymentStatus: "paid", paymentDetails: reference },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authData") ? JSON.parse(localStorage.getItem("authData")).token : ""}`,

@@ -47,7 +47,7 @@ const Home = () => {
       <GenderSelectionSection />
       <NewArrivals />
       {/* Best seller Products */}
-      <h1 className='text-3xl font-semibold text-center mb-4 text-gray-800'>
+      <h1 className='text-3xl font-semibold text-center mb-4 text-gray-700'>
         Best Seller
       </h1>
       {bestSellerProducts ? (

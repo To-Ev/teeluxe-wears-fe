@@ -59,7 +59,7 @@ const ProductsDetails = ({ productId }) => {
                 toast.loading('Adding product to cart...', {duration: 2000});
             }
             if(error) {
-                toast.error(error || 'Failed to add product to cart.', {duration: 2000});
+                toast.error(error.response.message || 'Failed to add product to cart.', {duration: 2000});
             }
             
         } catch (error) {

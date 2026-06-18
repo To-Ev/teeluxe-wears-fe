@@ -17,6 +17,7 @@ import UserManagement from './component/Admin/UserManagement'
 import ProductManagement from './component/Admin/ProductManagement'
 import EditProductPage from './component/Admin/EditProductPage'
 import OrderManagement from './component/Admin/OrderManagement'
+import ProtectedRoute from './component/Common/ProtectedRoute'
 
 
 function App() {
@@ -38,7 +39,10 @@ function App() {
           <Route path='my-orders' element={<MyOrderPage />}/>
 
         </Route>
-        <Route path='/admin' element={<AdminLayout />}> //Admin Layout
+        <Route path='/admin' element={
+            <ProtectedRoute role="admin">
+              <AdminLayout />
+            </ProtectedRoute>}> //Admin Layout
           <Route index element={<AdminHomePage />}/> 
           <Route path='users' element={<UserManagement />}/> 
           <Route path='products' element={<ProductManagement />}/> 

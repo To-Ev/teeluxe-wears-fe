@@ -23,7 +23,7 @@ const MyOrderPage = () => {
   return (
     <section className='max-w-7xl mx-auto p-4 sm:p-6'>
         <h1 className='text-xl sm:text-2xl text-gray-700 mb-6 font-semibold'>My Orders</h1>
-        <div className='overflow-x-scroll sm:overflow-hidden shadow-md sm:rounded-lg'>
+        <div className='overflow-x-scroll shadow-md sm:rounded-lg'>
             <table className='min-w-full md:w-2/3 text-left'>
                 <thead className=' bg-gray-100 text-xs uppercase'>
                     <tr>
@@ -73,7 +73,7 @@ const MyOrderPage = () => {
                             </tr>
                         ))) : (
                             <tr>
-                                <td colSpan={7} className='text-center px-4 py-6 text-3xl font-semibold'>You have no order</td>
+                                <td colSpan={7} className='text-gray-500 text-center px-4 py-6 text-3xl font-semibold'>You have no order</td>
                             </tr>
                         )
                     }
