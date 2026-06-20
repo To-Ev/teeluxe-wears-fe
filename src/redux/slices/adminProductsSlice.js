@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
+const token = `${localStorage.getItem('authData')}` ? JSON.parse(localStorage.getItem('authData')).token : null;
+const USER_TOKEN = `Bearer ${token}`;
 
 // async thunk to fetch products for admin dashboard
 export const fetchAdminProducts = createAsyncThunk(
@@ -9,7 +11,7 @@ export const fetchAdminProducts = createAsyncThunk(
   async () => {
     const response = await axios.get(`${API_URL}/admin/products`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: USER_TOKEN
       }
     });
     return response.data;
@@ -22,7 +24,7 @@ export const createProduct = createAsyncThunk(
   async (productData) => {
     const response = await axios.post(`${API_URL}/admin/products`, productData, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: USER_TOKEN
       }
     });
     return response.data;
@@ -35,7 +37,7 @@ export const updateProduct = createAsyncThunk(
   async (productData) => {
     const response = await axios.put(`${API_URL}/admin/products`, productData, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: USER_TOKEN
       }
     });
     return response.data;
@@ -48,7 +50,7 @@ export const deleteProduct = createAsyncThunk(
   async (productId) => {
     await axios.delete(`${API_URL}/admin/products/${productId}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: USER_TOKEN 
       }
     });
     return productId;
@@ -86,7 +88,7 @@ const adminProductsSlice = createSlice({
         // async thunk cases for updating a product
         .addCase(updateProduct.fulfilled, (state, action) => {
           state.loading = false;
-          const index = state.products.findIndex((product) => product.id === action.payload.id);
+          const index = state.products.findIndex((product) => product._id === action.payload._id);
           if (index !== -1) {
             state.products[index] = action.payload;
           }
@@ -94,7 +96,7 @@ const adminProductsSlice = createSlice({
         // async thunk cases for deleting a product
         .addCase(deleteProduct.fulfilled, (state, action) => {
           state.loading = false;
-          state.products = state.products.filter((product) => product.id !== action.payload);
+          state.products = state.products.filter((product) => product._id !== action.payload._id);
         })
   }
 });

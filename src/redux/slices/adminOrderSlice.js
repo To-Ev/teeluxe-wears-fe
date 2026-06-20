@@ -2,7 +2,9 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
-const USER_TOKEN = `Bearer ${localStorage.getItem('token')}`;
+const token = `${localStorage.getItem('authData')}` ? JSON.parse(localStorage.getItem('authData')).token : null;
+const USER_TOKEN = `Bearer ${token}`;
+console.log('USER_TOKEN:', USER_TOKEN);
 
 // fetch all orders for admin
 export const fetchAdminOrders = createAsyncThunk(
@@ -74,7 +76,7 @@ const adminOrderSlice = createSlice({
             })
             .addCase(fetchAdminOrders.fulfilled, (state, action) => {
                 state.loading = false;
-                state.orders = action.payload.orders;
+                state.orders = action.payload;
                 state.totalOrders = action.payload.length;
 
                 // calculate total sales
@@ -88,7 +90,7 @@ const adminOrderSlice = createSlice({
             // update order status
             .addCase(updateOrderStatus.fulfilled, (state, action) => {
                 const updateOrder = action.payload;
-                const orderIndex = state.orders.findIndex(order => order.id === updateOrder.id);
+                const orderIndex = state.orders.findIndex(order => order._id === updateOrder._id);
                 if (orderIndex !== -1) {
                     state.orders[orderIndex] = updateOrder;
                 }
@@ -96,7 +98,7 @@ const adminOrderSlice = createSlice({
             // delete order
             .addCase(deleteOrder.fulfilled, (state, action) => {
                 state.loading = false;
-                state.orders = state.orders.filter(order => order.id !== action.payload.id);
+                state.orders = state.orders.filter(order => order._id !== action.payload._id);
             })
         }
 });
