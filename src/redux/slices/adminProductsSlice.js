@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
-const token = `${localStorage.getItem('authData')}` ? JSON.parse(localStorage.getItem('authData')).token : null;
+const authData = localStorage.getItem('authData');
+const token = authData ? JSON.parse(authData).token : null;
+
 const USER_TOKEN = `Bearer ${token}`;
 
 // async thunk to fetch products for admin dashboard

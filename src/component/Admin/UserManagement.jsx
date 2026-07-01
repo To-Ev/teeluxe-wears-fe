@@ -1,14 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addUser, deleteUser, fetchUsers, updateUser } from '../../redux/slices/adminSlice';
 
 const UserManagement = () => {
-    const users = [
-        {
-            _id: 11323,
-            name: "Zaynab Tinuola",
-            email: "zaynab@gmail.com",
-            role: "admin"
-        },
-    ];
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { user } = useSelector(state => state.auth);
+    const { users, loading, error } = useSelector(state => state.admin);
+
+    useEffect(() => {
+        if(user && user.role !== "admin") {
+            navigate("/")
+        }
+    }, [user, navigate]);
+
+    useEffect(() => {
+        if(user && user.role === "admin") {
+            dispatch(fetchUsers())
+        }
+    }, [user, dispatch]);
 
     const [formData, setFormData] = useState({
         name: "",
@@ -25,28 +37,34 @@ const UserManagement = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+
+        dispatch(addUser(formData));
+        
         setFormData({
             name: "",
             email: "",
             password: "",
             role: "customer"
         });
-        console.log(formData);
     }
-
+    console.log(`Form Data: ${JSON.stringify(formData)}`);
     const handleRoleChange = (userId, newRole) =>{
-        console.log({Id: userId, role: newRole});
+       dispatch(updateUser({ id: userId, role: newRole }));
     }
 
     const handleDeleteUser = (userId) =>{
         if(window.confirm("Are you sure you want to delete this User?")){
-            console.log("Deleting user with ID", userId);
+            dispatch(deleteUser(userId));
         }
-    }
+    };
 
   return (
     <section className='max-w-7xl mx-auto p-6 text-gray-700 '>
         <h2 className="text-2xl font-bold mb-4">User Management</h2>
+
+        {loading && <p>loading...</p>}
+        {error && <p>Error: {typeof error === 'string' ? error : error.message}</p>}
+        
         {/* Add new user Form  */}
         <div className='p-6 rounded-lg mb-6'>
             <h3 className='text-lg font-bold mb-4'>Add New User</h3>
@@ -112,8 +130,8 @@ const UserManagement = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) =>(
-                        <tr key={user._id} className='border-b border-gray-50 hover:bg-gray-50'>
+                    {users.map((user, index) =>(
+                        <tr key={index} className='border-b border-gray-50 hover:bg-gray-50'>
                             <td className="p-4 text-gray-900 whitespace-nowrap">{user.name}</td>
                             <td className='p-4'>{user.email}</td>
                             <td className="p-4">

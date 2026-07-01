@@ -2,9 +2,10 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
-const token = `${localStorage.getItem('authData')}` ? JSON.parse(localStorage.getItem('authData')).token : null;
+const authData = localStorage.getItem('authData');
+const token = authData ? JSON.parse(authData).token : null;
+
 const USER_TOKEN = `Bearer ${token}`;
-console.log('USER_TOKEN:', USER_TOKEN);
 
 // fetch all orders for admin
 export const fetchAdminOrders = createAsyncThunk(
@@ -18,7 +19,7 @@ export const fetchAdminOrders = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response.data.err);
         }
     }
 );
@@ -35,7 +36,7 @@ export const updateOrderStatus = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response.data.err);
         }
     }
 );
@@ -52,7 +53,7 @@ export const deleteOrder = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response.data.err);
         }
     }
 );
