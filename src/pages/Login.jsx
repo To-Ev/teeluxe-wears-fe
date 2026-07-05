@@ -12,7 +12,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { user, guestId } = useSelector(state => state.auth);
+    const { user, guestId, loading } = useSelector(state => state.auth);
     const { cart } = useSelector(state => state.cart);
 
     // Get redirect parameter and check of it is checkout
@@ -30,7 +30,7 @@ const Login = () => {
             }
 
         }
-    }, [user, guestId, cart, dispatch, navigate, isCheckoutRedirect]);
+    }, [user, guestId, cart, redirect, dispatch, navigate, isCheckoutRedirect]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -82,7 +82,10 @@ const Login = () => {
                         placeholder='Enter your password'
                     />
                 </div>
-                <button type='submit' className='bg-black w-full p-2 text-white rounded hover:bg-gray-800 transition cursor-pointer font-semibold mb-4'>Sign in</button>
+                <button type='submit' className='bg-black w-full p-2 text-white rounded hover:bg-gray-800 transition cursor-pointer font-semibold mb-4'
+                >
+                    {loading ? "Loading..." : "Sign in"}
+                </button>
                 <p className='text-sm text-center font-semibold'>Don't have an account?
                     <Link 
                         to={`/register?redirect=${encodeURIComponent(redirect)}`}

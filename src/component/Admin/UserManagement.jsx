@@ -47,7 +47,6 @@ const UserManagement = () => {
             role: "customer"
         });
     }
-    console.log(`Form Data: ${JSON.stringify(formData)}`);
     const handleRoleChange = (userId, newRole) =>{
        dispatch(updateUser({ id: userId, role: newRole }));
     }

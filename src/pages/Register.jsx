@@ -13,7 +13,7 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
      const navigate = useNavigate();
-    const { user, guestId } = useSelector(state => state.auth);
+    const { user, guestId, loading } = useSelector(state => state.auth);
     const { cart } = useSelector(state => state.cart);
 
     // Get redirect parameter and check of it is checkout
@@ -93,7 +93,10 @@ const Register = () => {
                         placeholder='Enter your password'
                     />
                 </div>
-                <button type='submit' className='bg-black w-full p-2 text-white rounded hover:bg-gray-800 transition cursor-pointer font-semibold mb-4'>Sign up</button>
+                <button type='submit' className='bg-black w-full p-2 text-white rounded hover:bg-gray-800 transition cursor-pointer font-semibold mb-4'
+                >
+                    {loading ? "Loading..." : "Sign up"}
+                </button>
                 <p className='text-sm text-center font-semibold'>Already have an account?
                     <Link to={`/login?redirect=${encodeURIComponent(redirect)}`} className='text-yellow-300 ml-1'>Login</Link>
                 </p>

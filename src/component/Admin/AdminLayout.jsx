@@ -8,7 +8,8 @@ const AdminLayout = () => {
 
     const toggleSidebar = () =>{
         setIsSidebarOpen(!isSidebarOpen);
-    }
+    };
+    
   return (
     <section className='min-h-screen flex flex-col md:flex-row relative'>
         {/* Mobile toggle Button  */}
