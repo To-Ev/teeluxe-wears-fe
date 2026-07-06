@@ -38,11 +38,12 @@ const Register = () => {
             const result = await dispatch(registerUser({ name, email, password }));
 
             if (registerUser.fulfilled.match(result)) {
-            toast.success("Registration successful!");
-            // navigate somewhere if needed
+                const loggedInUser = result.payload.user;
+                toast.success(`Login successful ${loggedInUser.name}!`);
+                // navigate somewhere if needed
             } else {
-            // result.payload contains the backend error string
-            toast.error(result.payload || "Registration failed. Please try again.");
+                // result.payload contains the backend error string
+                toast.error(result.payload || "Registration failed. Please try again.");
             }
         } catch (error) {
             console.error("Registration failed:", error);

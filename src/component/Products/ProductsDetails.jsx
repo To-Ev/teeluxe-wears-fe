@@ -102,7 +102,7 @@ const ProductsDetails = ({ productId }) => {
                         <img   
                         src={mainImage} 
                         alt="Main Image" 
-                        className='rounded-lg w-full h-auto object-cover'
+                        className='rounded-lg max-w-lg h-auto object-cover'
                         />
                     </div>
                     {/*Mobile Thumbnails */}

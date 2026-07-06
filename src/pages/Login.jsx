@@ -38,11 +38,12 @@ const Login = () => {
             const result = await dispatch(loginUser({ email, password }));
 
             if (loginUser.fulfilled.match(result)) {
-            toast.success("Login successful!");
-            // navigate somewhere if needed
+                const loggedInUser = result.payload.user;
+                toast.success(`Login successful ${loggedInUser.name}!`);
+                // navigate somewhere if needed
             } else {
-            // result.payload contains the backend error string
-            toast.error(result.payload || "Login failed. Please try again.");
+                // result.payload contains the backend error string
+                toast.error(result.payload || "Login failed. Please try again.");
             }
         } catch (error) {
             console.error("Login failed:", error);
