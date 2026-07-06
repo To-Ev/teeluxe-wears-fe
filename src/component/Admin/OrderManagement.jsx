@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchAdminOrders, updateOrderStatus } from '../../redux/slices/adminOrderSlice';
+import toast from 'react-hot-toast';
 
 const OrderManagement = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,11 @@ const OrderManagement = () => {
     }
   }, [dispatch, user, navigate]);
 
-  const handleStatusChange= (orderId, status) =>{
+  const handleStatusChange = (orderId, status) => {
     dispatch(updateOrderStatus({ id: orderId, status }))
+      .unwrap()
+      .then(() => toast.success("Order status updated"))
+      .catch(err => toast.error(err));
   };
 
   if(loading) return <p className='text-xl text-gray-500'>Loading...</p>
@@ -58,7 +62,7 @@ const OrderManagement = () => {
                       className='bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-300 block p-2.5 focus:outline-green-200'
                     >
                       <option value="Processing">Processing</option>
-                      <option value="Shipped">Shipped</option>
+                      <option value="Shipping">Shipping</option>
                       <option value="Delivered">Delivered</option>
                       <option value="Cancelled">Cancelled</option>
                     </select>

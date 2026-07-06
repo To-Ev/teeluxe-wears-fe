@@ -19,7 +19,7 @@ export const fetchAdminOrders = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data.err);
+            return rejectWithValue(error?.response?.data?.err || 'Failed to fetch orders');
         }
     }
 );
@@ -36,7 +36,7 @@ export const updateOrderStatus = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data.err);
+            return rejectWithValue(error?.response?.data?.err || 'Failed to update order status');
         }
     }
 );
@@ -53,7 +53,7 @@ export const deleteOrder = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data.err);
+            return rejectWithValue(error?.response?.data?.err || 'Failed to delete order');
         }
     }
 );
@@ -95,6 +95,9 @@ const adminOrderSlice = createSlice({
                 if (orderIndex !== -1) {
                     state.orders[orderIndex] = updateOrder;
                 }
+            })
+            .addCase(updateOrderStatus.rejected, (state, action) => {
+                state.error = action.payload || 'Failed to update order status';
             })
             // delete order
             .addCase(deleteOrder.fulfilled, (state, action) => {

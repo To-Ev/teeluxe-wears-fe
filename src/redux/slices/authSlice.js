@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import api from '../../api';
 
 // Retrieve user info and token from localStorage
 const storedAuth = localStorage.getItem('authData')
@@ -24,7 +24,7 @@ export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
         userData
       );
@@ -42,7 +42,7 @@ export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/register`,
         userData
       );
@@ -101,6 +101,8 @@ const authSlice = createSlice({
       });
   },
 });
+
+
 
 export const { logout, generateGuestId } = authSlice.actions;
 export default authSlice.reducer;
