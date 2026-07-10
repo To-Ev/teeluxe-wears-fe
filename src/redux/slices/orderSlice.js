@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import api from '../api.js';
 
 // Async Thunk to fetch user orders
 export const fetchOrders = createAsyncThunk(
@@ -7,7 +7,7 @@ export const fetchOrders = createAsyncThunk(
         try {  
             const authData = JSON.parse(localStorage.getItem("authData"));
             const token = authData?.token;
-            const response = await axios.get(
+            const response = await api.get(
                 `${import.meta.env.VITE_BACKEND_URL}/api/orders/my-orders`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ export const fetchOrderDetails = createAsyncThunk(
         try {
             const authData = JSON.parse(localStorage.getItem("authData"));
             const token = authData?.token;
-            const response = await axios.get(
+            const response = await api.get(
                 `${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,

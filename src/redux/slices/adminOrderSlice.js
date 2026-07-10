@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../api";
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 const authData = localStorage.getItem('authData');
@@ -12,7 +12,7 @@ export const fetchAdminOrders = createAsyncThunk(
   'adminOrders/fetchAdminOrders',
     async (_, {rejectWithValue}) => {
         try {
-            const response = await axios.get(`${API_URL}/admin/orders`, {
+            const response = await api.get(`${API_URL}/admin/orders`, {
                 headers: {
                     Authorization: USER_TOKEN,
                 }
@@ -29,7 +29,7 @@ export const updateOrderStatus = createAsyncThunk(
     'adminOrders/updateOrderStatus',
     async ({id, status}, {rejectWithValue}) => {
         try {
-            const response = await axios.put(`${API_URL}/admin/orders/${id}`, { status }, {
+            const response = await api.put(`${API_URL}/admin/orders/${id}`, { status }, {
                 headers: {
                     Authorization: USER_TOKEN,
                 }
@@ -46,7 +46,7 @@ export const deleteOrder = createAsyncThunk(
     'adminOrders/deleteOrder',
     async ({id}, {rejectWithValue}) => {
         try {
-            const response = await axios.delete(`${API_URL}/admin/orders/${id}`, {
+            const response = await api.delete(`${API_URL}/admin/orders/${id}`, {
                 headers: {
                     Authorization: USER_TOKEN,
                 }

@@ -33,7 +33,7 @@ api.interceptors.response.use(
       toast.error("Session expired. Please log in again.");
 
       // Redirect to login
-      window.location.href = "/login";
+      window.location.href = `${import.meta.env.VITE_BACKEND_URL}login`;
     }
     return Promise.reject(error);
   }

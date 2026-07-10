@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';  
+import api from '../api';  
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`; // Base URL for your backend API
 // Async thunk to handle checkout process
@@ -10,7 +10,7 @@ export const createCheckout = createAsyncThunk(
       const authData = JSON.parse(localStorage.getItem("authData"));
       const token = authData?.token;
 
-      const response = await axios.post(`${API_URL}/checkout`, checkoutData, {
+      const response = await api.post(`${API_URL}/checkout`, checkoutData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

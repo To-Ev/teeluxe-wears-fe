@@ -39,7 +39,7 @@ const Register = () => {
 
             if (registerUser.fulfilled.match(result)) {
                 const loggedInUser = result.payload.user;
-                toast.success(`Login successful ${loggedInUser.name}!`);
+                toast.success(`Login successful ${loggedInUser.name}`);
                 // navigate somewhere if needed
             } else {
                 // result.payload contains the backend error string

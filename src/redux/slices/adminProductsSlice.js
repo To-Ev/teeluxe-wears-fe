@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import api from '../api';
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 const authData = localStorage.getItem('authData');
@@ -11,7 +11,7 @@ const USER_TOKEN = `Bearer ${token}`;
 export const fetchAdminProducts = createAsyncThunk(
   'adminProducts/fetchAdminProducts',
   async () => {
-    const response = await axios.get(`${API_URL}/admin/products`, {
+    const response = await api.get(`${API_URL}/admin/products`, {
       headers: {
         Authorization: USER_TOKEN
       }
@@ -24,7 +24,7 @@ export const fetchAdminProducts = createAsyncThunk(
 export const createProduct = createAsyncThunk(
   'adminProducts/createProduct',
   async (productData) => {
-    const response = await axios.post(`${API_URL}/products`, productData, {
+    const response = await api.post(`${API_URL}/products`, productData, {
       headers: {
         Authorization: USER_TOKEN
       }
@@ -37,7 +37,7 @@ export const createProduct = createAsyncThunk(
 export const updateProduct = createAsyncThunk(
   'adminProducts/updateProduct',
   async (productData) => {
-    const response = await axios.put(`${API_URL}/products/${productData._id}`, productData, {
+    const response = await api.put(`${API_URL}/products/${productData._id}`, productData, {
       headers: {
         Authorization: USER_TOKEN
       }
@@ -50,7 +50,7 @@ export const updateProduct = createAsyncThunk(
 export const deleteProduct = createAsyncThunk(
   'adminProducts/deleteProduct',
   async (productId) => {
-    await axios.delete(`${API_URL}/products/${productId}`, {
+    await api.delete(`${API_URL}/products/${productId}`, {
       headers: {
         Authorization: USER_TOKEN 
       }

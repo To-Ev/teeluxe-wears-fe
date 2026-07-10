@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import api from '../api';
 
 // helper function to get cart from localStorage
 const getCartFromLocalStorage = () => {
@@ -15,7 +15,7 @@ const saveCartToLocalStorage = (cart) => {
 // fetch cart from API for a user or guest
 export const fetchCart = createAsyncThunk('cart/fetchCart', async ({userId, guestId}, { rejectWithValue }) => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
+    const response = await api.get(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
       params: { userId, guestId },
     });
     return response.data;
@@ -28,7 +28,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async ({userId, gues
 // add item to cart
 export const addToCart = createAsyncThunk('cart/addToCart', async ({ productId, size, color, quantity, userId, guestId }, { rejectWithValue }) => {
   try { 
-    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
+    const response = await api.post(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
         productId,
         size,
         color,
@@ -46,7 +46,7 @@ export const addToCart = createAsyncThunk('cart/addToCart', async ({ productId, 
 // Update item quantity in cart
 export const updateCartItem = createAsyncThunk('cart/updateCartItem', async ({ productId, size, color, quantity, userId, guestId }, { rejectWithValue }) => {
   try {
-    const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/cart/`, {
+    const response = await api.put(`${import.meta.env.VITE_BACKEND_URL}/api/cart/`, {
         productId,
         size,
         color,
@@ -64,7 +64,7 @@ export const updateCartItem = createAsyncThunk('cart/updateCartItem', async ({ p
 // Remove item from cart
 export const removeFromCart = createAsyncThunk('cart/removeFromCart', async ({ productId, size, color, userId, guestId }, { rejectWithValue }) => {
   try {
-    const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart/`, {
+    const response = await api.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart/`, {
         data: {
             productId,
             size,
@@ -83,7 +83,7 @@ export const removeFromCart = createAsyncThunk('cart/removeFromCart', async ({ p
 // merge guest cart with user cart on login
 export const mergeCart = createAsyncThunk('cart/mergeCart', async ({ userId, guestId }, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/cart/merge`, {
+    const response = await api.post(`${import.meta.env.VITE_BACKEND_URL}/api/cart/merge`, {
         userId,
         guestId,
     },

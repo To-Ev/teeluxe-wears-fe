@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../api';
+import api from '../api';
 
 // Retrieve user info and token from localStorage
 const storedAuth = localStorage.getItem('authData')
