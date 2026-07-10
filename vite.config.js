@@ -27,7 +27,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           reactVendor: ['react', 'react-dom'],
-          uiVendor: ['react-icons', 'boxicons'],
+          uiVendor: ['react-icons'],
           reduxVendor: ['@reduxjs/toolkit', 'react-redux'],
         },
       },
