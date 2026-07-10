@@ -61,7 +61,7 @@ const UserManagement = () => {
     <section className='max-w-7xl mx-auto p-6 text-gray-700 '>
         <h2 className="text-2xl font-bold mb-4">User Management</h2>
 
-        {loading && <p>loading...</p>}
+        {loading && <p className='text-xl text-green-300'>loading...</p>}
         {error && <p>Error: {typeof error === 'string' ? error : error.message}</p>}
         
         {/* Add new user Form  */}

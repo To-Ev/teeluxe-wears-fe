@@ -48,10 +48,10 @@ const Login = () => {
         } catch (error) {
             console.error("Login failed:", error);
             toast.error("Login failed. Please try again.");
+        }finally{
+            setEmail("");
+            setPassword("");
         }
-
-        setEmail("");
-        setPassword("");
     };
 
   return (

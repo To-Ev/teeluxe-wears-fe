@@ -88,7 +88,7 @@ const EditProductPage = () => {
         });
     };
     
-    if(loading) return <p className='text-xl text-gray-500'>Loading...</p>
+    if(loading) return <p className='text-xl text-green-300'>Loading...</p>
     if(error) return <p className='text-red-500 text-xl'>Error: {error}</p>
 
   return (

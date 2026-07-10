@@ -17,8 +17,8 @@ const MyOrderPage = () => {
         navigate(`/orders/${orderId}`)
     };
 
-    if(loading) return <p className='text-gray-400 text-2xl'>Loading...</p>
-    if(error) return <p className='text-red-500'>{error}</p>
+    if(loading) return <p className='text-green-300 text-2xl'>Loading...</p>
+    if(error) return <p className='text-red-400'>{error}</p>
 
   return (
     <section className='max-w-7xl mx-auto p-4 sm:p-6'>

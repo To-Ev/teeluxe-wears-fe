@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { IoLogoInstagram } from 'react-icons/io'
 import { RiTwitterXLine } from 'react-icons/ri'
 import { TbBrandMeta } from 'react-icons/tb'
+import { FaWhatsapp } from "react-icons/fa";
 import { FiPhoneCall } from 'react-icons/fi'
 
 const Footer = () => {
@@ -36,13 +37,13 @@ const Footer = () => {
                 <h3 className="text-lg text-gray-800 mb-4">Follow us</h3>
                 <div className='flex space-x-3 space-y-4 justify-center'>
                     <a 
-                    href="#"
+                    href="https://www.facebook.com/share/1EJJMMaqtr/?mibextid=wwXIfr" 
                     target='_blank'
                     rel='noopener noreferrer'
                     ><TbBrandMeta className='h-5 w-5 text-gray-500 hover:text-gray-800 transition'/>
                     </a>
                     <a 
-                    href="#"
+                    href="https://www.instagram.com/derayo.ng?igsh=NXh2b2lid2ZvbWZ4"
                     target='_blank'
                     rel='noopener noreferrer'
                     ><IoLogoInstagram className='h-5 w-5 text-gray-500 hover:text-gray-800 transition'/>
@@ -53,17 +54,23 @@ const Footer = () => {
                     rel='noopener noreferrer'
                     ><RiTwitterXLine className='h-5 w-4 text-gray-500 hover:text-gray-800 transition'/>
                     </a>
+                    <a href="https://wa.me/971529004793" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className='hover:text-gray-300'>
+                        <FaWhatsapp className='h-5 w-4 text-gray-500 hover:text-gray-800 transition'/>
+                    </a>
                 </div>
                 <p className='text-gray-400 text-lg mb-1'>Call us</p>
                 <p className='text-gray-500'>
                     <FiPhoneCall className=' h-5 w-5 inline-block mr-3'/>
-                    0123-4567-89
+                    (+234) 706 2821 063
                 </p>
             </div>
         </div>
         <div className='container mx-auto mt-10'>
             <p className='text-gray-500 text-center'>
-                ©️ 2025, teeluxe. All right reserved.
+                ©️ {new Date().getFullYear()}, teeluxe. All right reserved.
             </p>
         </div>
     </footer>

@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <div>
-        <nav className='container flex mx-auto justify-between items-center py-4 px-6'>
+        <nav className='container flex mx-auto justify-between items-center py-4 px-6 md:px-2'>
             {/* Start Bar */}
             <div>
                 <Link to='/' className='text-md md:text-2xl font-semibold text-gray-700'>
@@ -47,7 +47,7 @@ const Navbar = () => {
                 </Link>
             </div>
             {/* Right Icons */}
-            <div className='flex items-center space-x-2.5 sm:space-x-4'>
+            <div className='flex items-center space-x-3.5 sm:space-x-4'>
                 {user && user.role === "admin" && (
                     <Link to="/admin" className='block bg-black rounded px-2 py-0.5 text-sm sm:px-3 sm:py-1 text-white'>Admin</Link>
                 )}

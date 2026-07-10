@@ -30,11 +30,11 @@ const AdminHomePage = () => {
     <section className='max-w-7xl mx-auto p-6 text-gray-700'>
       <h1 className="text-3xl font-bold  mb-6">Admin Dashboard</h1>
       {productLoading || ordersLoading ? (
-        <p>Loading...</p>
+        <p className='text-green-300 text-2xl'>Loading...</p>
       ) : productError ? (
-        <p className='text-red-500 text-2xl'>Error fetching products: {productError}</p>
+        <p className='text-red-400 text-2xl'>Error fetching products! {productError}</p>
       ) : ordersError ? (
-        <p className='text-red-500 text-2xl'>Error fetching orders: {ordersError}</p>
+        <p className='text-red-400 text-2xl'>Error fetching orders! {ordersError}</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="p-4 shadow-md rounded-lg">

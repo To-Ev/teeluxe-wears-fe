@@ -2,6 +2,7 @@ import React from 'react'
 import jewelryImg from '../../assets/JewelryImg.png';
 import WomenCollection from '../../assets/womens-collection.webp'
 import { Link } from 'react-router-dom';
+
 const GenderSelectionSection = () => {
   return (
     <section className='py-12 px-4 lg:px-0'>
@@ -15,7 +16,7 @@ const GenderSelectionSection = () => {
                     <h1 className=' text-2xl font-bold text-gray-700 mb-3'>
                         Jewelries collection
                     </h1>
-                    <Link to="/collection/all?jewelries" className='text-gray-900 underline'>
+                    <Link to="/collections/all?jewelries" className='text-gray-900 underline'>
                     Shop Now
                     </Link>
                 </div>
@@ -29,7 +30,7 @@ const GenderSelectionSection = () => {
                     <h1 className=' text-2xl font-bold text-gray-700 mb-3'>
                         Outfit's collection
                     </h1>
-                    <Link to="/collection/all?outfit" className='text-gray-900 underline'>
+                    <Link to="/collections/all?outfit" className='text-gray-900 underline'>
                     Shop Now
                     </Link>
                 </div>
