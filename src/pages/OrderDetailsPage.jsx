@@ -13,8 +13,8 @@ const OrderDetailsPage = () => {
         dispatch(fetchOrderDetails(id))
     }, [id, dispatch]);
 
-    if(loading) return <p className='text-gray-400 text-2xl p-2'>Loading...</p>
-    if(error) return <p className='text-red-500 p-2'>Error: {error}</p>
+    if(loading) return <p className='text-green-300 text-2xl p-6'>Loading...</p>
+    if(error) return <p className='text-red-400 p-6'>Error: {error}</p>
 
   return (
     <section className='max-w-7xl mx-auto p-4 sm:p-6 text-gray-700'>
@@ -54,16 +54,16 @@ const OrderDetailsPage = () => {
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8'>
                     <div>
                         <h4 className="text-xl font-semibold mb-2">Payment Info</h4>
-                        <p className='text-lg'>Payment Method: <span className='text-gray-400'>{orderDetails.paymentMethod}</span></p>
-                        <p className='text-lg'>Reference Id: <span className='text-gray-400'>{orderDetails.paymentDetails}</span></p>
-                        <p className='text-lg'>Status: <span className='text-gray-400'>{orderDetails.isPaid ? "Paid" : "Unpaid"}</span></p>
+                        <p className='text-lg'>Payment Method: <span className='text-gray-600'>{orderDetails.paymentMethod}</span></p>
+                        <p className='text-lg'>Reference Id: <span className='text-gray-600'>#{orderDetails.paymentDetails}</span></p>
+                        <p className='text-lg'>Status: <span className='text-gray-600'>{orderDetails.isPaid ? "Paid" : "Unpaid"}</span></p>
                     </div>
                     <div>
                         <h4 className="text-xl font-semibold mb-2">Shipping Info</h4>
-                        <p className='text-lg'>Shipping Method: <span className='text-gray-400'>{orderDetails.shippingMethod}</span></p>
+                        <p className='text-lg'>Shipping Method: <span className='text-gray-600'>{orderDetails.shippingMethod}</span></p>
                         <p className='text-lg'>
                             Address: {" "}
-                            <span className='text-gray-400'>{`${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.country}`}</span>
+                            <span className='text-gray-600'>{`${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.country}`}</span>
                         </p>
                     </div>
                 </div>

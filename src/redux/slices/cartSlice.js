@@ -21,7 +21,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async ({userId, gues
     return response.data;
   } catch (error) {
     console.error('Error fetching cart:', error);
-    return rejectWithValue(error.response.data);
+    return rejectWithValue(error.response?.data?.err);
     }
 });
 
@@ -39,7 +39,7 @@ export const addToCart = createAsyncThunk('cart/addToCart', async ({ productId, 
     return response.data;
   } catch (error) {
     console.error('Error adding to cart:', error);
-    return rejectWithValue(error.response.data);
+    return rejectWithValue(error.response?.data?.err);
   } 
 });
 
@@ -57,26 +57,26 @@ export const updateCartItem = createAsyncThunk('cart/updateCartItem', async ({ p
     return response.data;
   } catch (error) {
     console.error('Error updating cart item:', error);
-    return rejectWithValue(error.response.data);
+    return rejectWithValue(error.response?.data?.err);
   }
 });
 
 // Remove item from cart
 export const removeFromCart = createAsyncThunk('cart/removeFromCart', async ({ productId, size, color, userId, guestId }, { rejectWithValue }) => {
   try {
-    const response = await api.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart/`, {
+    const response = await api.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
         data: {
-            productId,
-            size,
-            color,
-            userId,
-            guestId,
+          productId,
+          size,
+          color,
+          userId,
+          guestId,
         },
     });
     return response.data;
   } catch (error) {
     console.error('Error removing from cart:', error);
-    return rejectWithValue(error.response.data);
+    return rejectWithValue(error.response?.data?.err);
   }
 });
 
@@ -95,7 +95,7 @@ export const mergeCart = createAsyncThunk('cart/mergeCart', async ({ userId, gue
     return response.data;
   } catch (error) {
     console.error('Error merging cart:', error);
-    return rejectWithValue(error.response.data);
+    return rejectWithValue(error.response?.data?.err);
   }
 });
 

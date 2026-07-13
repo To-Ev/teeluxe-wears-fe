@@ -3,7 +3,7 @@ import PayStackButton from './PayStackButton';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCheckout } from '../../redux/slices/checkoutSlice';
-import axios from 'axios';
+import api from '../../redux/api';
 
 const CheckOut = () => {
 
@@ -11,6 +11,8 @@ const CheckOut = () => {
   const dispatch = useDispatch();
   const { cart, loading, error } = useSelector(state => state.cart);
   const { user } = useSelector(state => state.auth);
+  const [shippingMethod, setShippingMethod] = useState("Standard");
+
 
   const [shippingAddress, setShippingAddress] = useState({
     firstName: "",
@@ -38,7 +40,7 @@ const CheckOut = () => {
           checkoutItems: cart.products,   // ✅ use orderItems if backend expects this
           shippingAddress,
           paymentMethod: "Paystack",
-          shippingMethod: "Standard",
+          shippingMethod: shippingMethod || "Standard",
           totalPrice: cart.totalPrice,
         })
       );
@@ -54,7 +56,7 @@ const CheckOut = () => {
 
   const handlePaymentSuccess = async (reference) =>{
     try {
-      await axios.put(
+      await api.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkOutId}/pay`,
         { paymentStatus: "paid", paymentDetails: reference },
         {
@@ -71,7 +73,7 @@ const CheckOut = () => {
 
   const handleFinalizeCheckout = async (checkOutId) => {
     try {
-      const res = await axios.post(
+      const res = await api.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkOutId}/finalize`,
         {},
         {
@@ -80,7 +82,8 @@ const CheckOut = () => {
           },
         }
       );
-
+            
+      console.log("Payload shippingMethod:", shippingMethod);
       // ✅ update Redux checkout slice with finalized order
       dispatch({ type: "checkout/createCheckout/fulfilled", payload: res.data });
 
@@ -90,7 +93,7 @@ const CheckOut = () => {
     }
   };
 
-  if(loading) return <p>Loading cart...</p>
+  if(loading) return <p className='text-xl text-green-300 p-4'>Loading cart...</p>
   if(error) return <p className='p-4 text-2xl text-gray-400'>Error: {error}</p>
   if(!cart || !cart.products || cart.products.length === 0) {
     return <p>Your cart is empty</p>
@@ -187,7 +190,7 @@ const CheckOut = () => {
               />
             </div>
           </div>
-          <div className='mb-2'>
+          <div className='mb-3'>
             <label className='block text-gray-700'>Country</label>
               <input 
                 type="text" 
@@ -201,19 +204,38 @@ const CheckOut = () => {
                 required
               />
           </div>
-          <div className='mb-2'>
-            <label className='block text-gray-700'>Phone</label>
-              <input 
-                type="tel" 
-                value={shippingAddress.phone}
-                onChange={(e) => 
-                  setShippingAddress({
-                    ...shippingAddress, 
-                    phone: e.target.value})
-                  }
-                className='w-full rounded text-lg text-gray-800 bg-gray-100 p-2 focus:outline-green-200'
-                required
-              />
+          <div className='mb-2 grid grid-cols-2 gap-4'>
+            <div>
+              <label className='block text-gray-700'>Phone</label>
+                <input 
+                  type="tel" 
+                  value={shippingAddress.phone}
+                  onChange={(e) => 
+                    setShippingAddress({
+                      ...shippingAddress, 
+                      phone: e.target.value})
+                    }
+                  className='w-full rounded text-lg text-gray-800 bg-gray-100 p-2 focus:outline-green-200'
+                  required
+                />
+            </div>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Shipping Method
+              </label>
+              <div className="relative -top-2">
+                <select
+                  value={shippingMethod}
+                  onChange={(e) => {
+                    setShippingMethod(e.target.value)
+                  }}
+                  className="w-full rounded text-lg text-gray-800 bg-gray-100 p-2 focus:outline-green-200 appearance-none">
+                  <option value="Standard">Standard</option>
+                  <option value="Express">Express</option>
+                  <option value="Pickup">Pickup</option>
+                </select>
+              </div>
+            </div>
           </div>
           <div className='mt-6'>
             {

@@ -81,7 +81,7 @@ const ProductsDetails = ({ productId }) => {
   return (
     <section className='p-6'>
         {selectedProduct &&
-            <div  className='max-w-6xl mx-auto p-8'>
+            <div  className='max-w-6xl mx-auto p-0'>
                 <div className='flex flex-col md:flex-row'>
                     {/* Thumbnails images */}
                     <div className='hidden md:flex flex-col mr-6'>
@@ -102,7 +102,7 @@ const ProductsDetails = ({ productId }) => {
                         <img   
                         src={mainImage} 
                         alt="Main Image" 
-                        className='rounded-lg max-w-lg h-auto object-cover'
+                        className='rounded-lg w-full max-w-lg h-auto object-cover'
                         />
                     </div>
                     {/*Mobile Thumbnails */}

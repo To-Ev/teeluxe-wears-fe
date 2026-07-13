@@ -72,15 +72,15 @@ const OrderConfirmationPage = () => {
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-5 text-gray-700'>
                         <div>
                             <h4 className="text-xl font-semibold mb-2">Payment Info</h4>
-                            <p className='text-lg'>Payment Method: <span className='text-gray-500 font-semibold'>{checkout.paymentMethod}</span></p>
-                            <p className='text-lg'>Reference Id: <span className='text-gray-500 font-semibold'>{checkout.paymentDetails}</span></p>
+                            <p className='text-lg'>Payment Method: <span className='text-gray-600'>{checkout.paymentMethod}</span></p>
+                            <p className='text-lg'>Reference Id: <span className='text-gray-600'>#{checkout.paymentDetails}</span></p>
                         </div>
                         <div>
                             <h4 className="text-xl font-semibold mb-2">Shipping Info</h4>
-                            <p className='text-lg'>Shipping Method: <span className='text-gray-500'>{checkout.shippingMethod}</span></p>
+                            <p className='text-lg'>Shipping Method: <span className='text-gray-600'>{checkout.shippingMethod}</span></p>
                             <p className='text-lg'>
                                 Address: {" "}
-                                <span className='text-gray-500'>{`${checkout.shippingAddress.city}, ${checkout.shippingAddress.country}`}</span>
+                                <span className='text-gray-600'>{`${checkout.shippingAddress.city}, ${checkout.shippingAddress.country}`}</span>
                             </p>
                         </div>
                     </div>
