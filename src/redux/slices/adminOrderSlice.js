@@ -19,7 +19,7 @@ export const fetchAdminOrders = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error?.response?.data?.err || 'Failed to fetch orders');
+            return rejectWithValue(error?.response?.data?.err || 'Failed to fetch orders! check network connection');
         }
     }
 );
@@ -36,7 +36,7 @@ export const updateOrderStatus = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error?.response?.data?.err || 'Failed to update order status');
+            return rejectWithValue(error?.response?.data?.err || 'Failed to update order status! check network connection');
         }
     }
 );
@@ -53,7 +53,7 @@ export const deleteOrder = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error?.response?.data?.err || 'Failed to delete order');
+            return rejectWithValue(error?.response?.data?.err || 'Failed to delete order! check network connection');
         }
     }
 );
@@ -86,7 +86,7 @@ const adminOrderSlice = createSlice({
             })
             .addCase(fetchAdminOrders.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload || 'Failed to fetch orders';
+                state.error = action.payload || 'Failed to fetch orders! check network connection';
             })
             // update order status
             .addCase(updateOrderStatus.fulfilled, (state, action) => {

@@ -18,7 +18,7 @@ export const createCheckout = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Checkout failed");
+      return rejectWithValue(error.response?.data || "Checkout failed! check network connection");
     }
   }
 );

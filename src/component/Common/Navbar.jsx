@@ -27,8 +27,8 @@ const Navbar = () => {
         <nav className='container flex mx-auto justify-between items-center py-4 px-6 md:px-2'>
             {/* Start Bar */}
             <div>
-                <Link to='/' className='text-md md:text-2xl font-semibold text-gray-700'>
-                    Teeluxe Wears
+                <Link to='/' className='text-3xl md:text-3xl font-semibold text-gray-600'>
+                    Derayo
                 </Link>
             </div>
             {/* Middle bar */}

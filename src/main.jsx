@@ -7,9 +7,6 @@ import App from './App.jsx'
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-// export const server = "http://localhost:5000"
-// export const server = "https://one-backend-kohl.vercel.app"
-
 const container = document.getElementById('root')
 
 if (!window.__REACT_ROOT__) {

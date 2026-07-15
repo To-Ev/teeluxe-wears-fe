@@ -20,7 +20,7 @@ export const fetchUsers = createAsyncThunk(
             });
             return response.data; // Assuming the API returns an array of users
         } catch(err) {
-            return rejectWithValue(err.response.data.err); // Return error message from API
+            return rejectWithValue(err?.response?.data?.err); // Return error message from API
         }
     }
 );
@@ -37,7 +37,7 @@ export const addUser = createAsyncThunk(
             });
             return response.data; // Assuming the API returns the created user
         } catch(err) {
-            return rejectWithValue(err.response.data.err); // Return error message from API
+            return rejectWithValue(err?.response?.data?.err); // Return error message from API
         }
     }
 );
@@ -54,7 +54,7 @@ export const updateUser = createAsyncThunk(
             });
             return response.data; // Assuming the API returns the updated user
         } catch(err) {
-            return rejectWithValue(err.response.data.err); // Return error message from API
+            return rejectWithValue(err?.response?.data?.err); // Return error message from API
         }
     }
 );
@@ -71,7 +71,7 @@ export const deleteUser = createAsyncThunk(
             });
             return id; // Return the deleted user's ID for state update
         } catch(err) {
-            return rejectWithValue(err.response.data.err); // Return error message from API
+            return rejectWithValue(err?.response?.data?.err); // Return error message from API
         }
     }
 );

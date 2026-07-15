@@ -15,7 +15,7 @@ export const fetchOrders = createAsyncThunk(
             });
             return response.data; // Assuming the API returns an array of orders
         } catch(err) {
-            return rejectWithValue(err.response.data); // Return error message from API
+            return rejectWithValue(err?.response?.data); // Return error message from API
         }
     }
 );
@@ -34,7 +34,7 @@ export const fetchOrderDetails = createAsyncThunk(
             });
             return response.data; // Assuming the API returns an array of orders
         } catch(err) {
-            return rejectWithValue(err.response.data); // Return error message from API
+            return rejectWithValue(err?.response?.data); // Return error message from API
         }
     }
 );

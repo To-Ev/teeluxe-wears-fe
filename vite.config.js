@@ -1,28 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(), 
-    tailwindcss({
-      theme: { 
-        extend: { 
-          colors: { 
-            rabbit: "#ea2e0e",
-          },
-          fontFamily: { 
-            heading: ['Poppins', 'sans-serif'], 
-          },
-        },
-      },
-    }),
-  ],
+  plugins: [react()],
+  base: '/teeluxe-wears-fe/',
   build: {
-    // raise the warning threshold if you want
-    chunkSizeWarningLimit: 1000, // kB
-
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -33,8 +17,8 @@ export default defineConfig({
       },
     },
   },
-  base: '/teeluxe-wears-fe/'
 })
+
 
 // git remote -v 
 // git remote set-url origin  https://github.com/To-Ev/teeluxe-wears-be.git

@@ -42,7 +42,7 @@ const Home = () => {
 
 
   return (
-    <div>
+    <div className=''>
       <Hero />
       <GenderSelectionSection />
       <NewArrivals />
