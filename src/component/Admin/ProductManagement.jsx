@@ -30,9 +30,18 @@ const ProductManagement = () => {
 
     if(loading) return <p className='text-xl text-green-300'>Loading...</p>
     if(error) return <p className='text-red-500 text-xl'>Error: {error}</p>
+
   return (
     <section className='max-w-7xl mx-auto p-6 text-gray-700'>
         <h2 className="text-2xl font-bold mb-6">Product Management</h2>
+        <div className='mb-6'>
+            <Link 
+                to={`/admin/products/new`} 
+                className='bg-green-500 text-white px-3 py-3 rounded hover:bg-green-600'>
+                Add New Product
+            </Link>
+        
+        </div>
         <div className="overflow-x-auto shadow-md sm:rounded-lg">
             <table className="min-w-full text-left text-gray-500">
                 <thead className="bg-gray-100 text-left text-gray-700">

@@ -135,8 +135,8 @@ const ProductsDetails = ({ productId }) => {
                     <div className='md:w-1/2 md:ml-10'>
                         <h1 className='font-semibold text-2xl md:text-3xl mb-2 text-gray-700'>{selectedProduct.name}</h1>
                         <p className='text-lg text-gray-500 line-through mb-1'>
-                            { selectedProduct.originalPrice && 
-                                `N${selectedProduct.originalPrice}`
+                            { selectedProduct.discountPrice && 
+                                `N${selectedProduct.discountPrice}`
                             }
                         </p>
                         <p className='text-xl text-gray-600 font-semibold mb-2'>

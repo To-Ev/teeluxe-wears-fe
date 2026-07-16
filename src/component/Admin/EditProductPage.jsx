@@ -104,6 +104,7 @@ const EditProductPage = () => {
                     value={productData.name} onChange={handleChange}
                     className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
                     required
+                    placeholder='Product name...'
                 />
             </div>
             {/* Description  */}
@@ -119,7 +120,7 @@ const EditProductPage = () => {
             </div>
             {/* Price  */}
             <div className='mb-6'>
-                 <label className='block font-semibold mb-2'>Price</label>
+                <label className='block font-semibold mb-2'>Price</label>
                 <input 
                     type="number" 
                     name='price'
@@ -129,9 +130,22 @@ const EditProductPage = () => {
                     className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
                 />
             </div>
+            {/*Discount Price  */}
+            <div className='mb-6'>
+                <label className='block font-semibold mb-2'>Discount Price</label>
+                <input 
+                    type="number" 
+                    name='discountPrice'
+                    step="any"
+                    value={productData.discountPrice} onChange={handleChange}
+                    min={0}
+                    placeholder='Optional'
+                    className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
+                />
+            </div>
             {/* Count in Stock  */}
             <div className='mb-6'>
-                 <label className='block font-semibold mb-2'>Count in Stock</label>
+                <label className='block font-semibold mb-2'>Count in Stock</label>
                 <input 
                     type="number" 
                     name='countInStock'
@@ -142,17 +156,77 @@ const EditProductPage = () => {
             </div>
             {/* SKU  */}
             <div className='mb-6'>
-                 <label className='block font-semibold mb-2'>SKU</label>
+                <label className='block font-semibold mb-2'>SKU</label>
                 <input 
                     type="text" 
                     name='sku'
                     value={productData.sku} onChange={handleChange}
                     className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
+                    placeholder='VNECK-CLS-010'
+                />
+            </div>
+            {/* Category  */}
+            <div className='mb-6'>
+                <label className='block font-semibold mb-2'>Category</label>
+                <select
+                    name='category'
+                    value={productData.category}
+                    onChange={handleChange}
+                    className="w-full rounded-md focus:outline-green-200 bg-gray-100 p-3">
+                    <option value=""></option>
+                    <option value="Top Wear">Top Wear</option>
+                    <option value="Bottom Wear">Bottom Wear</option>
+                </select>
+            </div>
+            {/* Section  */}
+            <div className='mb-6'>
+                <label className='block font-semibold mb-2'>Section</label>
+                <select
+                    name='section'
+                    value={productData.section}
+                    onChange={handleChange}
+                    className="w-full rounded-md focus:outline-green-200 bg-gray-100 p-3">
+                    <option value=""></option>
+                    <option value="Wears">Wears</option>
+                    <option value="Jewelries">Jewelries</option>
+                </select>
+            </div>
+            {/* Brand  */}
+            <div className='mb-6'>
+                <label className='block font-semibold mb-2'>Brand</label>
+                <input 
+                    type="text" 
+                    name='brand'
+                    value={productData.brand} onChange={handleChange}
+                    className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
+                    placeholder='ActiveWear || ChillZone || UrbanStyle...'
+                />
+            </div>
+            {/* Material */}
+            <div className='mb-6'>
+                <label className='block font-semibold mb-2'>Material</label>
+                <input 
+                    type="text" 
+                    name='material'
+                    value={productData.material} onChange={handleChange}
+                    className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
+                    placeholder='Polyester || Cotton || Cotton Blend...'
+                />
+            </div>
+            {/* Collections  */}
+            <div className='mb-6'>
+                <label className='block font-semibold mb-2'>Collections</label>
+                <input 
+                    type="text" 
+                    name='collections'
+                    value={productData.collections} onChange={handleChange}
+                    className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
+                    placeholder='Casual Collection || Urban Collection || Lounge Collection..'
                 />
             </div>
             {/* Sizes  */}
             <div className='mb-6'>
-                 <label className='block font-semibold mb-2'>Sizes (comma-separated)</label>
+                <label className='block font-semibold mb-2'>Sizes (comma-separated)</label>
                 <input 
                     type="text" 
                     name='sizes'
@@ -161,11 +235,12 @@ const EditProductPage = () => {
                         sizes: e.target.value.split(",").map((size) => size.trim())
                     })}
                     className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
+                    placeholder='S, M, X, XL'
                 />
             </div>
             {/* Color  */}
             <div className='mb-6'>
-                 <label className='block font-semibold mb-2'>Colors (comma-separated)</label>
+                <label className='block font-semibold mb-2'>Colors (comma-separated)</label>
                 <input 
                     type="text" 
                     name='color'
@@ -174,6 +249,7 @@ const EditProductPage = () => {
                         colors: e.target.value.split(",").map((color) => color.trim())
                     })}
                     className='w-full rounded-md focus:outline-green-200 bg-gray-100 p-3'
+                    placeholder='Red, Black'
                 />
             </div>
             {/* Image Upload  */}

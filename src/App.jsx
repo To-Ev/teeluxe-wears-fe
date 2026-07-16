@@ -18,6 +18,7 @@ import ProductManagement from './component/Admin/ProductManagement'
 import EditProductPage from './component/Admin/EditProductPage'
 import OrderManagement from './component/Admin/OrderManagement'
 import ProtectedRoute from './component/Common/ProtectedRoute'
+import AddNewProductPage from './component/Admin/AddNewProductPage'
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route path='users' element={<UserManagement />}/> 
           <Route path='products' element={<ProductManagement />}/> 
           <Route path='products/:id/edit' element={<EditProductPage />}/> 
+          <Route path='products/new' element={<AddNewProductPage />}/> 
           <Route path='orders' element={<OrderManagement />}/> 
         </Route>
       </Routes>

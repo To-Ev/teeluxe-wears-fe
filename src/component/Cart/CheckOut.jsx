@@ -231,7 +231,7 @@ const CheckOut = () => {
                   onChange={(e) => {
                     setShippingMethod(e.target.value)
                   }}
-                  className="w-full rounded text-lg text-gray-800 bg-gray-100 p-2 focus:outline-green-200 appearance-none">
+                  className="w-full rounded text-lg text-gray-800 bg-gray-100 p-2 focus:outline-green-200">
                   <option value="Standard">Standard</option>
                   <option value="Express">Express</option>
                   <option value="Pickup">Pickup</option>
