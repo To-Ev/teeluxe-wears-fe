@@ -48,9 +48,9 @@ const FilterSideBar = () => {
       materials: params.materials ? params.materials.split(",") : [],
       color: params.color || "",
       minPrice: params.minPrice ? Number(params.minPrice) : 0,
-      maxPrice: params.maxPrice ? Number(params.maxPrice) : 100,
+      maxPrice: params.maxPrice ? Number(params.maxPrice) : 1000,
     });
-    setPriceRange([0, params.maxPrice || 100])
+    setPriceRange([0, params.maxPrice || 1000])
   }, [searchParams]);
 
   const handleInputChange = (e) => {
@@ -225,7 +225,7 @@ const FilterSideBar = () => {
         <div className='p-6'>
           <label className='block mb-2'>Price Range</label>
           <input 
-            type="range" name='priceRange' min={0} max={100}
+            type="range" name='priceRange' min={0} max={1000}
             value={priceRange[1]}
             onChange={handlePriceChange}
             className='w-full bg-gray-400 appearance-none rounded-lg h-2'

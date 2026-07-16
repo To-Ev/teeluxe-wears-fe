@@ -19,7 +19,7 @@ const CollectionPage = () => {
 
     useEffect(() => {
         dispatch(fetchByFilters({ collection, ...queryParams }));
-    }, [dispatch, collection, searchParams]);
+    }, [dispatch, collection, queryParams, searchParams]);
 
     const toggleSidebar = () =>{
         setIsSidebarOpen(!isSidebarOpen);
@@ -52,7 +52,7 @@ const CollectionPage = () => {
         {/* Filter section */}
         <div 
             ref={sideBarRef}
-            className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} z-50 bg-white w-2/5 sm:w-100 fixed left-0 inset-y-0 overflow-y-auto transition duration-300 lg:static lg:translate-x-0`}>
+            className={`${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} z-50 bg-white w-4/5 sm:w-100 fixed left-0 inset-y-0 overflow-y-auto transition duration-300 lg:static lg:translate-x-0`}>
             <FilterSideBar />
         </div>  
         <div className='grow p-4'>
