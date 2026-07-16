@@ -9,6 +9,10 @@ const ProductGrid = ({products, loading, error}) => {
         return <p className='text-center text-red-400 text-xl'>Error fetching products! check network connection.</p>
     }
 
+    if (!loading && !error && (!products || products.length === 0)) {
+        return <p className="text-center text-gray-400 text-xl">No products available.</p>;
+    }
+
   return (
     <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
         {

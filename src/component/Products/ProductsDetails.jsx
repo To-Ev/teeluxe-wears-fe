@@ -76,7 +76,19 @@ const ProductsDetails = ({ productId }) => {
         if(selectedProduct?.images?.length > 0) {
             setMainImage(selectedProduct.images[0].url)
         }
-    }, [selectedProduct])
+    }, [selectedProduct]);
+
+    if (loading) {
+        return <p className="text-center text-green-400 text-xl">Loading product...</p>;
+    }
+
+    if (error) {
+        return <p className="text-center text-red-400 text-xl">{error}</p>;
+    }
+
+    if (!loading && !error && !selectedProduct) {
+        return <p className="text-center text-gray-400 text-xl">Product not found.</p>;
+    }
 
   return (
     <section className='p-6'>

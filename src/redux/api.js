@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL + "/api",
+   timeout: 10000, // 10 seconds
 });
 
 // Attach token to every request

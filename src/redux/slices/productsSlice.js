@@ -38,10 +38,17 @@ export const fetchByFilters = createAsyncThunk(
 
     // Async thunk to fetch a single product by ID
     export const fetchProductDetails = createAsyncThunk(
-        "products/fetchProductDetails",
-        async (productId) => {
-            const response = await api.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${productId}`);
-            return response.data;
+  'products/fetchProductDetails',
+    async (id, { rejectWithValue }) => {
+        try {
+            const res = await api.get(`/products/${id}`);
+            if (!res.data || Object.keys(res.data).length === 0) {
+                return rejectWithValue("Product not found");
+            }
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.err || "Network error");
+            }
         }
     );
 
@@ -58,11 +65,25 @@ export const updateProduct = createAsyncThunk("products/updateProduct", async ({
 
 // Async thunk to fetch related products based on category
 export const fetchSimilarProducts = createAsyncThunk(
-    "products/fetchSimilarProducts",
-    async (productId) => {
-        const response = await api.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${productId}`);
-        return response.data;
+  "products/fetchSimilarProducts",
+  async (productId, { rejectWithValue }) => {
+    try {
+      const response = await api.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${productId}`
+      );
+
+      // Reject if no data or empty array
+      if (!response.data || response.data.length === 0) {
+        return rejectWithValue("No similar products found");
+      }
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || error.message || "Network error"
+      );
     }
+  }
 );
 
 const productsSlice = createSlice({

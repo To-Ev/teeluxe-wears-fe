@@ -19,7 +19,7 @@ const CollectionPage = () => {
 
     useEffect(() => {
         dispatch(fetchByFilters({ collection, ...queryParams }));
-    }, [dispatch, collection, queryParams, searchParams]);
+    }, [dispatch, collection, searchParams]);
 
     const toggleSidebar = () =>{
         setIsSidebarOpen(!isSidebarOpen);
