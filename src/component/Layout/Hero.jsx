@@ -15,7 +15,7 @@ const Hero = () => {
           <p 
           className='text-md sm:text-sm tracking-tighter md:text-lg sm:mb-5 mb-6'>Explore our ready to wear outfits with Nation wide shipping
           </p>
-          <Link to="#" className='px-6 py-3 rounded-md font-semibold bg-white text-gray-900'>Shop Now</Link>
+          <Link to="/collections/all" className='px-6 py-3 rounded-md font-semibold bg-white text-gray-900'>Shop Now</Link>
         </div>
       </div>
     </section>

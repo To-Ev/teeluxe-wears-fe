@@ -63,7 +63,7 @@ const OrderDetailsPage = () => {
                         <p className='text-lg'>Shipping Method: <span className='text-gray-600'>{orderDetails.shippingMethod}</span></p>
                         <p className='text-lg'>
                             Address: {" "}
-                            <span className='text-gray-600'>{`${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.country}`}</span>
+                            <span className='text-gray-600'>{`${orderDetails.shippingAddress.address}, ${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.country}`}</span>
                         </p>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCheckout } from '../../redux/slices/checkoutSlice';
 import api from '../../redux/api';
+import { clearCart } from '../../redux/slices/cartSlice';
 
 const CheckOut = () => {
 
@@ -82,10 +83,11 @@ const CheckOut = () => {
           },
         }
       );
-            
-      console.log("Payload shippingMethod:", shippingMethod);
       // ✅ update Redux checkout slice with finalized order
       dispatch({ type: "checkout/createCheckout/fulfilled", payload: res.data });
+
+      // ✅ Clear cart here
+      dispatch(clearCart());
 
       navigate("/order-confirmation");
     } catch (err) {
