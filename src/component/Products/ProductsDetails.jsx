@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductDetails, fetchSimilarProducts } from '../../redux/slices/productsSlice';
 import { addToCart } from '../../redux/slices/cartSlice';
+import { HiBars3BottomRight, HiOutlineShoppingBag, HiOutlineUser } from 'react-icons/hi2'
+import { FiShoppingBag, FiShoppingCart } from 'react-icons/fi';
 
 const ProductsDetails = ({ productId }) => {
     
@@ -99,7 +101,7 @@ const ProductsDetails = ({ productId }) => {
                     <div className='hidden md:flex flex-col mr-6'>
                         {
                             selectedProduct.images.map((image, index) =>(
-                                <div key={index} className={`w-20 h-20 border rounded-lg mb-3 overflow-hidden ${mainImage === image.url ? 'border-black' : 'border-gray-500'}`}>
+                                <div key={index} className={`w-20 h-20 rounded-lg mb-3 overflow-hidden ${mainImage === image.url ? 'ring-2 ring-gray-700' : 'border-gray-500'}`}>
                                     <img 
                                     src={image.url} 
                                     alt={image.altText} 
@@ -133,25 +135,30 @@ const ProductsDetails = ({ productId }) => {
                     </div>
                     {/* Right side */}
                     <div className='md:w-1/2 md:ml-10'>
-                        <h1 className='font-semibold text-2xl md:text-3xl mb-2 text-gray-700'>{selectedProduct.name}</h1>
-                        <p className='text-lg text-gray-500 line-through mb-1'>
-                            { selectedProduct.discountPrice && 
-                                `N${selectedProduct.discountPrice}`
-                            }
-                        </p>
-                        <p className='text-xl text-gray-600 font-semibold mb-2'>
-                            N{selectedProduct.price}
-                        </p>
+                        <h1 className='font-semibold text-4xl mb-2 text-gray-700'>{selectedProduct.name}</h1>
+                        {/* Price */}
+                        <div className='flex gap-3 items-end mb-3'>
+                            <p className='text-3xl text-gray-600 font-semibold'>
+                                N{selectedProduct.price}
+                            </p>
+                            <p className='text-lg text-gray-500 line-through'>
+                            {selectedProduct.discountPrice > 0 ? 
+                            `N${selectedProduct.discountPrice}` : ""}
+                            </p>
+                        </div>
                         <p className='text-gray-800 mb-2'>
                             {selectedProduct.description}
                         </p>
                         {/* selected colors */}
                         <div className='mb-4'>
-                            <p className='text-gray-700'>colors:</p>
+                            <p className='text-gray-700'>Colors:</p>
                             <div className='flex gap-3 mt-1'>
                                 {selectedProduct.colors.map((color, index) =>(
                                     <button key={index}
-                                        className={`w-8 h-8 rounded-full border cursor-pointer ${selectedColor === color ? 'border-3 border-black' : 'border-gray-300'}`}
+                                        className={`w-8 h-8 rounded-full cursor-pointer 
+                                        ${selectedColor === color 
+                                        ? 'border-2 border-white ring-2 ring-black' 
+                                        : 'border border-white'}`}
                                         style={
                                             {backgroundColor: color,
                                             filter: 'brightness(0.6)',
@@ -170,12 +177,11 @@ const ProductsDetails = ({ productId }) => {
                                     <button 
                                         onClick={() => {setSelectedSize(size)}}
                                         key={index}
-                                        className={`text-xl cursor-pointer px-2 border border-gray-200 rounded text-gray-900  transition ${selectedSize === size ? 'bg-black text-white' : ''}`}>
+                                        className={`text-sm cursor-pointer font-semibold px-5 py-2 border border-gray-200 rounded text-gray-900  transition ${selectedSize === size ? 'bg-black text-white' : ''}`}>
                                             {size}
                                     </button>
                                 ))}
                             </div>
-                            
                         </div>
                         {/* selected Quantity */}
                         <div className='mb-4'>
@@ -191,13 +197,18 @@ const ProductsDetails = ({ productId }) => {
                             </div>
                             
                         </div>
+                        {/* Button */}
                         <button 
                         onClick={() =>handleAddToCart()}
                         disabled={isButtonAllowed}
-                        className={`w-full bg-black text-white rounded-lg px-6 py-2 cursor-pointer mb-4 ${isButtonAllowed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-900'}`}>
-                            {isButtonAllowed ? 'Adding...' : `ADD TO CART`}
+                        className={`w-full bg-black text-white rounded-lg px-6 py-3 cursor-pointer mb-4 ${isButtonAllowed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-900'}`}>
+                            {isButtonAllowed ? ('Adding...') : (
+                                <span className="flex items-center justify-center gap-2">
+                                <FiShoppingBag className='w-6 h-6'/> Add to Cart
+                                </span>
+                            )}
                         </button>
-
+                           {/* Characteristics */}
                         <div className='mt-5 text-gray-700'>
                             <h1 className='text-2xl font-bold mb-4'>Characteristics</h1>
                             <table className='w-full text-left text-sm text-gray-600'>

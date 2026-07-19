@@ -1,25 +1,53 @@
 import React from 'react'
-import featuredImg from '../../assets/featured.webp'
+import featuredImg from '../../assets/featured.jpg'
 import { Link } from 'react-router-dom'
+import { FaLongArrowAltRight } from "react-icons/fa"
 
 const FeaturedProducts = () => {
   return (
-    <section className='py-12 px-4 lg:px-0'>
-        <div className='container mx-auto flex flex-col-reverse item overflow-hidden rounded-2xl bg-green-50 lg:flex-row items-center'>
+    <section className='py-12 px-4 h-full lg:px-0'>
+        <div className='relative mx-auto hidden lg:flex overflow-hidden rounded-2x lg:flex-row items-center text-amber-950'>
+            {/* left side */}
+            <div className='lg:w-2/3 text-center p-8 lg:text-left z-50 absolute top-1/2 -translate-y-1/2'>
+                <h2 className='text-md tracking-wider mb-2'>
+                    COMFORT AND STYLE
+                </h2>
+                <h2 className='text-4xl text-gray-900 lg:text-6xl font-bold mb-6'>
+                    Apparel made for <br /> <span className='text-5xl'>your <span className='italic text-amber-600'>every day life</span></span>
+                </h2>
+                <p className=' text-lg mb-6 w-1/2'>
+                    Discover high-quality clothing that effortlessly blends fashion and function. Designed to always make you look and feel great.
+                </p>
+               <button className='w-50 bg-amber-600 py-2.5 rounded-md'>
+                    <Link to="/collections/all" className='text-gray-900 w-full flex justify-center items-center gap-3'>
+                        DISCOVER NOW <FaLongArrowAltRight />
+                    </Link>
+                 </button>
+            </div>
+            {/* right side */}
+            <div className='w-full'>
+                <img 
+                    src={featuredImg} 
+                    alt="Featured image" 
+                    className='w-full h-160 object-cover'
+                />
+            </div>
+        </div>
+        <div className='container lg:hidden mx-auto flex flex-col-reverse item overflow-hidden rounded-2xl bg-gray-900 lg:flex-row items-center'>
             {/* left side */}
             <div className='lg:w-1/2 text-center p-8 lg:text-left'>
-                <h2 className='text-lg font-semibold text-gray-700 mb-2'>
+                <h2 className='text-md uppercase text-amber-500 mb-2'>
                     Comfort and style
                 </h2>
-                <h2 className='text-4xl lg:text-5xl font-bold text-gray-700 mb-6'>
+                <h2 className='text-4xl lg:text-5xl font-bold text-gray-300 mb-6'>
                     Apparel made for your every day life
                 </h2>
-                <p className='text-gray-500 text-lg mb-6'>
+                <p className='text-gray-400 text-lg mb-6'>
                     Discover high-quality clothing that effortlessly blends fashion and function. Designed to always make you look and feel great.
                 </p>
                 <Link 
                     to="/collections/all"
-                    className='bg-black text-white px-6 py-3 rounded-lg text-lg hover:bg-gray-700'
+                    className='bg-amber-600 text-gray-900 px-6 py-3 rounded-lg text-lg hover:bg-amber-700'
                 >
                     Discover now
                 </Link>

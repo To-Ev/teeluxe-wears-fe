@@ -31,6 +31,10 @@ const AddNewProductPage = () => {
 
     const [uploading, setUploading] = useState(false); // Image uploading state
 
+    // Modal
+    const [showModal, setShowModal] = React.useState(false);
+    const [imageToDelete, setImageToDelete] = React.useState(null);
+
     const handleChange = (e) =>{
         const {name, value} = e.target;
         setProductData((prevData) => ({...prevData, [name]: value}))
@@ -256,6 +260,10 @@ const AddNewProductPage = () => {
                                 <img 
                                     src={image?.url} alt={image?.altText || productData?.name || "Product images"} 
                                     className='w-20 h-20 object-cover rounded-md'
+                                    onClick={() => {
+                                    setImageToDelete(index); // store index of clicked image
+                                    setShowModal(true);      // open modal
+                                }}
                                 />
                             </div>
                         ))}
@@ -267,6 +275,35 @@ const AddNewProductPage = () => {
                     {loading ? "Loading..." : "Add New Product"}
                 </button>
             </form>
+            {/* Modal goes here, outside the form but inside the section */}
+            {showModal && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg shadow-lg p-6 w-80">
+                <h3 className="text-lg font-semibold mb-4">Delete Image</h3>
+                <p className="text-gray-600 mb-6">Are you sure you want to delete this image?</p>
+                <div className="flex justify-end gap-4">
+                    <button
+                    className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                    onClick={() => setShowModal(false)}
+                    >
+                    Cancel
+                    </button>
+                    <button
+                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                    onClick={() => {
+                        setProductData({
+                        ...productData,
+                        images: productData.images.filter((_, i) => i !== imageToDelete)
+                        });
+                        setShowModal(false);
+                        setImageToDelete(null);
+                    }}
+                    >
+                    Delete
+                    </button>
+                </div>
+                </div>
+            </div>)}
         </section>
     )
 }

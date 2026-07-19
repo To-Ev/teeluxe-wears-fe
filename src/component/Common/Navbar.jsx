@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { HiBars3BottomRight, HiOutlineShoppingBag, HiOutlineUser } from 'react-icons/hi2'
 import SearchBar from './SearchBar';
 import CartDrawer from '../Layout/CartDrawer';
@@ -12,6 +12,9 @@ const Navbar = () => {
     const { cart } = useSelector(state => state.cart);
     const { user } = useSelector(state => state.auth);
 
+    const location = useLocation();
+    const isHome = location.pathname === "/";
+
     const cartItemCount = 
     cart?.products?.reduce((total, product) => total + product.quantity, 0) || 0;
 
@@ -23,54 +26,105 @@ const Navbar = () => {
     }
 
   return (
-    <div>
-        <nav className='container flex mx-auto justify-between items-center py-4 px-6 md:px-2'>
-            {/* Start Bar */}
-            <div>
-                <Link to='/' className='text-3xl md:text-3xl font-semibold text-gray-600'>
+    <div className="w-full m-0 p-0">
+        <nav className={`m-0 p-0 w-full flex items-center justify-between py-4 px-6 z-30
+        ${isHome ? "absolute bg-blend-multiply" : "relative bg-gray-900"}`}>
+            {/* Left bar */}
+            <div className='hidden md:flex gap-3 text-gray-200 flex-1'>
+                <Link to='/collections/all?section=Wears' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
+                    ACCESSORIES
+                </Link>
+                <Link to='/collections/all?section=Wears' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
+                    2-P SETS
+                </Link>
+                <Link to='/collections/all?category=Top Wear' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
+                    BÚBÚS
+                </Link>
+                <Link to='/collections/all?category=Bottom Wear' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
+                    KAFTANS
+                </Link>
+                <Link to='/collections/all?category=Bottom Wear' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
+                    AṢỌ ÒKÈ
+                </Link>
+            </div>
+            {/* Mid Bar */}
+            <div className='flex-1 flex justify-start md:justify-center'>
+                <Link to='/' className='text-4xl font-semibold text-gray-200'>
                     Derayo
                 </Link>
             </div>
-            {/* Middle bar */}
-            <div className='hidden md:flex space-x-6'>
-                <Link to='/collections/all?section=Jewelries' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
-                    Jewelries
-                </Link>
-                <Link to='/collections/all?section=Wears' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
-                    Wears
-                </Link>
-                <Link to='/collections/all?category=Top Wear' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
-                    Top wear
-                </Link>
-                <Link to='/collections/all?category=Bottom Wear' className='text-gray-700 hover:text-black text-sm font-bold uppercase'>
-                    Bottom wear
-                </Link>
-            </div>
             {/* Right Icons */}
-            <div className='flex items-center space-x-3.5 sm:space-x-4'>
+            <div className="flex items-center justify-end space-x-4 text-gray-200 flex-1">
                 {user && user.role === "admin" && (
-                    <Link to="/admin" className='block bg-black rounded px-2 py-0.5 text-sm sm:px-3 sm:py-1 text-white'>Admin</Link>
+                    <Link
+                    to="/admin"
+                    className="block bg-black rounded px-2 py-0.5 text-sm sm:px-2 sm:py-0.5 text-amber-300"
+                    >
+                    Admin
+                    </Link>
                 )}
-                
-                <Link to='/profile' className='hover:text-black'>
-                    <HiOutlineUser className='h-6 w-6 text-gray-700'/>
+
+                {/* Profile */}
+                {/* Desktop: icon + text */}
+                <Link
+                    to="/profile"
+                    className="hover:text-amber-700 hidden md:flex items-center gap-1.5 text-xs font-semibold"
+                >
+                    <HiOutlineUser className="h-5 w-5 text-white" />
+                    PROFILE
                 </Link>
-                <button 
-                    onClick={toggleCartDrawer} className='relative hover:text-black cursor-pointer'>
-                        <HiOutlineShoppingBag className='h-6 w-6 text-gray-700'/>
-                        {cartItemCount > 0 && (<span className='absolute -top-1 text-xs bg-[#ea2e0e] rounded-full px-2 py-0.5 text-white'>
-                            {cartItemCount}
-                        </span>)
-                    }
+                {/* Mobile: icon only */}
+                <Link
+                    to="/profile"
+                    className="hover:text-amber-700 md:hidden"
+                >
+                    <HiOutlineUser className="h-5 w-5 text-white" />
+                </Link>
+
+                {/* Cart */}
+                <button
+                    onClick={toggleCartDrawer}
+                    className="relative hover:text-amber-700 cursor-pointer hidden md:flex items-center text-xs gap-1.5 font-semibold"
+                >
+                    <HiOutlineShoppingBag className="h-5 w-5 text-white" />
+                    CART
+                    {cartItemCount > 0 && (
+                    <span className="absolute -top-1 text-xs bg-[#ea2e0e] rounded-full px-2 py-0.5 text-white">
+                        {cartItemCount}
+                    </span>
+                    )}
                 </button>
-                {/* SearchBar */}
-                <SearchBar />
-                {/* NavBar */}
-                <button  className='md:hidden cursor-pointer' onClick={toggleNavDrawer}>
-                    <HiBars3BottomRight className='h-6 w-6 text-gray-700'/>
+                {/* Mobile: icon only */}
+                <button
+                    onClick={toggleCartDrawer}
+                    className="relative hover:text-amber-700 cursor-pointer md:hidden"
+                >
+                    <HiOutlineShoppingBag className="h-5 w-5 text-white" />
+                    {cartItemCount > 0 && (
+                    <span className="absolute -top-1 text-xs bg-[#ea2e0e] rounded-full px-2 py-0.5 text-white">
+                        {cartItemCount}
+                    </span>
+                    )}
+                </button>
+
+                {/* Desktop: full search bar */}
+                <div className="hidden md:flex items-center space-x-4">
+                    <SearchBar className="w-40 md:w-60 shrink-0" />
+                </div>
+
+                {/* Mobile: icon only */}
+                <div className="md:hidden">
+                    <SearchBar />
+                </div>
+
+                {/* NavBar (hamburger) */}
+                <button className="md:hidden cursor-pointer" onClick={toggleNavDrawer}>
+                    <HiBars3BottomRight className="h-6 w-6 text-gray-200" />
                 </button>
             </div>
+
         </nav>
+        
         <CartDrawer drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer}/>
         
         {/* Mobile Navigation */}
@@ -81,27 +135,32 @@ const Navbar = () => {
                 </button>
             </div>
             <div className='space-y-4 ml-4'>
-                <h2 className="text-gray-700 text-2xl font-semibold">Menu</h2>
+                <h2 className="text-gray-700 text-3xl font-semibold">Menu</h2>
                 <Link 
                     to="/collections/all?section=Jewelries" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
-                >Jewelries</Link>
+                >ACCESSORIES</Link>
                 <Link 
                     to="/collections/all?section=Wears" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
-                >Wears</Link>
+                >TWO-PIECE SETS</Link>
                 <Link 
                     to="/collections/all?category=Top Wear" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
-                >Top Wear</Link>
+                >BÚBÚS</Link>
                 <Link 
                     to="/collections/all?category=Bottom Wear" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
-                >Bottom Wear</Link>
+                >KAFTANS</Link>
+                <Link 
+                    to="/collections/all?category=Bottom Wear" 
+                    className='block font-semibold text-gray-700 hover:text-black'
+                    onClick={toggleNavDrawer}
+                >AṢỌ ÒKÈ</Link>
             </div>
         </div>
     </div>

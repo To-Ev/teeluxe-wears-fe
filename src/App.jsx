@@ -19,13 +19,13 @@ import EditProductPage from './component/Admin/EditProductPage'
 import OrderManagement from './component/Admin/OrderManagement'
 import ProtectedRoute from './component/Common/ProtectedRoute'
 import AddNewProductPage from './component/Admin/AddNewProductPage'
+import AdminOrderPageDetails from './component/Admin/AdminOrderPageDetails '
 
 
 function App() {
 
   return (
     <>
-
       <Routes>
         <Route path='/' element={<UserLayout />}> //UserLayout
           <Route index element={<Home />} />
@@ -50,6 +50,7 @@ function App() {
           <Route path='products/:id/edit' element={<EditProductPage />}/> 
           <Route path='products/new' element={<AddNewProductPage />}/> 
           <Route path='orders' element={<OrderManagement />}/> 
+          <Route path="orders/:id" element={<AdminOrderPageDetails />} />
         </Route>
       </Routes>
       <Toaster position='top-right'/>

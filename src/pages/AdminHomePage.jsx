@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchAdminOrders } from '../redux/slices/adminOrderSlice';
 import { fetchAdminProducts } from '../redux/slices/adminProductsSlice';
 
 const AdminHomePage = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const {
     products, 
     loading: productLoading, 
@@ -25,6 +27,10 @@ const AdminHomePage = () => {
     dispatch(fetchAdminProducts());
     dispatch(fetchAdminOrders());
   }, [dispatch]);
+
+  const handleRowClick = (orderId) =>{
+    navigate(`/admin/orders/${orderId}`)
+  };
 
   return (
     <section className='max-w-7xl mx-auto p-6 text-gray-700'>
@@ -71,7 +77,10 @@ const AdminHomePage = () => {
             <tbody >
               {orders.length > 0 ? (
                 orders.map((order) => (
-                <tr key={order._id} className='border-b border-gray-200 hover:bg-gray-50 cursor-pointer'>
+                <tr 
+                  key={order._id} 
+                  onClick={() => handleRowClick(order._id)}
+                  className='border-b border-gray-200 hover:bg-gray-50 cursor-pointer'>
                   <td className='p-4'>#{order._id}</td>
                   <td className='p-4'>{order.user.name}</td>
                   <td className='p-4'>N{order.totalPrice.toFixed(2)}</td>

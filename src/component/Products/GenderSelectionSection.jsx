@@ -1,6 +1,6 @@
 import React from 'react'
-import jewelryImg from '../../assets/JewelryImg.png';
-import WomenCollection from '../../assets/womens-collection.webp'
+import jewelryImg from '../../assets/JewelryImg.jpg';
+import WomenCollection from '../../assets/womens-collection.jpg'
 import { Link } from 'react-router-dom';
 
 const GenderSelectionSection = () => {
@@ -14,7 +14,7 @@ const GenderSelectionSection = () => {
                 alt="jewelry Img"/>
                 <div className='absolute bottom-8 left-8 bg-white/80 p-3 sm:p-5 rounded-md'>
                     <h1 className='text-xl sm:text-2xl font-bold text-gray-700 mb-3'>
-                        Jewelries collection
+                        Accessories collection
                     </h1>
                     <Link to="/collections/all?jewelries" className='text-gray-900 underline'>
                     Shop Now

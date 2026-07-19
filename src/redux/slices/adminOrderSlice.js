@@ -24,6 +24,23 @@ export const fetchAdminOrders = createAsyncThunk(
     }
 );
 
+//Get admin order details
+export const fetchOrderDetails = createAsyncThunk(
+  'orders/fetchOrderDetails',
+  async (orderId, { rejectWithValue }) => {
+    try {
+        const response = await api.get(`${API_URL}/admin/orders/${orderId}`, {
+            headers: {
+                Authorization: USER_TOKEN,
+            }
+        });
+        return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || 'Failed to fetch order');
+    }
+  }
+);
+
 // update order delivery status
 export const updateOrderStatus = createAsyncThunk(
     'adminOrders/updateOrderStatus',
@@ -69,42 +86,67 @@ const adminOrderSlice = createSlice({
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder
+    builder
         // fetch all admin orders
-            .addCase(fetchAdminOrders.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(fetchAdminOrders.fulfilled, (state, action) => {
-                state.loading = false;
-                state.orders = action.payload;
-                state.totalOrders = action.payload.length;
+        .addCase(fetchAdminOrders.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        })
+        .addCase(fetchAdminOrders.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = action.payload;
+        state.totalOrders = action.payload.length;
+        state.totalSales = action.payload.reduce((total, order) => total + order.totalPrice, 0);
+        })
+        .addCase(fetchAdminOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        })
 
-                // calculate total sales
-                const totalSales = action.payload.reduce((total, order) => total + order.totalPrice, 0);
-                state.totalSales = totalSales;
-            })
-            .addCase(fetchAdminOrders.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload || 'Failed to fetch orders! check network connection';
-            })
-            // update order status
-            .addCase(updateOrderStatus.fulfilled, (state, action) => {
-                const updateOrder = action.payload;
-                const orderIndex = state.orders.findIndex(order => order._id === updateOrder._id);
-                if (orderIndex !== -1) {
-                    state.orders[orderIndex] = updateOrder;
-                }
-            })
-            .addCase(updateOrderStatus.rejected, (state, action) => {
-                state.error = action.payload || 'Failed to update order status';
-            })
-            // delete order
-            .addCase(deleteOrder.fulfilled, (state, action) => {
-                state.loading = false;
-                state.orders = state.orders.filter(order => order._id !== action.payload._id);
-            })
-        }
+        // fetch single order details
+        .addCase(fetchOrderDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        })
+        .addCase(fetchOrderDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedOrder = action.payload; // add selectedOrder to initialState
+        })
+        .addCase(fetchOrderDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        })
+
+        // update order status
+        .addCase(updateOrderStatus.pending, (state) => {
+        state.loading = true;
+        })
+        .addCase(updateOrderStatus.fulfilled, (state, action) => {
+        state.loading = false;
+        const updatedOrder = action.payload;
+        const index = state.orders.findIndex(o => o._id === updatedOrder._id);
+        if (index !== -1) state.orders[index] = updatedOrder;
+        state.selectedOrder = updatedOrder; // keep detail page in sync
+        })
+        .addCase(updateOrderStatus.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        })
+
+        // delete order
+        .addCase(deleteOrder.pending, (state) => {
+        state.loading = true;
+        })
+        .addCase(deleteOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = state.orders.filter(order => order._id !== action.payload._id);
+        })
+        .addCase(deleteOrder.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        });
+    }
+
 });
 
 export default adminOrderSlice.reducer;

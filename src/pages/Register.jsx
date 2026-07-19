@@ -5,6 +5,7 @@ import { registerUser } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { mergeCart } from '../redux/slices/cartSlice';
 import toast from 'react-hot-toast';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register = () => {
     
@@ -12,9 +13,10 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
-     const navigate = useNavigate();
+    const navigate = useNavigate();
     const { user, guestId, loading } = useSelector(state => state.auth);
     const { cart } = useSelector(state => state.cart);
+    const [showPassword, setShowPassword] = useState(false);
 
     // Get redirect parameter and check of it is checkout
     const redirect = new URLSearchParams(location.search).get("redirect") || "/";
@@ -84,15 +86,21 @@ const Register = () => {
                         placeholder='Enter your email'
                     />
                 </div>
-                <div className='mb-6'>
+                <div className='relative mb-6'>
                     <label className='text-sm font-semibold block mb-2'>Password</label>
                     <input 
-                        type="password" 
+                        type={showPassword ? "text" : "password"} 
                         value={password}
                         onChange={(e) =>setPassword(e.target.value)}
-                        className='w-full p-2 bg-gray-200 text-gray-700 rounded  focus:outline-green-200'
+                        className='w-full p-2 text-gray-500 bg-gray-200 rounded  focus:outline-green-200'
                         placeholder='Enter your password'
                     />
+                    <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-10 cursor-pointer text-gray-500"
+                    >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
                 </div>
                 <button type='submit' className='bg-black w-full p-2 text-white rounded hover:bg-gray-800 transition cursor-pointer font-semibold mb-4'
                 >

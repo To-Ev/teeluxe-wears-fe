@@ -7,7 +7,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const TopBar = () => {
   return (
-    <div className="bg-gray-400 text-white ">
+    <div className="bg-gray-950 text-white ">
       <div className="container mx-auto flex justify-between items-center py-3 px-4">
         <div className='hidden md:flex item-center space-x-4'>
           <a 

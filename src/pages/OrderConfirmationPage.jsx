@@ -25,6 +25,7 @@ const OrderConfirmationPage = () => {
         return orderDate.toLocaleDateString();
     };
 
+    console.log(checkout.paymentDetails);
   return (
     <section className='max-w-4xl mx-auto p-6'>
         <h1 className='text-4xl text-center text-emerald-700 mb-8'>Thank you for your order!</h1>
@@ -73,7 +74,7 @@ const OrderConfirmationPage = () => {
                         <div>
                             <h4 className="text-xl font-semibold mb-2">Payment Info</h4>
                             <p className='text-lg'>Payment Method: <span className='text-gray-600'>{checkout.paymentMethod}</span></p>
-                            <p className='text-lg'>Reference Id: <span className='text-gray-600'>#{checkout.paymentDetails}</span></p>
+                            <p className='text-lg'>Ref: <span className='text-gray-600'>{checkout.paymentDetails}</span></p>
                         </div>
                         <div>
                             <h4 className="text-xl font-semibold mb-2">Shipping Info</h4>
