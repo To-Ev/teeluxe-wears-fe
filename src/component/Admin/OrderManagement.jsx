@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchAdminOrders, updateOrderStatus } from '../../redux/slices/adminOrderSlice';
 import toast from 'react-hot-toast';
+import ROLES_LIST from '../../ROLES_LIST';
 
 const OrderManagement = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const OrderManagement = () => {
   const { orders, loading, error } = useSelector(state => state.adminOrders);
 
   useEffect(() => {
-    if(!user || user.role !== "admin") {
+    if(!user || user.roles?.Admin !== ROLES_LIST.Admin) {
       navigate("/");
     } else {
       dispatch(fetchAdminOrders());
@@ -27,10 +28,10 @@ const OrderManagement = () => {
   };
 
   if(loading) return <p className='text-xl text-green-300'>Loading...</p>
-  if(error) return <p className='text-red-500 text-2xl'>Error: {error}</p>
+  if(error) return <p className='text-red-500 text-2xl'>{error}</p>
 
   return (
-    <section className='max-w-7xl mx-auto p-6 text-gray-700'>
+    <section className='max-w-7xl mx-auto py-6 text-gray-700'>
       <h2 className='text-2xl font-bold mb-6'>Order Management</h2>
       <div className='overflow-x-auto shadow-md sm:rounded-lg'>
         <table className="min-w-full text-left text-gray-500">

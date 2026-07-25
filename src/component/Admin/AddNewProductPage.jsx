@@ -80,8 +80,8 @@ const AddNewProductPage = () => {
         })
     }
     
-    if(loading) return <p className='text-xl text-green-300'>Loading...</p>
-    if(error) return <p className='text-red-500 text-xl'>Error: {error}</p>
+    if(loading) return <p className='text-2xl text-green-300 p-3'>Loading...</p>
+    if(error) return <p className='text-red-500 text-2xl p-3'>Error: {error}</p>
 
     return (
         <section className='max-w-7xl mx-auto p-6 shadow-md rounded-md text-gray-700'>
@@ -148,7 +148,7 @@ const AddNewProductPage = () => {
                 </div>
                 {/* SKU  */}
                 <div className='mb-6'>
-                    <label className='block font-semibold mb-2'>SKU</label>
+                    <label className='block font-semibold mb-2'>SKU (Stock Keeping Unit)</label>
                     <input 
                         type="text" 
                         name='sku'
@@ -165,9 +165,11 @@ const AddNewProductPage = () => {
                         value={productData.category}
                         onChange={handleChange}
                         className="w-full rounded-md focus:outline-green-200 bg-gray-100 p-3">
-                        <option value=""></option>
-                        <option value="Top Wear">Top Wear</option>
-                        <option value="Bottom Wear">Bottom Wear</option>
+                        <option value="">Choose Category</option>
+                        <option value="Two Piece Sets">TWO PIECE SETS</option>
+                        <option value="Bubus">BÚBÚS</option>
+                        <option value="Kaftans">KAFTANS</option>
+                        <option value="Aso Oke">AṢỌ ÒKÈ</option>
                     </select>
                 </div>
                 {/* Section  */}
@@ -178,9 +180,9 @@ const AddNewProductPage = () => {
                         value={productData.section}
                         onChange={handleChange}
                         className="w-full rounded-md focus:outline-green-200 bg-gray-100 p-3">
-                        <option value=""></option>
-                        <option value="Wears">Wears</option>
-                        <option value="Jewelries">Jewelries</option>
+                        <option value="">Choose Section</option>
+                        <option value="Accessories">ACCESSORIES</option>
+                        <option value="Clothing">CLOTHING</option>
                     </select>
                 </div>
                 {/* Brand  */}

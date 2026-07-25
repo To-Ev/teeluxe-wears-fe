@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import CartDrawer from '../Layout/CartDrawer';
 import { IoMdClose } from 'react-icons/io';
 import { useSelector } from 'react-redux';
+import ROLES_LIST from '../../ROLES_LIST';
 
 const Navbar = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -27,23 +28,23 @@ const Navbar = () => {
 
   return (
     <div className="w-full m-0 p-0">
-        <nav className={`m-0 p-0 w-full flex items-center justify-between py-4 px-6 z-30
+        <nav className={`w-full flex items-center justify-between py-2 px-6 z-30
         ${isHome ? "absolute bg-blend-multiply" : "relative bg-gray-900"}`}>
             {/* Left bar */}
             <div className='hidden md:flex gap-3 text-gray-200 flex-1'>
-                <Link to='/collections/all?section=Wears' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
-                    ACCESSORIES
+                <Link to='/collections/all?New In' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
+                    NEW IN
                 </Link>
-                <Link to='/collections/all?section=Wears' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
-                    2-P SETS
+                <Link to='/collections/all?category=Two Piece Sets' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
+                    2-Ps-SETS
                 </Link>
-                <Link to='/collections/all?category=Top Wear' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
+                <Link to='/collections/all?category=Bubus' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
                     BÚBÚS
                 </Link>
-                <Link to='/collections/all?category=Bottom Wear' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
+                <Link to='/collections/all?category=Kaftans' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
                     KAFTANS
                 </Link>
-                <Link to='/collections/all?category=Bottom Wear' className=' hover:text-amber-700 text-xs font-semibold uppercase'>
+                <Link to='/collections/all?category=Aso Oke' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
                     AṢỌ ÒKÈ
                 </Link>
             </div>
@@ -54,11 +55,11 @@ const Navbar = () => {
                 </Link>
             </div>
             {/* Right Icons */}
-            <div className="flex items-center justify-end space-x-4 text-gray-200 flex-1">
-                {user && user.role === "admin" && (
+            <div className="flex items-center justify-end space-x-2 sm:space-x-4 text-gray-200 flex-1">
+                {user && user.roles?.Admin === ROLES_LIST.Admin  && (
                     <Link
                     to="/admin"
-                    className="block bg-black rounded px-2 py-0.5 text-sm sm:px-2 sm:py-0.5 text-amber-300"
+                    className="block bg-black rounded px-2 py-0.5 text-sm sm:px-2 sm:py-0.5 text-amber-500"
                     >
                     Admin
                     </Link>
@@ -68,7 +69,7 @@ const Navbar = () => {
                 {/* Desktop: icon + text */}
                 <Link
                     to="/profile"
-                    className="hover:text-amber-700 hidden md:flex items-center gap-1.5 text-xs font-semibold"
+                    className="hover:text-amber-500 hidden md:flex items-center gap-1.5 text-xs font-semibold"
                 >
                     <HiOutlineUser className="h-5 w-5 text-white" />
                     PROFILE
@@ -76,7 +77,7 @@ const Navbar = () => {
                 {/* Mobile: icon only */}
                 <Link
                     to="/profile"
-                    className="hover:text-amber-700 md:hidden"
+                    className="hover:text-amber-500 md:hidden"
                 >
                     <HiOutlineUser className="h-5 w-5 text-white" />
                 </Link>
@@ -84,12 +85,12 @@ const Navbar = () => {
                 {/* Cart */}
                 <button
                     onClick={toggleCartDrawer}
-                    className="relative hover:text-amber-700 cursor-pointer hidden md:flex items-center text-xs gap-1.5 font-semibold"
+                    className="relative hover:text-amber-500 cursor-pointer hidden md:flex items-center text-xs gap-1.5 font-semibold"
                 >
                     <HiOutlineShoppingBag className="h-5 w-5 text-white" />
                     CART
                     {cartItemCount > 0 && (
-                    <span className="absolute -top-1 text-xs bg-[#ea2e0e] rounded-full px-2 py-0.5 text-white">
+                    <span className="absolute -top-1 text-xs bg-[#ea9d0e] rounded-full px-2 py-0.5 text-white">
                         {cartItemCount}
                     </span>
                     )}
@@ -97,11 +98,11 @@ const Navbar = () => {
                 {/* Mobile: icon only */}
                 <button
                     onClick={toggleCartDrawer}
-                    className="relative hover:text-amber-700 cursor-pointer md:hidden"
+                    className="relative hover:text-amber-300 cursor-pointer md:hidden"
                 >
                     <HiOutlineShoppingBag className="h-5 w-5 text-white" />
                     {cartItemCount > 0 && (
-                    <span className="absolute -top-1 text-xs bg-[#ea2e0e] rounded-full px-2 py-0.5 text-white">
+                    <span className="absolute -top-1 text-xs bg-[#eaaf0e] rounded-full px-2 py-0.5 text-white">
                         {cartItemCount}
                     </span>
                     )}
@@ -137,27 +138,27 @@ const Navbar = () => {
             <div className='space-y-4 ml-4'>
                 <h2 className="text-gray-700 text-3xl font-semibold">Menu</h2>
                 <Link 
-                    to="/collections/all?section=Jewelries" 
+                    to="/collections/all?New In" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
-                >ACCESSORIES</Link>
+                >NEW IN</Link>
                 <Link 
-                    to="/collections/all?section=Wears" 
+                    to="/collections/all?category=Two Piece Sets" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
                 >TWO-PIECE SETS</Link>
                 <Link 
-                    to="/collections/all?category=Top Wear" 
+                    to="/collections/all?category=Bubus" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
                 >BÚBÚS</Link>
                 <Link 
-                    to="/collections/all?category=Bottom Wear" 
+                    to="/collections/all?category=Kaftans" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
                 >KAFTANS</Link>
                 <Link 
-                    to="/collections/all?category=Bottom Wear" 
+                    to="/collections/all?category=Aso Oke" 
                     className='block font-semibold text-gray-700 hover:text-black'
                     onClick={toggleNavDrawer}
                 >AṢỌ ÒKÈ</Link>

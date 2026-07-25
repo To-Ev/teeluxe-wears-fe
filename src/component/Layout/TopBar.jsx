@@ -3,6 +3,7 @@ import { TbBrandMeta } from 'react-icons/tb';
 import { IoLogoInstagram } from 'react-icons/io';
 import { RiTwitterXLine } from 'react-icons/ri';
 import { FaWhatsapp } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 const TopBar = () => {
@@ -14,27 +15,27 @@ const TopBar = () => {
             href="https://www.facebook.com/share/1EJJMMaqtr/?mibextid=wwXIfr" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-gray-300'>
+            className='hover:text-amber-500'>
             <TbBrandMeta className='h-5 w-5'/>
           </a>
           <a 
             href="https://www.instagram.com/derayo.ng?igsh=NXh2b2lid2ZvbWZ4" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-gray-300'>
+            className='hover:text-amber-500'>
             <IoLogoInstagram className='h-5 w-5'/>
           </a>
           <a 
             href="#" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-gray-300'>
+            className='hover:text-amber-500'>
             <RiTwitterXLine className='h-5 w-4'/>
           </a>
           <a href="https://wa.me/971529004793" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-gray-300'>
+            className='hover:text-amber-500'>
             <FaWhatsapp className='h-5 w-4'/>
           </a>
         </div>
@@ -42,9 +43,9 @@ const TopBar = () => {
           <span>Update your wardrobe and elevate your style</span>
         </div>
         <div className='text-sm hidden md:block'>
-          <a href="tel:+2347062821063" className='hover:text-gray-300'>
-            (+234) 706 2821 063
-          </a>
+          <Link to="#" className='hover:text-amber-400'>
+            TRACK ORDER
+          </Link>
         </div>
       </div>
     </div>

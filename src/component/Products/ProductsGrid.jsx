@@ -2,11 +2,11 @@ import {Link} from 'react-router-dom'
 
 const ProductGrid = ({products, loading, error}) => {
     if(loading) {
-        return <p className='text-center text-green-300 text-xl'>Loading products...</p>
+        return <p className='text-center text-green-300 text-2xl p-3'>Loading products...</p>
     }
 
     if(error) {
-        return <p className='text-center text-red-400 text-xl'>Error fetching products! check network connection.</p>
+        return <p className='text-center text-red-400 text-2xl p-3'>Error fetching products! check network connection.</p>
     }
 
     if (!loading && !error && (!products || products.length === 0)) {

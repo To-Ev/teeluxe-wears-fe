@@ -20,6 +20,7 @@ import OrderManagement from './component/Admin/OrderManagement'
 import ProtectedRoute from './component/Common/ProtectedRoute'
 import AddNewProductPage from './component/Admin/AddNewProductPage'
 import AdminOrderPageDetails from './component/Admin/AdminOrderPageDetails '
+import ROLES_LIST from './ROLES_LIST'
 
 
 function App() {
@@ -40,8 +41,8 @@ function App() {
           <Route path='my-orders' element={<MyOrderPage />}/>
 
         </Route>
-        <Route path='/admin' element={
-            <ProtectedRoute role="admin">
+          <Route path='/admin' element={
+            <ProtectedRoute roles={ROLES_LIST.Admin}>
               <AdminLayout />
             </ProtectedRoute>}> //Admin Layout
           <Route index element={<AdminHomePage />}/> 

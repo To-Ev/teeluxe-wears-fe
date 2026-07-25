@@ -32,12 +32,12 @@ const ProductManagement = () => {
     if(error) return <p className='text-red-500 text-xl'>Error: {error}</p>
 
   return (
-    <section className='max-w-7xl mx-auto p-6 text-gray-700'>
+    <section className='max-w-7xl mx-auto py-6 text-gray-700'>
         <h2 className="text-2xl font-bold mb-6">Product Management</h2>
         <div className='mb-6'>
             <Link 
                 to={`/admin/products/new`} 
-                className='bg-green-500 text-white px-3 py-3 rounded hover:bg-green-600'>
+                className='bg-purple-500 text-white px-3 py-3 rounded hover:bg-purple-600'>
                 Add New Product
             </Link>
         

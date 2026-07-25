@@ -3,14 +3,14 @@ import { FaBoxOpen, FaClipboard, FaClipboardList, FaSignOutAlt, FaStore, FaUser 
 import { useDispatch } from 'react-redux'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { removeFromCart } from '../../redux/slices/cartSlice'
-import { logout } from '../../redux/slices/authSlice'
+import { logoutUser } from '../../redux/slices/authSlice'
 
 const AdminSidebar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleLogout = () =>{
-        dispatch(logout());
+        dispatch(logoutUser());
         dispatch(removeFromCart());
         navigate("/");
     };

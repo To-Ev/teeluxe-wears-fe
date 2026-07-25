@@ -74,7 +74,7 @@ const OrderConfirmationPage = () => {
                         <div>
                             <h4 className="text-xl font-semibold mb-2">Payment Info</h4>
                             <p className='text-lg'>Payment Method: <span className='text-gray-600'>{checkout.paymentMethod}</span></p>
-                            <p className='text-lg'>Ref: <span className='text-gray-600'>{checkout.paymentDetails}</span></p>
+                            <p className='text-lg'>Ref: <span className='text-gray-600'>{checkout.paymentDetails.reference}</span></p>
                         </div>
                         <div>
                             <h4 className="text-xl font-semibold mb-2">Shipping Info</h4>

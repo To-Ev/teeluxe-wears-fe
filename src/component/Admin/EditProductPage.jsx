@@ -162,7 +162,7 @@ const EditProductPage = () => {
             </div>
             {/* SKU  */}
             <div className='mb-6'>
-                <label className='block font-semibold mb-2'>SKU</label>
+                <label className='block font-semibold mb-2'>SKU (Stock Keeping Unit)</label>
                 <input 
                     type="text" 
                     name='sku'
@@ -179,9 +179,11 @@ const EditProductPage = () => {
                     value={productData.category}
                     onChange={handleChange}
                     className="w-full rounded-md focus:outline-green-200 bg-gray-100 p-3">
-                    <option value=""></option>
-                    <option value="Top Wear">Top Wear</option>
-                    <option value="Bottom Wear">Bottom Wear</option>
+                    <option value="">Choose Category</option>
+                    <option value="Two Piece Sets">TWO PIECE SETS</option>
+                    <option value="Bubus">BÚBÚS</option>
+                    <option value="Kaftans">KAFTANS</option>
+                    <option value="Aso Oke">AṢỌ ÒKÈ</option>
                 </select>
             </div>
             {/* Section  */}
@@ -192,9 +194,9 @@ const EditProductPage = () => {
                     value={productData.section}
                     onChange={handleChange}
                     className="w-full rounded-md focus:outline-green-200 bg-gray-100 p-3">
-                    <option value=""></option>
-                    <option value="Wears">Wears</option>
-                    <option value="Jewelries">Jewelries</option>
+                    <option value="">Choose Section</option>
+                    <option value="Accessories">ACCESSORIES</option>
+                    <option value="Clothing">CLOTHING</option>
                 </select>
             </div>
             {/* Brand  */}

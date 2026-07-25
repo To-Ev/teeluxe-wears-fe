@@ -18,7 +18,7 @@ const MyOrderPage = () => {
     };
 
     if(loading) return <p className='text-green-300 text-2xl p-6'>Loading...</p>
-    if(error) return <p className='text-red-400 p-6'>{error}</p>
+    if(error) return <p className='text-red-400 p-6 text-3xl'>{error}</p>
 
   return (
     <section className='max-w-7xl mx-auto p-4 sm:p-6 text-gray-700'>

@@ -11,9 +11,8 @@ const PayStackButton = ({amount, email, onSuccess}) => {
             key: import.meta.env.VITE_PAYSTACK_CLIENT_ID,
             amount: amount * 100,
             email: email,
-            onSuccess(transaction){
-                console.log(transaction); 
-                onSuccess(transaction.reference);
+            onSuccess(transaction){ 
+                onSuccess(transaction);
             },
             onCancel() {
                 alert(`You have Canceled the transaction`);

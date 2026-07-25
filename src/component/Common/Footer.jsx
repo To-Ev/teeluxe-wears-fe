@@ -62,10 +62,10 @@ const Footer = () => {
                     </a>
                 </div>
                 <p className='text-gray-400 text-lg mb-1'>Call us</p>
-                <p className='text-gray-500'>
+                <a href="tel:+2347062821063" className='text-gray-500 hover:text-gray-700'>
                     <FiPhoneCall className=' h-5 w-5 inline-block mr-3'/>
                     (+234) 706 2821 063
-                </p>
+                </a>
             </div>
         </div>
         <div className='container mx-auto mt-10'>

@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 const FilterSideBar = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
   const navigate = useNavigate()
   const [filter, setFilter] = useState({
     category: "",
@@ -13,9 +13,9 @@ const FilterSideBar = () => {
     size: [],
     materials: [],
     minPrice: 0,
-    maxPrice: 100,
+    maxPrice: 1000,
   });
-  const category = ["Top Wear", "Bottom Wear"]
+  const category = ["Two Piece Sets", "Bubus", "Kaftans", "Aso Oke"]
   const size = ["XS", "S", "M", "L", "XL", "XXL"]
   const materials = [
     "Cotton",
@@ -35,7 +35,7 @@ const FilterSideBar = () => {
     "Modern Fit",
     "Fashionista"
   ]
-  const section = ["Jewelries", "Wears"]
+  const section = ["Accessories", "Clothing"]
 
   useEffect(()=>{
     const params = Object.fromEntries([...searchParams]);
@@ -71,7 +71,6 @@ const FilterSideBar = () => {
     
     setFilter(newFilters);
     updateURLParams(newFilters);
-    console.log(newFilters);
   }
   
   const updateURLParams = (newFilters) =>{

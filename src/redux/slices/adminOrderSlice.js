@@ -36,7 +36,7 @@ export const fetchOrderDetails = createAsyncThunk(
         });
         return response.data;
     } catch (err) {
-      return rejectWithValue(err.response?.data?.message || 'Failed to fetch order');
+      return rejectWithValue(err.response?.data?.err || 'Failed to fetch order');
     }
   }
 );

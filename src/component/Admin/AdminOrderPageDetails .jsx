@@ -75,7 +75,7 @@ const AdminOrderPageDetails = () => {
           <div>
             <h4 className="text-xl font-semibold mb-2">Payment Info</h4>
             <p className="text-lg">Ref: <span className="text-gray-600">
-              {selectedOrder.paymentDetails || "N/A"}
+              {selectedOrder.paymentDetails.reference || "N/A"}
             </span></p>
             <p className="text-lg">Status: <span className="text-gray-600">{selectedOrder.isPaid ? "Paid" : "Unpaid"}</span></p>
           </div>

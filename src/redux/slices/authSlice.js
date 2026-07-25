@@ -55,6 +55,23 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async (_, { dispatch }) => {
+    try {
+      await api.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/logout`,
+        {},
+        { withCredentials: true } // ensures cookie is sent
+      );
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+    dispatch(logout()); // clears localStorage and Redux state
+  }
+);
+
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,

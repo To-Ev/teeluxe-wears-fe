@@ -96,7 +96,7 @@ const CheckOut = () => {
   };
 
   if(loading) return <p className='text-xl text-green-300 p-4'>Loading cart...</p>
-  if(error) return <p className='p-4 text-2xl text-gray-400'>Error: {error}</p>
+  if(error) return <p className='p-4 text-2xl text-red-400'>Error! {error}</p>
   if(!cart || !cart.products || cart.products.length === 0) {
     return <p>Your cart is empty</p>
   };

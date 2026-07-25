@@ -56,7 +56,7 @@ const OrderDetailsPage = () => {
                         <h4 className="text-xl font-semibold mb-2">Payment Info</h4>
                         <p className='text-lg'>Payment Method: <span className='text-gray-600'>{orderDetails.paymentMethod}</span></p>
                         <p className='text-lg'>
-                        Ref: <span className='text-gray-600'>{orderDetails.paymentDetails || "N/A"}</span>
+                        Ref: <span className='text-gray-600'>{orderDetails.paymentDetails.reference || "N/A"}</span>
                         </p>
                         <p className='text-lg'>Status: <span className='text-gray-600'>{orderDetails.isPaid ? "Paid" : "Unpaid"}</span></p>
                     </div>

@@ -2,14 +2,23 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children, role }) => {
+const ProtectedRoute = ({ children, roles }) => {
 
-    const { user } = useSelector(state => state.auth);
+    const { user, token } = useSelector(state => state.auth);
 
-    if(!user || (role && user.role != role)) {
-        return <Navigate to="/login" replace />
-    };
+    if (!user || !token) {
+        return <Navigate to="/login" replace />;
+    }
 
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
+
+    // If roles are required, check membership
+    if (roles && !Object.values(user.roles).includes(roles)) {
+        return <Navigate to="/login" replace />;
+    }
+    
     return children;
 }
 

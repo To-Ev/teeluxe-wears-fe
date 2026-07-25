@@ -33,7 +33,7 @@ const AdminHomePage = () => {
   };
 
   return (
-    <section className='max-w-7xl mx-auto p-6 text-gray-700'>
+    <section className='max-w-7xl mx-auto py-6 text-gray-700'>
       <h1 className="text-3xl font-bold  mb-6">Admin Dashboard</h1>
       {productLoading || ordersLoading ? (
         <p className='text-green-300 text-2xl'>Loading...</p>
