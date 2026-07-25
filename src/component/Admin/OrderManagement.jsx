@@ -28,7 +28,7 @@ const OrderManagement = () => {
   };
 
   if(loading) return <p className='text-xl text-green-300'>Loading...</p>
-  if(error) return <p className='text-red-500 text-2xl'>{error}</p>
+  if(error) return <p className='text-gray-500 text-2xl p-6'>{error}</p>
 
   return (
     <section className='max-w-7xl mx-auto py-6 text-gray-700'>

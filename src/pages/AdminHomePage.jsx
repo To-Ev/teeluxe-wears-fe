@@ -42,6 +42,7 @@ const AdminHomePage = () => {
       ) : ordersError ? (
         <p className='text-red-400 text-2xl'>{ordersError}</p>
       ) : (
+        // Dashboard
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="p-4 shadow-md rounded-lg">
             <h2 className='text-xl font-semibold'>Revenue</h2>
