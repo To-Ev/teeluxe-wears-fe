@@ -15,27 +15,27 @@ const TopBar = () => {
             href="https://www.facebook.com/share/1EJJMMaqtr/?mibextid=wwXIfr" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-amber-500'>
+            className='hover:text-amber-300'>
             <TbBrandMeta className='h-5 w-5'/>
           </a>
           <a 
             href="https://www.instagram.com/derayo.ng?igsh=NXh2b2lid2ZvbWZ4" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-amber-500'>
+            className='hover:text-amber-300'>
             <IoLogoInstagram className='h-5 w-5'/>
           </a>
           <a 
             href="#" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-amber-500'>
+            className='hover:text-amber-300'>
             <RiTwitterXLine className='h-5 w-4'/>
           </a>
           <a href="https://wa.me/971529004793" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-amber-500'>
+            className='hover:text-amber-300'>
             <FaWhatsapp className='h-5 w-4'/>
           </a>
         </div>
@@ -43,7 +43,7 @@ const TopBar = () => {
           <span>Update your wardrobe and elevate your style</span>
         </div>
         <div className='text-sm hidden md:block'>
-          <Link to="#" className='hover:text-amber-400'>
+          <Link to="/my-orders" className='hover:text-amber-300'>
             TRACK ORDER
           </Link>
         </div>

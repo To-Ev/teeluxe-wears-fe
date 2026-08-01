@@ -70,7 +70,7 @@ const Footer = () => {
         </div>
         <div className='container mx-auto mt-10'>
             <p className='text-gray-500 text-center'>
-                ©️ {new Date().getFullYear()}, teeluxe. All right reserved.
+                ©️ {new Date().getFullYear()}, <i className="icon-Derayo"></i>. All right reserved.
             </p>
         </div>
     </footer>

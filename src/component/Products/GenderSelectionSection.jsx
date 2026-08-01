@@ -22,7 +22,7 @@ const GenderSelectionSection = () => {
                 </div>
             </div>
             {/* womens collection */}
-            <div className='relative mx-auto flex-1 w-80 sm:w-full sm:h-full'>
+            <div className='relative mx-auto flex-1 w-80 sm:w-full sm:min-h-full'>
                 <img src={WomenCollection} 
                 className='w-full h-full object-cover' 
                 alt="jewelry Img"/>

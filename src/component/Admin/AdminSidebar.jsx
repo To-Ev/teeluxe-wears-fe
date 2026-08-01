@@ -18,8 +18,8 @@ const AdminSidebar = () => {
   return (
     <section className='p-6'>
         <div className='mb-6'>
-            <Link to="/admin" className='text-2xl'>
-                Teeluxe Wears
+            <Link to="/admin" className='text-4xl'>
+                <i className="icon-Derayo"></i>
             </Link>
             <h2 className='text-xl my-5 text-center'>Admin Dashboard</h2>
             <nav className='flex flex-col space-y-2'>

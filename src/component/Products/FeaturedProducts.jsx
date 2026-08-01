@@ -50,7 +50,7 @@ const FeaturedProducts = () => {
                 </p>
                 <Link 
                     to="/collections/all"
-                    className='bg-amber-600 text-gray-950 px-6 py-3 rounded-lg text-lg transition hover:bg-amber-700'
+                    className='bg-amber-600 text-gray-950 px-6 py-3 rounded-lg text-lg hover:bg-amber-700 transition'
                 >
                     Discover now
                 </Link>

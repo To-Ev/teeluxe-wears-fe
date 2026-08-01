@@ -7,6 +7,9 @@ import { fetchProductDetails, fetchSimilarProducts } from '../../redux/slices/pr
 import { addToCart } from '../../redux/slices/cartSlice';
 import { HiBars3BottomRight, HiOutlineShoppingBag, HiOutlineUser } from 'react-icons/hi2'
 import { FiShoppingBag, FiShoppingCart } from 'react-icons/fi';
+import { FaStar } from "react-icons/fa";
+import StarRating from './StarRating';
+import ProductTabs from './ProductTabs';
 
 const ProductsDetails = ({ productId }) => {
     
@@ -81,22 +84,25 @@ const ProductsDetails = ({ productId }) => {
     }, [selectedProduct]);
 
     if (loading) {
-        return <p className="text-center text-green-400 text-xl">Loading product...</p>;
+        return <p className="text-center text-green-400 text-xl p-6">Loading product...</p>;
     }
 
-    if (error) {
-        return <p className="text-center text-red-400 text-xl">{error}</p>;
+    if (error && !selectedProduct) {
+        return <p className="text-center text-red-400 text-xl p-6">{error}</p>;
     }
 
     if (!loading && !error && !selectedProduct) {
-        return <p className="text-center text-gray-400 text-xl">Product not found.</p>;
-    }
+        return <p className="text-center text-gray-400 text-xl p-6">Product not found.</p>;
+    };
 
   return (
     <section className='p-6'>
         {selectedProduct &&
             <div  className='max-w-6xl mx-auto p-0'>
-                <div className='flex flex-col md:flex-row'>
+                {/* Product Details */}
+                <div>
+                    {/* Top */}
+                    <div className='flex flex-col md:flex-row'>
                     {/* Thumbnails images */}
                     <div className='hidden md:flex flex-col mr-6'>
                         {
@@ -116,7 +122,7 @@ const ProductsDetails = ({ productId }) => {
                         <img   
                         src={mainImage} 
                         alt="Main Image" 
-                        className='rounded-lg w-full max-w-lg h-auto object-cover'
+                        className='rounded-lg w-full max-w-lg h-auto object-cover min-h-full'
                         />
                     </div>
                     {/*Mobile Thumbnails */}
@@ -135,7 +141,15 @@ const ProductsDetails = ({ productId }) => {
                     </div>
                     {/* Right side */}
                     <div className='md:w-1/2 md:ml-10'>
-                        <h1 className='font-semibold text-4xl mb-2 text-gray-700'>{selectedProduct.name}</h1>
+                        <h1 className='font-semibold text-4xl mb-2 text-gray-700'>
+                            {selectedProduct.name}
+                        </h1>
+                        {/* Stars rating and reviews */}
+                        <div className='flex items-center text-gray-700 mb-3'>
+                            <StarRating rating={selectedProduct.rating} />
+                            <p className='ml-3 text-sm font-semibold text-gray-500'>{selectedProduct.rating}</p>
+                            <p className='text-sm'>({selectedProduct.numReviews} reviews)</p>
+                        </div>
                         {/* Price */}
                         <div className='flex gap-3 items-end mb-3'>
                             <p className='text-3xl text-gray-600 font-semibold'>
@@ -146,12 +160,12 @@ const ProductsDetails = ({ productId }) => {
                             `N${selectedProduct.discountPrice}` : ""}
                             </p>
                         </div>
-                        <p className='text-gray-800 mb-2'>
+                        <p className='text-gray-800 mb-2 pb-5  border-b border-gray-200'>
                             {selectedProduct.description}
                         </p>
                         {/* selected colors */}
-                        <div className='mb-4'>
-                            <p className='text-gray-700'>Colors:</p>
+                        <div className='mb-4 mt-5'>
+                            <p className='text-gray-700 font-semibold mb-2'>Colors: <span className='font-medium'>{selectedColor}</span></p>
                             <div className='flex gap-3 mt-1'>
                                 {selectedProduct.colors.map((color, index) =>(
                                     <button key={index}
@@ -171,7 +185,7 @@ const ProductsDetails = ({ productId }) => {
                         </div>
                         {/* selected Sizes */}
                         <div className='mb-4'>
-                            <p className='text-gray-700'>Sizes:</p>
+                            <p className='text-gray-700 font-semibold mb-3'>Sizes: <span className='font-medium'>{selectedSize}</span></p>
                             <div className='flex gap-3 mt-1'>
                                 {selectedProduct.sizes.map((size, index) =>(
                                     <button 
@@ -183,49 +197,35 @@ const ProductsDetails = ({ productId }) => {
                                 ))}
                             </div>
                         </div>
-                        {/* selected Quantity */}
-                        <div className='mb-4'>
-                            <p className='text-gray-700'>Quantity:</p>
-                            <div className='flex items-center gap-3 mt-1'>
-                                <button className='bg-gray-300 px-2 py-1 rounded text-xl cursor-pointer text-gray-700'
+
+                        {/* Add to cart Button and Quantity*/}
+                        <div className='flex items-start justify-center flex-col lg:flex-row'>
+                            <div className='w-2/5 flex mb-4 items-center flex-none gap-8 mt-3'>
+                                <button className='border border-gray-200 px-5 py-1 rounded text-3xl cursor-pointer text-gray-700'
                                 onClick={() =>handleQuantityChange("minus")}
                                 >-</button>
-                                <span className='mx-1 text-lg font-semibold text-gray-700'>{selectedQuantity}</span>
-                                <button className='bg-gray-300 px-2 py-1 rounded text-xl cursor-pointer text-gray-700'
+                                <span className='mx-1 text-xl font-semibold text-gray-600'>{selectedQuantity}</span>
+                                <button className='border border-gray-200 px-4 py-1 rounded text-3xl cursor-pointer text-gray-700'
                                 onClick={() =>handleQuantityChange("plus")}
                                 >+</button>
                             </div>
-                            
-                        </div>
-                        {/* Button */}
-                        <button 
-                        onClick={() =>handleAddToCart()}
-                        disabled={isButtonAllowed}
-                        className={`w-full bg-black text-white rounded-lg px-6 py-3 cursor-pointer mb-4 ${isButtonAllowed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-900'}`}>
-                            {isButtonAllowed ? ('Adding...') : (
-                                <span className="flex items-center justify-center gap-2">
-                                <FiShoppingBag className='w-6 h-6'/> Add to Cart
-                                </span>
-                            )}
-                        </button>
-                           {/* Characteristics */}
-                        <div className='mt-5 text-gray-700'>
-                            <h1 className='text-2xl font-bold mb-4'>Characteristics</h1>
-                            <table className='w-full text-left text-sm text-gray-600'>
-                                <tbody>
-                                    <tr>
-                                        <td className='py-1'>Brand</td>
-                                        <td className='py-1'>{selectedProduct.brand}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='py-1'>Material</td>
-                                        <td className='py-1'>{selectedProduct.material}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <button 
+                                onClick={() =>handleAddToCart()}
+                                disabled={isButtonAllowed}
+                                className={`grow w-full mt-3 lg:w-3/5 bg-black text-white rounded-lg px-6 py-3 cursor-pointer mb-4 ${isButtonAllowed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-900'}`}>
+                                    {isButtonAllowed ? ('Please wait...') : (
+                                        <span className="flex items-center justify-center gap-2">
+                                        <FiShoppingBag className='w-6 h-6'/> Add to Cart
+                                        </span>
+                                    )}
+                            </button>
                         </div>
                     </div>
+                    </div>
+                    {/* Bottom */}
+                    <ProductTabs product={selectedProduct}/>
                 </div>
+                {/* Similar Product */}
                 <div className='mt-15'>
                     <h1 className='text-center text-2xl text-gray-700 font-bold mb-10'>
                         You may also like

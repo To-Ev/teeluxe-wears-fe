@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -10,23 +10,14 @@ const ProductManagement = () => {
     const { products, loading, error } = useSelector(
         (state) => state.adminProducts
     );
+
+    // Modal
+    const [showModal, setShowModal] = useState(false);
+    const [productToDelete, setProductToDelete] = useState(null);
     
     useEffect(() => {
         dispatch(fetchAdminProducts());
     }, [dispatch]);
-
-    const handleDelete = (id) => {
-        if (window.confirm("Are you sure you want to delete the Product?")) {
-            dispatch(deleteProduct(id))
-            .unwrap()
-            .then(() => {
-                toast.success("Product deleted successfully!");
-            })
-            .catch((err) => {
-                toast.error(`Failed to delete product: ${err}`);
-            });
-        }
-    };
 
     if(loading) return <p className='text-xl text-green-300'>Loading...</p>
     if(error) return <p className='text-red-500 text-xl'>Error: {error}</p>
@@ -68,8 +59,12 @@ const ProductManagement = () => {
                                     >Edit
                                 </Link>
                                 <button 
-                                    onClick={() => handleDelete(product._id)}
-                                    className='bg-red-500 px-2 py-1 rounded text-white hover:bg-red-600 cursor-pointer'>Delete
+                                    onClick={() => {
+                                        setProductToDelete(product._id);
+                                        setShowModal(true);
+                                    }}
+                                    className='bg-red-500 px-2 py-1 rounded text-white hover:bg-red-600 cursor-pointer'
+                                >Delete
                                 </button>
                             </td>
                         </tr>
@@ -79,6 +74,39 @@ const ProductManagement = () => {
                 </tbody>
             </table>
         </div>
+        {/* Modal goes here, outside the form but inside the section */}
+        {showModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg p-6 w-80">
+            <h3 className="text-lg font-semibold mb-4">Delete Product</h3>
+            <p className="text-gray-600 mb-6">Are you sure you want to delete this product?</p>
+            <div className="flex justify-end gap-4">
+                <button
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                onClick={() => setShowModal(false)}
+                >
+                Cancel
+                </button>
+                <button
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                onClick={() => {
+                    dispatch(deleteProduct(productToDelete))
+                        .unwrap()
+                        .then(() => {
+                            toast.success("Product deleted successfully!");
+                        })
+                        .catch((err) => {
+                            toast.error(`Failed to delete product: ${err}`);
+                        });
+                    setShowModal(false);
+                    setProductToDelete(null);
+                }}
+                >
+                Delete
+                </button>
+            </div>
+            </div>
+        </div>)}
     </section>
   )
 }

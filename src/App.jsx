@@ -21,6 +21,7 @@ import ProtectedRoute from './component/Common/ProtectedRoute'
 import AddNewProductPage from './component/Admin/AddNewProductPage'
 import AdminOrderPageDetails from './component/Admin/AdminOrderPageDetails '
 import ROLES_LIST from './ROLES_LIST'
+import './assets/styles/style.css';
 
 
 function App() {

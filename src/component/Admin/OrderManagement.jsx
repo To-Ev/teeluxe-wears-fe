@@ -71,7 +71,12 @@ const OrderManagement = () => {
                   <td className="p-4">
                     <button 
                       onClick={() => handleStatusChange(order._id, "Delivered")}
-                      className='bg-green-500 text-white px-3 cursor-pointer py-2 rounded hover:bg-green-600'>
+                      disabled={order.status === "Delivered"}
+                      className={`px-3 py-2 rounded 
+                        ${order.status === "Delivered" 
+                          ? "bg-green-300 text-white cursor-not-allowed" 
+                          : "bg-green-500 text-white hover:bg-green-600 cursor-pointer"}`}
+                    >
                       Mark as Delivered
                     </button>
                   </td>

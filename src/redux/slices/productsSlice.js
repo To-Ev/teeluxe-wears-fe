@@ -86,6 +86,19 @@ export const fetchSimilarProducts = createAsyncThunk(
   }
 );
 
+// Thunk: add a review
+export const addProductReview = createAsyncThunk(
+  "products/addReview",
+  async ({ id, rating, comment }, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post(`/products/${id}/reviews`, { rating, comment });
+      return data; // backend returns updated product
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.err || "Failed to add review");
+    }
+  }
+);
+
 const productsSlice = createSlice({
     name: "products",
     initialState: {
@@ -94,6 +107,7 @@ const productsSlice = createSlice({
         similarProducts: [], // store similar products
         loading: false,
         error: null,
+        reviewError: null, 
         filters: {
             category: "",
             size: "",
@@ -164,7 +178,7 @@ const productsSlice = createSlice({
             .addCase(updateProduct.fulfilled, (state, action) => {
                 state.loading = false;
                 state.selectedProduct = action.payload;
-                const index = state.products.findIndex((product) => product._id === updateProduct._id);
+                const index = state.products.findIndex((product) => product._id === action.payload._id);
                 if (index !== -1) {
                     state.products[index] = updateProduct;
                 }
@@ -184,8 +198,23 @@ const productsSlice = createSlice({
             })
             .addCase(fetchSimilarProducts.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.err;
+                state.error = action.payload || action.error.message;
+            })
+            .addCase(addProductReview.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(addProductReview.fulfilled, (state, action) => {
+                state.loading = false;
+                state.selectedProduct = {
+                    ...state.selectedProduct,
+                    ...action.payload,
+                };
+            })
+            .addCase(addProductReview.rejected, (state, action) => {
+                state.loading = false;
+                state.reviewError = action.payload; // keep separate
             });
+
     },
 });
 

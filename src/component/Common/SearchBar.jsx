@@ -30,8 +30,7 @@ const SearchBar = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search"
-                className="bg-gray-100 px-4 py-2 pl-2 pr-12 rounded-lg 
-                        focus:outline-none w-full placeholder:text-gray-700"
+                className="bg-gray-100 text-gray-500 italic px-4 py-2 pl-2 pr-12 rounded-lg focus:outline-none w-full placeholder:text-gray-700"
             />
             {/* Search submit */}
             <button
@@ -53,7 +52,7 @@ const SearchBar = () => {
         <>
             {/* Desktop: icon + text */}
             <button
-            className="hidden md:flex gap-1.5 items-center cursor-pointer font-semibold text-xs text-gray-200 hover:text-amber-500"
+            className="hidden md:flex gap-1.5 items-center cursor-pointer font-semibold text-xs text-gray-200 hover:text-amber-300 transition"
             onClick={() => setIsOpen(!isOpen)}
             >
             <HiMagnifyingGlass className="w-5 h-5 cursor-pointer text-white" />
@@ -62,7 +61,7 @@ const SearchBar = () => {
 
             {/* Mobile: icon only */}
             <button
-            className="md:hidden cursor-pointer text-gray-200 hover:text-amber-500"
+            className="md:hidden cursor-pointer text-gray-200 hover:text-amber-300 transition"
             onClick={() => setIsOpen(!isOpen)}
             >
             <HiMagnifyingGlass className="w-5 h-5 cursor-pointer text-white" />

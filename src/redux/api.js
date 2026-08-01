@@ -27,32 +27,29 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (
-      error.response?.status === 401 &&
-      error.response?.data?.err === "Token expired" &&
-      !originalRequest._retry
-    ) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
         const refreshResponse = await api.post("/users/refresh");
         const newAccessToken = refreshResponse.data.accessToken;
 
-        // Save new token in localStorage
         const authData = JSON.parse(localStorage.getItem("authData")) || {};
         authData.token = newAccessToken;
         localStorage.setItem("authData", JSON.stringify(authData));
 
-        // Update header and retry original request
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       } catch (refreshError) {
-        // Refresh failed → force logout
-        console.error(refreshError);
+        console.error(refreshError)
         localStorage.removeItem("authData");
-        toast.error("Session expired. Please log in again.");
-        history.push("/login");
+        if (!error._toastShown) {
+          toast.error("Session expired. Please log in again.");
+          error._toastShown = true;
+        }
+        history.push("/teeluxe-wears-fe/login");
       }
     }
+
 
     return Promise.reject(error);
   }

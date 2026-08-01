@@ -32,26 +32,26 @@ const Navbar = () => {
         ${isHome ? "absolute bg-blend-multiply" : "relative bg-gray-900"}`}>
             {/* Left bar */}
             <div className='hidden md:flex gap-3 text-gray-200 flex-1'>
-                <Link to='/collections/all?New In' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
+                <Link to='/collections/all?New In' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
                     NEW IN
                 </Link>
-                <Link to='/collections/all?category=Two Piece Sets' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
+                <Link to='/collections/all?category=Two Piece Sets' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
                     2-Ps-SETS
                 </Link>
-                <Link to='/collections/all?category=Bubus' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
+                <Link to='/collections/all?category=Bubus' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
                     BÚBÚS
                 </Link>
-                <Link to='/collections/all?category=Kaftans' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
+                <Link to='/collections/all?category=Kaftans' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
                     KAFTANS
                 </Link>
-                <Link to='/collections/all?category=Aso Oke' className=' hover:text-amber-500 text-xs font-semibold uppercase'>
+                <Link to='/collections/all?category=Aso Oke' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
                     AṢỌ ÒKÈ
                 </Link>
             </div>
             {/* Mid Bar */}
             <div className='flex-1 flex justify-start md:justify-center'>
-                <Link to='/' className='text-4xl font-semibold text-gray-200'>
-                    Derayo
+                <Link to='/' className='text-4xl sm:text-5xl font-semibold text-amber-300'>
+                    <i className="icon-Derayo"></i>
                 </Link>
             </div>
             {/* Right Icons */}
@@ -69,7 +69,7 @@ const Navbar = () => {
                 {/* Desktop: icon + text */}
                 <Link
                     to="/profile"
-                    className="hover:text-amber-500 hidden md:flex items-center gap-1.5 text-xs font-semibold"
+                    className="hover:text-amber-300 hidden md:flex items-center gap-1.5 text-xs font-semibold transition"
                 >
                     <HiOutlineUser className="h-5 w-5 text-white" />
                     PROFILE
@@ -77,7 +77,7 @@ const Navbar = () => {
                 {/* Mobile: icon only */}
                 <Link
                     to="/profile"
-                    className="hover:text-amber-500 md:hidden"
+                    className="hover:text-amber-300 md:hidden transition"
                 >
                     <HiOutlineUser className="h-5 w-5 text-white" />
                 </Link>
@@ -85,7 +85,7 @@ const Navbar = () => {
                 {/* Cart */}
                 <button
                     onClick={toggleCartDrawer}
-                    className="relative hover:text-amber-500 cursor-pointer hidden md:flex items-center text-xs gap-1.5 font-semibold"
+                    className="relative hover:text-amber-300 cursor-pointer hidden md:flex items-center text-xs gap-1.5 font-semibold transition"
                 >
                     <HiOutlineShoppingBag className="h-5 w-5 text-white" />
                     CART
@@ -98,7 +98,7 @@ const Navbar = () => {
                 {/* Mobile: icon only */}
                 <button
                     onClick={toggleCartDrawer}
-                    className="relative hover:text-amber-300 cursor-pointer md:hidden"
+                    className="relative hover:text-amber-300 cursor-pointer md:hidden transition"
                 >
                     <HiOutlineShoppingBag className="h-5 w-5 text-white" />
                     {cartItemCount > 0 && (
