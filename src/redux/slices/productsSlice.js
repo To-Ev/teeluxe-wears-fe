@@ -205,9 +205,16 @@ const productsSlice = createSlice({
             })
             .addCase(addProductReview.fulfilled, (state, action) => {
                 state.loading = false;
+
+                // Ensure reviews are merged, not replaced
                 state.selectedProduct = {
                     ...state.selectedProduct,
-                    ...action.payload,
+                    reviews: [
+                    ...(state.selectedProduct.reviews || []),
+                    ...(action.payload.reviews || []),
+                    ],
+                    rating: action.payload.rating,
+                    numReviews: action.payload.numReviews,
                 };
             })
             .addCase(addProductReview.rejected, (state, action) => {

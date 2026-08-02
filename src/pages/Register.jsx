@@ -50,11 +50,8 @@ const Register = () => {
         } catch (error) {
             console.error("Registration failed:", error);
             toast.error("Registration failed. Please try again.");
-        }finally {
-            setName("");
-            setEmail("");
-            setPassword("");
         }
+        
     };
     
   return (

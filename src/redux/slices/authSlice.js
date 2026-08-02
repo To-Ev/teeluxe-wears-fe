@@ -67,6 +67,13 @@ export const logoutUser = createAsyncThunk(
     } catch (err) {
       console.error("Logout error:", err);
     }
+
+    // Clear local storage
+    localStorage.removeItem("authData");
+
+    // Remove default Authorization header globally
+    delete api.defaults.headers.Authorization;
+
     dispatch(logout()); // clears localStorage and Redux state
   }
 );
