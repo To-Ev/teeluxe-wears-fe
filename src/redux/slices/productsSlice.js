@@ -34,27 +34,27 @@ export const fetchByFilters = createAsyncThunk(
 
         const response = await api.get(`${import.meta.env.VITE_BACKEND_URL}/api/products?${queryParams.toString()}`);
         return response.data; 
-    });
+});
 
-    // Async thunk to fetch a single product by ID
-    export const fetchProductDetails = createAsyncThunk(
-  'products/fetchProductDetails',
-    async (id, { rejectWithValue }) => {
-        try {
-            const res = await api.get(`/products/${id}`);
-            if (!res.data || Object.keys(res.data).length === 0) {
-                return rejectWithValue("Product not found");
-            }
-            return res.data;
-        } catch (error) {
-            return rejectWithValue(error.response?.data?.err || "Network error");
-            }
+// Async thunk to fetch a single product by ID
+export const fetchProductDetails = createAsyncThunk(
+'products/fetchProductDetails',
+async (id, { rejectWithValue }) => {
+    try {
+        const res = await api.get(`/products/${id}`);
+        if (!res.data || Object.keys(res.data).length === 0) {
+            return rejectWithValue("Product not found");
         }
-    );
+        return res.data;
+    } catch (error) {
+        return rejectWithValue(error.response?.data?.err || "Network error");
+        }
+    }
+);
 
 // Async thunk to update based on category
 export const updateProduct = createAsyncThunk("products/updateProduct", async ({ productId, updatedData }) => {
-    const response = await api.put(`${import.meta.env.VITE_BACKEND_URL}/api/products/${productId}`, updatedData, {
+    const response = await api.put(`/products/${productId}`, updatedData, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const fetchSimilarProducts = createAsyncThunk(
   async (productId, { rejectWithValue }) => {
     try {
       const response = await api.get(
-        `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${productId}`
+        `/products/similar/${productId}`
       );
 
       // Reject if no data or empty array
@@ -180,7 +180,7 @@ const productsSlice = createSlice({
                 state.selectedProduct = action.payload;
                 const index = state.products.findIndex((product) => product._id === action.payload._id);
                 if (index !== -1) {
-                    state.products[index] = updateProduct;
+                    state.products[index] = action.payload;
                 }
             })
             .addCase(updateProduct.rejected, (state, action) => {

@@ -62,7 +62,7 @@ const ProductTabs = React.memo(({ product, loading }) => {
             className={`px-4 py-2 cursor-pointer ${activeTab === "details" ? "border-b-2 border-gray-500 text-lg sm:text-xl" : "text-gray-500"}`}
             onClick={() => setActiveTab("details")}
             >
-            Additional Information
+            Additional Info
             </button>
             <button
             className={`px-4 py-2 cursor-pointer ${activeTab === "reviews" ? "border-b-2 border-gray-500 text-lg sm:text-xl" : "text-gray-500"}`}
@@ -75,10 +75,18 @@ const ProductTabs = React.memo(({ product, loading }) => {
       {/* Tab content */}
         <div className="p-4">
             {activeTab === "description" && (
-            <div className="flex gap-20 text-gray-700">
-                <div>
+            <div className="flex gap-20 flex-col sm:flex-row text-gray-700">
+                <div className="w-full sm:w-1/2">
                     <h1 className="text-xl font-semibold mb-4">Description</h1>
                     <p className="text-gray-700">{product.description}</p>
+                </div>
+                <div className="w-full sm:w-1/2">
+                    <h1 className="text-xl font-semibold mb-4">Information</h1>
+                    <ul className="list-disc list-inside">
+                        <li>Ideal choice in {product.section} fashion</li>
+                        <li>Styled under {product.category} essentials</li>
+                        <li>Featured in the {product.collections} line</li>
+                    </ul>
                 </div>
             </div>
             )}
@@ -107,10 +115,6 @@ const ProductTabs = React.memo(({ product, loading }) => {
                         <tr>
                             <td className='py-3 pl-4'>Colors</td>
                             <td className='py-3 pl-4'>{product.colors.join(", ")}</td>
-                        </tr>
-                        <tr>
-                            <td className='py-3 pl-4'>Collections</td>
-                            <td className='py-3 pl-4'>{product.collections}</td>
                         </tr>
                     </tbody>
                 </table>

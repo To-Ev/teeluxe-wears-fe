@@ -20,8 +20,8 @@ const Home = () => {
     // fetch product for a specific collection
     dispatch(
       fetchByFilters({ 
-        section: "Wears", 
-        category: "Bottom Wear",
+        section: "Accessories", 
+        category: "Aso Oke,Kaftans,Two Piece Sets",
         limit: 8,
       })
     );
