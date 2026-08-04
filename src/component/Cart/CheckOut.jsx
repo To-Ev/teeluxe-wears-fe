@@ -13,6 +13,7 @@ const CheckOut = () => {
   const { cart, loading, error } = useSelector(state => state.cart);
   const { user } = useSelector(state => state.auth);
   const [shippingMethod, setShippingMethod] = useState("Standard");
+  const [checkoutComplete, setCheckoutComplete] = useState(false);
 
 
   const [shippingAddress, setShippingAddress] = useState({
@@ -28,17 +29,17 @@ const CheckOut = () => {
 
   // ensure cart is loaded before proceeding
   useEffect(() => {
-    if(!cart || !cart.products || cart.products.length === 0) {
+    if(!checkoutComplete && (!cart || !cart.products || cart.products.length === 0)) {
       navigate("/")
     }
-  }, [cart, navigate]);
+  }, [cart, navigate, checkoutComplete]);
 
   const handleCheckOut = async (e) =>{
     e.preventDefault();
     if (cart && cart.products.length > 0) {
       const result = await dispatch(
         createCheckout({
-          checkoutItems: cart.products,   // ✅ use orderItems if backend expects this
+          checkoutItems: cart.products,   // use orderItems if backend expects this
           shippingAddress,
           paymentMethod: "Paystack",
           shippingMethod: shippingMethod || "Standard",
@@ -83,13 +84,14 @@ const CheckOut = () => {
           },
         }
       );
-      // ✅ update Redux checkout slice with finalized order
+      // update Redux checkout slice with finalized order
       dispatch({ type: "checkout/createCheckout/fulfilled", payload: res.data });
 
-      // ✅ Clear cart here
-      dispatch(clearCart());
-
+      setCheckoutComplete(true);
       navigate("/order-confirmation");
+
+      // Clear cart here
+      dispatch(clearCart());
     } catch (err) {
       console.error(err)
     }

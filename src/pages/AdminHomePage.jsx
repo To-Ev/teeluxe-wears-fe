@@ -32,6 +32,8 @@ const AdminHomePage = () => {
     navigate(`/admin/orders/${orderId}`)
   };
 
+  console.log("Items in AdminHomePage:", orders.user);
+
   return (
     <section className='max-w-7xl mx-auto py-6 text-gray-700'>
       <h1 className="text-3xl font-bold  mb-6">Admin Dashboard</h1>
@@ -83,7 +85,7 @@ const AdminHomePage = () => {
                   onClick={() => handleRowClick(order._id)}
                   className='border-b border-gray-200 hover:bg-gray-50 cursor-pointer'>
                   <td className='p-4'>#{order._id}</td>
-                  <td className='p-4'>{order.user.name}</td>
+                  <td className='p-4'>{order.user?.name || "Guest"}</td>
                   <td className='p-4'>N{order.totalPrice.toFixed(2)}</td>
                   <td className='p-4'>{order.status}</td>
                 </tr>

@@ -17,7 +17,7 @@ const OrderConfirmationPage = () => {
         } else {
             navigate("/my-orders");
         }
-    }, [checkout, dispatch, navigate])
+    }, [checkout, dispatch, navigate]);
 
     const calculateEstimatedDelivery = (createdAt) =>{
         const orderDate = new Date(createdAt);
@@ -25,13 +25,15 @@ const OrderConfirmationPage = () => {
         return orderDate.toLocaleDateString();
     };
 
-    console.log(checkout.paymentDetails);
   return (
     <section className='max-w-4xl mx-auto p-6'>
-        <h1 className='text-4xl text-center text-emerald-700 mb-8'>Thank you for your order!</h1>
+        <div className='flex flex-col justify-center w-full items-center my-8'>
+            <h1 className='text-4xl text-gray-700 font-bold mb-1'>Your order is completed!</h1>
+            <p className='text-gray-600 text-lg'>Thank you. Your Order has been received.</p>
+        </div>
         {checkout && 
             (
-                <div className='p-6 bg-gray-50 shadow-lg rounded-lg'>
+                <div className='p-6 shadow-lg rounded-lg'>
                     <div className='flex justify-between mb-10'>
                         {/* Order Id & Date  */}
                         <div>
@@ -81,7 +83,7 @@ const OrderConfirmationPage = () => {
                             <p className='text-lg'>Shipping Method: <span className='text-gray-600'>{checkout.shippingMethod}</span></p>
                             <p className='text-lg'>
                                 Address: {" "}
-                                <span className='text-gray-600'>{`${checkout.shippingAddress.city}, ${checkout.shippingAddress.country}`}</span>
+                                <span className='text-gray-600'>{`${checkout.shippingAddress?.address}, ${checkout.shippingAddress?.city}, ${checkout.shippingAddress?.country}`}</span>
                             </p>
                         </div>
                     </div>

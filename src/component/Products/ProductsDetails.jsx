@@ -17,6 +17,13 @@ const ProductsDetails = ({ productId }) => {
     const dispatch = useDispatch();
     const {selectedProduct, loading, error, similarProducts} = useSelector(state => state.products);
     const { user, guestId }= useSelector(state => state.auth);
+    const { byProduct = {}, loading: reviewsLoading = false } = useSelector(
+        (state) => state.reviews || {}
+    );
+    
+    const productFetchId = productId || id;
+    const reviews = byProduct[productFetchId] || [];
+
 
     const [mainImage, setMainImage] = useState(selectedProduct?.images?.[0]?.url);
     const [selectedColor, setSelectedColor] = useState("");
@@ -24,7 +31,6 @@ const ProductsDetails = ({ productId }) => {
     const [selectedQuantity, setSelectedQuantity] = useState(1);
     const [isButtonAllowed, setIsButtonAllowed] = useState(false);
 
-    const productFetchId = productId || id;
     useEffect(() => {
         if(productFetchId) {
             dispatch(fetchProductDetails(productFetchId));
@@ -227,7 +233,11 @@ const ProductsDetails = ({ productId }) => {
                     </div>
                     {/* Bottom */}
                     <div>
-                        <ProductTabs product={selectedProduct} loading={loading}/>
+                        <ProductTabs 
+                            product={selectedProduct} 
+                            reviews={reviews}  
+                            loading={reviewsLoading}
+                        />
                     </div>
                     
                 </div>

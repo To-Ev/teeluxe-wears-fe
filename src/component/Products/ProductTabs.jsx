@@ -4,7 +4,7 @@ import { addProductReview } from "../../redux/slices/productsSlice";
 import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
 
-const ProductTabs = React.memo(({ product, loading }) => {
+const ProductTabs = React.memo(({ product, reviews, loading }) => {
     const [activeTab, setActiveTab] = useState("details");
     const dispatch = useDispatch();
 
@@ -168,7 +168,7 @@ const ProductTabs = React.memo(({ product, loading }) => {
                 ) : (
                     // Actual distribution
                     [5, 4, 3, 2, 1].map((star) => {
-                    const count = product.reviews.filter((r) => r.rating === star).length;
+                    const count = reviews.filter((r) => r.rating === star).length;
                     const percentage =
                         product.numReviews > 0
                         ? (count / product.numReviews) * 100
