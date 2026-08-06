@@ -54,7 +54,7 @@ const reviewsSlice = createSlice({
         if (!state.byProduct[productId]) {
           state.byProduct[productId] = [];
         }
-        state.byProduct[productId].push(review);
+        state.byProduct[productId].push(review); //  now review is a single object
       });
   },
 });

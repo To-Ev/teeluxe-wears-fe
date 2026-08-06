@@ -9,6 +9,8 @@ const api = axios.create({
   withCredentials: true, // always send cookies
 });
 
+const BASE_URL = "/teeluxe-wears-fe/";
+
 // Attach token to every request
 api.interceptors.request.use((config) => {
   const authData = localStorage.getItem("authData");
@@ -27,7 +29,7 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if ((error.response?.status === 401 || error.response?.status === 403) && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       const authData = localStorage.getItem("authData");
       if (!authData) {
         // user is logged out → don’t try refresh
@@ -59,7 +61,7 @@ api.interceptors.response.use(
           toast.error("Session expired. Please log in again.");
           error._toastShown = true;
         }
-        history.push("/login"); // basename will prepend /teeluxe-wears-fe
+        history.push(`${BASE_URL}login`); // basename will prepend /teeluxe-wears-fe
         return Promise.reject(refreshError);
       }
     }

@@ -10,6 +10,7 @@ import { FiShoppingBag, FiShoppingCart } from 'react-icons/fi';
 import { FaStar } from "react-icons/fa";
 import StarRating from './StarRating';
 import ProductTabs from './ProductTabs';
+import { fetchProductReviews } from '../../redux/slices/reviewsSlice';
 
 const ProductsDetails = ({ productId }) => {
     
@@ -17,9 +18,7 @@ const ProductsDetails = ({ productId }) => {
     const dispatch = useDispatch();
     const {selectedProduct, loading, error, similarProducts} = useSelector(state => state.products);
     const { user, guestId }= useSelector(state => state.auth);
-    const { byProduct = {}, loading: reviewsLoading = false } = useSelector(
-        (state) => state.reviews || {}
-    );
+    const { byProduct, loading: reviewsLoading } = useSelector(state => state.reviews);
     
     const productFetchId = productId || id;
     const reviews = byProduct[productFetchId] || [];
@@ -35,6 +34,9 @@ const ProductsDetails = ({ productId }) => {
         if(productFetchId) {
             dispatch(fetchProductDetails(productFetchId));
             dispatch(fetchSimilarProducts(productFetchId));
+
+            // Fetch product reviews
+            dispatch(fetchProductReviews(productFetchId));
         }
     }, [dispatch, productFetchId])
 
@@ -236,7 +238,7 @@ const ProductsDetails = ({ productId }) => {
                         <ProductTabs 
                             product={selectedProduct} 
                             reviews={reviews}  
-                            loading={reviewsLoading}
+                            reviewsLoading={reviewsLoading}
                         />
                     </div>
                     

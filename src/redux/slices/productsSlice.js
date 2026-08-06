@@ -86,19 +86,6 @@ export const fetchSimilarProducts = createAsyncThunk(
   }
 );
 
-// Thunk: add a review
-export const addProductReview = createAsyncThunk(
-  "products/addReview",
-  async ({ id, rating, comment }, { rejectWithValue }) => {
-    try {
-      const { data } = await api.post(`/products/${id}/reviews`, { rating, comment });
-      return data; // backend returns updated product
-    } catch (err) {
-      return rejectWithValue(err.response?.data?.err || "Failed to add review");
-    }
-  }
-);
-
 const productsSlice = createSlice({
     name: "products",
     initialState: {
@@ -107,7 +94,6 @@ const productsSlice = createSlice({
         similarProducts: [], // store similar products
         loading: false,
         error: null,
-        reviewError: null, 
         filters: {
             category: "",
             size: "",
@@ -199,27 +185,6 @@ const productsSlice = createSlice({
             .addCase(fetchSimilarProducts.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload || action.error.message;
-            })
-            .addCase(addProductReview.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(addProductReview.fulfilled, (state, action) => {
-                state.loading = false;
-
-                // Ensure reviews are merged, not replaced
-                state.selectedProduct = {
-                    ...state.selectedProduct,
-                    reviews: [
-                    ...(state.selectedProduct.reviews || []),
-                    ...(action.payload.reviews || []),
-                    ],
-                    rating: action.payload.rating,
-                    numReviews: action.payload.numReviews,
-                };
-            })
-            .addCase(addProductReview.rejected, (state, action) => {
-                state.loading = false;
-                state.reviewError = action.payload; // keep separate
             });
 
     },

@@ -36,7 +36,7 @@ const Navbar = () => {
                     NEW IN
                 </Link>
                 <Link to='/collections/all?category=Two Piece Sets' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
-                    2-Ps-SETS
+                    2-Pcs-SETS
                 </Link>
                 <Link to='/collections/all?category=Bubus' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
                     BÚBÚS

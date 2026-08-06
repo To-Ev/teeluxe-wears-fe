@@ -28,7 +28,7 @@ const ProductManagement = () => {
         <div className='mb-6'>
             <Link 
                 to={`/admin/products/new`} 
-                className='bg-purple-500 text-white px-3 py-3 rounded hover:bg-purple-600'>
+                className='bg-blue-500 text-white px-3 py-3 rounded hover:bg-blue-600'>
                 Add New Product
             </Link>
         

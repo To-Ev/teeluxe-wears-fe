@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchAdminOrders } from '../redux/slices/adminOrderSlice';
+import { closeYear, fetchAdminOrders } from '../redux/slices/adminOrderSlice';
 import { fetchAdminProducts } from '../redux/slices/adminProductsSlice';
+import toast from 'react-hot-toast';
+import ClosingLogsTable from '../component/Admin/ClosingLogsTable';
 
 const AdminHomePage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
   
   const {
     products, 
@@ -19,6 +22,7 @@ const AdminHomePage = () => {
     orders,
     totalOrders,
     totalSales,
+    loading,
     loading: ordersLoading,
     error: ordersError,
   } = useSelector(state => state.adminOrders);
@@ -32,7 +36,13 @@ const AdminHomePage = () => {
     navigate(`/admin/orders/${orderId}`)
   };
 
-  console.log("Items in AdminHomePage:", orders.user);
+  const handleConfirm = () => {
+    dispatch(closeYear())
+      .unwrap()
+      .then(() => toast.success("Year closed successfully"))
+      .catch(err => toast.error(err));
+    setShowModal(false);
+  };
 
   return (
     <section className='max-w-7xl mx-auto py-6 text-gray-700'>
@@ -65,6 +75,8 @@ const AdminHomePage = () => {
         </div>
       )}
 
+      {/* Closing logs  */}
+      <ClosingLogsTable />
       <div className="mt-6">
         <h2 className="text-2xl font-bold mb-4">Recent Orders</h2>
         <div className="overflow-x-auto">
@@ -101,6 +113,39 @@ const AdminHomePage = () => {
           </table>
         </div>
       </div>
+      {/* Modal setup */}
+      <div className="mt-6 flex w-full justify-end">
+        <button
+          onClick={() => setShowModal(true)}
+          className="mt-6 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 cursor-pointer transition"
+        >
+          End of Year Closing
+        </button>
+      </div>
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-96">
+            <h2 className="text-lg font-semibold mb-4">Confirm Closing</h2>
+            <p className="mb-6 text-gray-600">
+              This will permanently clear all orders and reset revenue to zero.
+              Are you sure?
+            </p>
+            <div className="flex justify-end gap-4">
+              <button onClick={() => setShowModal(false)} className="px-4 py-2 cursor-pointer bg-gray-300 rounded hover:bg-gray-400">
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="px-4 py-2 bg-red-600 text-white rounded cursor-pointer hover:bg-red-700"
+                disabled={loading}
+              >
+                {loading ? "Closing..." : "Confirm"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

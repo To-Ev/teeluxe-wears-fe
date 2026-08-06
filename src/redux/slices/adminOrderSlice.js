@@ -75,14 +75,42 @@ export const deleteOrder = createAsyncThunk(
     }
 );
 
+// End of year closing thunks
+export const closeYear = createAsyncThunk(
+  "adminOrders/closeYear",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/admin/orders/year-closing");
+      return data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.err || "Failed to close year");
+    }
+  }
+);
+
+export const fetchClosingLogs = createAsyncThunk(
+  "adminOrders/fetchClosingLogs",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/admin/orders/closing-logs");
+      return data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.err || "Failed to fetch logs");
+    }
+  }
+);
+
+
 const adminOrderSlice = createSlice({
     name: 'adminOrders',
     initialState: {
         orders: [],
         totalOrders: 0,
         totalSales: 0,
+        logs: [],
         loading: false,
         error: null,
+        closingMessage: null,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -135,15 +163,42 @@ const adminOrderSlice = createSlice({
 
         // delete order
         .addCase(deleteOrder.pending, (state) => {
-        state.loading = true;
+            state.loading = true;
         })
         .addCase(deleteOrder.fulfilled, (state, action) => {
-        state.loading = false;
-        state.orders = state.orders.filter(order => order._id !== action.payload._id);
+            state.loading = false;
+            state.orders = state.orders.filter(order => order._id !== action.payload._id);
         })
         .addCase(deleteOrder.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+            state.loading = false;
+            state.error = action.payload;
+        })
+        .addCase(closeYear.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(closeYear.fulfilled, (state, action) => {
+            state.loading = false;
+            state.orders = [];
+            state.totalOrders = action.payload.totalOrders;
+            state.totalSales = action.payload.totalSales;
+            state.closingMessage = action.payload.message;
+        })
+        .addCase(closeYear.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+        .addCase(fetchClosingLogs.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(fetchClosingLogs.fulfilled, (state, action) => {
+            state.loading = false;
+            state.logs = action.payload;
+        })
+        .addCase(fetchClosingLogs.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
         });
     }
 

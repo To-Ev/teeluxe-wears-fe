@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProductReview } from "../../redux/slices/productsSlice";
 import toast from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
+import { addProductReview } from "../../redux/slices/reviewsSlice";
 
-const ProductTabs = React.memo(({ product, reviews, loading }) => {
+const ProductTabs = React.memo(({ product, reviews, reviewsLoading }) => {
     const [activeTab, setActiveTab] = useState("details");
     const dispatch = useDispatch();
 
@@ -13,11 +13,6 @@ const ProductTabs = React.memo(({ product, reviews, loading }) => {
 
     const [selectedRating, setSelectedRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
-
-    // const skeletonWidths = useMemo(
-    //     () => [5,4,3,2,1].map(() => `${Math.floor(Math.random() * 80 + 20)}%`),
-    //     []
-    // );
 
     // Handle and update the star ratings and reviews
     const handleRate = (newRating, e) => {
@@ -35,7 +30,7 @@ const ProductTabs = React.memo(({ product, reviews, loading }) => {
         setSelectedRating(newRating);
 
         dispatch(addProductReview({
-            id: product._id,
+            productId: product._id,
             rating: newRating,
             comment: "Loved it!"
         }))
@@ -47,6 +42,10 @@ const ProductTabs = React.memo(({ product, reviews, loading }) => {
         });
 
     };
+
+    const avgRating = reviews.length > 0
+        ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+        : 0;
 
   return (
     <div className="w-full">
@@ -73,7 +72,7 @@ const ProductTabs = React.memo(({ product, reviews, loading }) => {
         </div>
 
       {/* Tab content */}
-        <div className="p-4">
+        <div className="p-0 sm:p-4">
             {activeTab === "description" && (
             <div className="flex gap-20 flex-col sm:flex-row text-gray-700">
                 <div className="w-full sm:w-1/2">
@@ -123,10 +122,15 @@ const ProductTabs = React.memo(({ product, reviews, loading }) => {
             {activeTab === "reviews" && (
             <div className="w-full flex items-center justify-between sm:flex-row flex-col">
                 {/* Left: overall rating and stars */}
-                <div className="w-1/3 flex flex-col mb-6 items-center">
-                    <div className="flex gap-2 items-end">
-                        <p className="text-4xl font-semibold text-gray-700">{product.rating}</p>
+                <div className="w-full sm:w-1/3 flex flex-col mb-6 items-center">
+                    <div className="flex gap-2 items-end mb-1">
+                        <p className="text-4xl font-semibold text-gray-700">
+                            {avgRating.toFixed(1)}
+                        </p>
                         <p className="text-gray-700">out of 5</p>
+                    </div>
+                    <div className="mb-1">
+                        <p className="text-gray-500 text-sm">Add Your Rating.</p>
                     </div>
                     <div className="flex">
                         {[1, 2, 3, 4, 5].map((star) => (
@@ -147,47 +151,46 @@ const ProductTabs = React.memo(({ product, reviews, loading }) => {
                         </button>
                         ))}
                     </div>
-                    <p className="text-gray-700 mt-3">({product.numReviews} reviews)</p>
+                    <p className="text-gray-700 mt-3">({reviews.length} reviews)</p>
                 </div>
 
                 {/* Right: skeleton rows or actual distribution */}
-                <div className="w-2/3 space-y-3">
-                {loading ? (
-                    // Skeleton rows
-                    [5, 4, 3, 2, 1].map((star) => (
-                    <div key={star} className="flex justify-center items-center gap-10">
-                        <span className="text-sm text-gray-500">{star} star</span>
-                        <div className="w-3/5 bg-gray-200 rounded-full h-2">
-                        <div
-                            className="bg-gray-400 h-2 rounded-full animate-pulse"
-                            style={{ width: "60%" }}
-                        ></div>
-                        </div>
-                    </div>
-                    ))
-                ) : (
-                    // Actual distribution
-                    [5, 4, 3, 2, 1].map((star) => {
-                    const count = reviews.filter((r) => r.rating === star).length;
-                    const percentage =
-                        product.numReviews > 0
-                        ? (count / product.numReviews) * 100
-                        : 0;
-                    return (
+                <div className="w-full sm:w-2/3 space-y-3">
+                    {reviewsLoading ? (
+                        // Skeleton rows
+                        [5,4,3,2,1].map((star) => (
                         <div key={star} className="flex justify-center items-center gap-10">
-                        <span className="text-sm text-gray-500">{star} star</span>
-                        <div className="w-3/5 bg-gray-200 rounded-full h-2">
+                            <span className="text-sm text-gray-500">{star} star</span>
+                            <div className="w-3/5 bg-gray-200 rounded-full h-2">
                             <div
-                            className="bg-yellow-400 h-2 rounded-full"
-                            style={{ width: `${percentage}%` }}
+                                className="bg-gray-600 h-2 rounded-full animate-pulse"
+                                style={{ width: "60%" }}
                             ></div>
+                            </div>
                         </div>
-                        <span className="text-xs text-gray-500">{count}</span>
-                        </div>
-                    );
-                    })
-                )}
-                </div>
+                        ))
+                    ) : reviews.length === 0 ? (
+                        <p className="text-gray-500 text-center">No reviews yet</p>
+                    ) : (
+                        [5,4,3,2,1].map((star) => {
+                        const count = reviews.filter((r) => r.rating === star).length;
+                        const percentage = reviews.length > 0 ? (count / reviews.length) * 100 : 0;
+                        return (
+                            <div key={star} className="flex justify-center items-center gap-10">
+                            <span className="text-sm text-gray-500">{star} star</span>
+                            <div className="w-3/5 bg-gray-200 rounded-full h-2">
+                                <div
+                                className="bg-yellow-400 h-2 rounded-full"
+                                style={{ width: `${percentage}%` }}
+                                ></div>
+                            </div>
+                            <span className="text-xs text-gray-500">{count}</span>
+                            </div>
+                        );
+                        })
+                    )}
+                    </div>
+
             </div>
             )}
         </div>

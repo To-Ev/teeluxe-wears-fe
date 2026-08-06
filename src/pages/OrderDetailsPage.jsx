@@ -14,7 +14,7 @@ const OrderDetailsPage = () => {
     }, [id, dispatch]);
 
     if(loading) return <p className='text-green-300 text-2xl p-6'>Loading...</p>
-    if(error) return <p className='text-red-400 p-6'>Error: {error}</p>
+    if(error) return <p className='text-red-400 p-6 text-2xl'>Error! {error}</p>
 
   return (
     <section className='max-w-7xl mx-auto p-4 sm:p-6 text-gray-700'>
