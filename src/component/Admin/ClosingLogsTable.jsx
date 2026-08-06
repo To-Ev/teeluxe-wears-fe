@@ -9,9 +9,8 @@ const ClosingLogsTable = () => {
   useEffect(() => {
     const loadLogs = async () => {
       try {
-        const logs = await dispatch(fetchClosingLogs()).unwrap();
-        // logs is the actual payload returned from the thunk
-        console.log("Fetched logs:", logs);
+        await dispatch(fetchClosingLogs()).unwrap();
+  
         // you can set local state here if needed
         // setLogs(logs);
       } catch (err) {
