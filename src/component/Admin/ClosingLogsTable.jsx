@@ -25,12 +25,12 @@ const ClosingLogsTable = () => {
     <section className="mt-10">
       <h2 className="text-2xl font-bold mb-4">Closing History</h2>
 
-      {loading && <p className="text-blue-500 text-2xl">Loading logs...</p>}
+      {loading && <p className="text-green-300 text-2xl">Loading logs...</p>}
       {error && <p className="text-red-500 text-2xl">{error}</p>}
 
       {!loading && !error && (
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-left text-gray-700 border border-gray-200 rounded-lg">
+        <div className="overflow-x-auto max-w-full">
+          <table className="min-w-[500px] sm:min-w-full text-left text-gray-700 border border-gray-200 rounded-lg">
             <thead className="bg-gray-100 text-xs uppercase text-gray-600">
               <tr>
                 <th className="py-3 px-4">Date</th>

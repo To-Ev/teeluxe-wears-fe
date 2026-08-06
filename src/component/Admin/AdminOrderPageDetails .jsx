@@ -19,10 +19,8 @@ const AdminOrderPageDetails = () => {
   if (error) return <p className="text-red-400 p-6">Error: {error}</p>;
   if (!selectedOrder) return <p>No Order details found</p>;
 
-  console.log(`selected order:`, selectedOrder);
-
   return (
-    <section className="max-w-7xl mx-auto p-4 sm:p-6 text-gray-700">
+    <section className="max-w-7xl mx-auto p-0 sm:p-6 text-gray-700">
       <h2 className="text-2xl md:text-3xl font-bold mb-6">Admin Order Details</h2>
       <div className="p-4 sm:p-6 rounded-lg shadow-lg text-gray-700">
         {/* Order info */}

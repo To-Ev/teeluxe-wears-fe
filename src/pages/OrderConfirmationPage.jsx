@@ -28,13 +28,13 @@ const OrderConfirmationPage = () => {
   return (
     <section className='max-w-4xl mx-auto p-6'>
         <div className='flex flex-col justify-center w-full items-center my-8'>
-            <h1 className='text-4xl text-gray-700 font-bold mb-1'>Your order is completed!</h1>
-            <p className='text-gray-600 text-lg'>Thank you. Your Order has been received.</p>
+            <h1 className='text-3xl sm:text-4xl text-gray-700 font-bold mb-1'>Your order is completed!</h1>
+            <p className='text-gray-600 text-md sm:text-lg'>Thank you. Your Order has been received.</p>
         </div>
         {checkout && 
             (
                 <div className='p-6 shadow-lg rounded-lg'>
-                    <div className='flex justify-between mb-10'>
+                    <div className='flex justify-between mb-10 sm:flex-row flex-col'>
                         {/* Order Id & Date  */}
                         <div>
                             <h1 className='sm:text-xl font-semibold text-gray-600 mb-4'>
@@ -45,7 +45,7 @@ const OrderConfirmationPage = () => {
                             </p>
                         </div>
                         {/* Estimated Delivery  */}
-                        <div className='ml-auto text-right'>
+                        <div className='mr-auto mt-1 sm:mr-0 text-right'>
                             <p className='text-emerald-700 text-md'>
                                 Estimated Delivery: {" "}
                                 {calculateEstimatedDelivery(checkout.createdAt)}

@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full m-0 p-0">
-        <nav className={`w-full flex items-center justify-between py-2 px-6 z-30
+        <nav className={`w-full flex items-center justify-between py-2 sm:px-4 px-2 z-30
         ${isHome ? "absolute bg-blend-multiply" : "relative bg-gray-900"}`}>
             {/* Left bar */}
             <div className='hidden md:flex gap-3 text-gray-200 flex-1'>

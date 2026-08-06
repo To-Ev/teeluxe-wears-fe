@@ -4,9 +4,13 @@ import { IoLogoInstagram } from 'react-icons/io';
 import { RiTwitterXLine } from 'react-icons/ri';
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const TopBar = () => {
+
+  const { user } = useSelector(state => state.auth);
+
   return (
     <div className="bg-gray-950 text-white ">
       <div className="container mx-auto flex justify-between items-center py-3 px-4">
@@ -43,7 +47,7 @@ const TopBar = () => {
           <span>Update your wardrobe and elevate your style</span>
         </div>
         <div className='text-sm hidden md:block'>
-          <Link to="/my-orders" className='hover:text-amber-300'>
+          <Link to={user ? "/my-orders" : "/login"} className='hover:text-amber-300'>
             TRACK ORDER
           </Link>
         </div>
