@@ -7,7 +7,19 @@ const ClosingLogsTable = () => {
   const { logs, loading, error } = useSelector((state) => state.adminOrders);
 
   useEffect(() => {
-    dispatch(fetchClosingLogs());
+    const loadLogs = async () => {
+      try {
+        const logs = await dispatch(fetchClosingLogs()).unwrap();
+        // logs is the actual payload returned from the thunk
+        console.log("Fetched logs:", logs);
+        // you can set local state here if needed
+        // setLogs(logs);
+      } catch (err) {
+        console.error("Failed to fetch logs:", err);
+      }
+    };
+
+    loadLogs();
   }, [dispatch]);
 
   return (
