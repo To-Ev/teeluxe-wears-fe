@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 const FilterSideBar = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [priceRange, setPriceRange] = useState([0, 100000]);
   const navigate = useNavigate()
   const [filter, setFilter] = useState({
     category: "",
@@ -13,7 +13,7 @@ const FilterSideBar = () => {
     size: [],
     materials: [],
     minPrice: 0,
-    maxPrice: 1000,
+    maxPrice: 100000,
   });
   const category = ["Two Piece Sets", "Bubus", "Kaftans", "Aso Oke"]
   const size = ["XS", "S", "M", "L", "XL", "XXL"]
@@ -224,7 +224,7 @@ const FilterSideBar = () => {
         <div className='p-6'>
           <label className='block mb-2'>Price Range</label>
           <input 
-            type="range" name='priceRange' min={0} max={1000}
+            type="range" name='priceRange' step={1000} min={0} max={100000}
             value={priceRange[1]}
             onChange={handlePriceChange}
             className='w-full bg-gray-400 appearance-none rounded-lg h-2'

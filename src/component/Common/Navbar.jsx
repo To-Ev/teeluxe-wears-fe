@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { HiBars3BottomRight, HiOutlineShoppingBag, HiOutlineUser } from 'react-icons/hi2'
 import SearchBar from './SearchBar';
 import CartDrawer from '../Layout/CartDrawer';
@@ -15,6 +15,9 @@ const Navbar = () => {
 
     const location = useLocation();
     const isHome = location.pathname === "/";
+    const searchParams = new URLSearchParams(location.search);
+    const activeCategory = searchParams.get("category");
+    const activeNewIn = location.search.includes("New In");
 
     const cartItemCount = 
     cart?.products?.reduce((total, product) => total + product.quantity, 0) || 0;
@@ -32,21 +35,62 @@ const Navbar = () => {
         ${isHome ? "absolute bg-blend-multiply" : "relative bg-gray-900"}`}>
             {/* Left bar */}
             <div className='hidden md:flex gap-3 text-gray-200 flex-1'>
-                <Link to='/collections/all?New In' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
-                    NEW IN
-                </Link>
-                <Link to='/collections/all?category=Two Piece Sets' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
-                    2-Pcs-SETS
-                </Link>
-                <Link to='/collections/all?category=Bubus' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
-                    BÚBÚS
-                </Link>
-                <Link to='/collections/all?category=Kaftans' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
-                    KAFTANS
-                </Link>
-                <Link to='/collections/all?category=Aso Oke' className=' hover:text-amber-300 text-xs font-semibold uppercase transition'>
-                    AṢỌ ÒKÈ
-                </Link>
+                <div className="hidden md:flex gap-3 text-gray-200 flex-1">
+                    <Link
+                        to="/collections/all?New In"
+                        className={`text-xs font-semibold uppercase transition pb-1 ${
+                        activeNewIn
+                            ? "text-amber-300 border-b-2 border-amber-300"
+                            : "hover:text-amber-300"
+                        }`}
+                    >
+                        NEW IN
+                    </Link>
+
+                    <Link
+                        to="/collections/all?category=Two Piece Sets"
+                        className={`text-xs font-semibold uppercase transition pb-1 ${
+                        activeCategory === "Two Piece Sets"
+                            ? "text-amber-300 border-b-2 border-amber-300"
+                            : "hover:text-amber-300"
+                        }`}
+                    >
+                        2-Pcs-SETS
+                    </Link>
+
+                    <Link
+                        to="/collections/all?category=Bubus"
+                        className={`text-xs font-semibold uppercase transition pb-1 ${
+                        activeCategory === "Bubus"
+                            ? "text-amber-300 border-b-2 border-amber-300"
+                            : "hover:text-amber-300"
+                        }`}
+                    >
+                        BÚBÚS
+                    </Link>
+
+                    <Link
+                        to="/collections/all?category=Kaftans"
+                        className={`text-xs font-semibold uppercase transition pb-1 ${
+                        activeCategory === "Kaftans"
+                            ? "text-amber-300 border-b-2 border-amber-300"
+                            : "hover:text-amber-300"
+                        }`}
+                    >
+                        KAFTANS
+                    </Link>
+
+                    <Link
+                        to="/collections/all?category=Aso Oke"
+                        className={`text-xs font-semibold uppercase transition pb-1 ${
+                        activeCategory === "Aso Oke"
+                            ? "text-amber-300 border-b-2 border-amber-300"
+                            : "hover:text-amber-300"
+                        }`}
+                    >
+                        AṢỌ ÒKÈ
+                    </Link>
+                </div>
             </div>
             {/* Mid Bar */}
             <div className='flex-1 flex justify-start md:justify-center'>

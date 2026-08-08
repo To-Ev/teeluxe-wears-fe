@@ -18,8 +18,8 @@ const SortOptions = () => {
         onChange={handleSortChange}
         className='mb-4 border border-gray-400 focus:outline-green-200 p-2 rounded-lg cursor-pointer'>
         <option value="">Default</option>
-        <option value="priceACS">Price: High to Low</option>
-        <option value="priceDCS">Price: Low to High</option>
+        <option value="priceDesc">Price: High to Low</option>
+        <option value="priceAsc">Price: Low to High</option>
         <option value="popularity">Popularity</option>
       </select>
     </section>

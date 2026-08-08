@@ -49,7 +49,13 @@ const ProductManagement = () => {
                             key={product._id}
                             className='border-b border-gray-100 hover:bg-gray-50 cursor-pointer'
                         >
-                            <td className='p-4 text-gray-800 whitespace-nowrap'>{product.name}</td>
+                            <td className='p-4 text-gray-800 whitespace-nowrap'>
+                                <Link 
+                                    to={`/admin/products/${product._id}`}
+                                    className='hover:text-amber-500 transition'
+                                    >{product.name}
+                                </Link>
+                            </td>
                             <td className="p-4">N{product.price}</td>
                             <td className="p-4">{product.sku}</td>
                             <td className="flex flex-col gap-1 sm:flex-row p-4">

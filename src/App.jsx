@@ -22,6 +22,7 @@ import AddNewProductPage from './component/Admin/AddNewProductPage'
 import AdminOrderPageDetails from './component/Admin/AdminOrderPageDetails '
 import ROLES_LIST from './ROLES_LIST'
 import './assets/styles/style.css';
+import AdminProductDetails from './component/Admin/AdminProductDetails'
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path='products/new' element={<AddNewProductPage />}/> 
           <Route path='orders' element={<OrderManagement />}/> 
           <Route path="orders/:id" element={<AdminOrderPageDetails />} />
+          <Route path="products/:id" element={<AdminProductDetails />} />
         </Route>
       </Routes>
       <Toaster position='top-right'/>
