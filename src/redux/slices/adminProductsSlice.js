@@ -64,43 +64,73 @@ const adminProductsSlice = createSlice({
   initialState: {
     products: [],
     loading: false,
-    error: null
+    error: null,
+    success: null
   },
-  reducers: {},
+  reducers: {
+    clearStatus: (state) => {
+      state.error = null;
+      state.success = null;
+    }
+  },
   extraReducers: (builder) => {
     builder
-    // async thunk cases for fetching products
-        .addCase(fetchAdminProducts.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-        })
-        .addCase(fetchAdminProducts.fulfilled, (state, action) => {
-            state.loading = false;
-            state.products = action.payload;
-        })
-        .addCase(fetchAdminProducts.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.payload;
-        })
-        // async thunk cases for creating, updating, and deleting products
-        .addCase(createProduct.fulfilled, (state, action) => {
-          state.loading = false;
-          state.products.push(action.payload);
-        })
-        // async thunk cases for updating a product
-        .addCase(updateProduct.fulfilled, (state, action) => {
-          state.loading = false;
-          const index = state.products.findIndex((product) => product._id === action.payload._id);
-          if (index !== -1) {
-            state.products[index] = action.payload;
-          }
-        })
-        // async thunk cases for deleting a product
-        .addCase(deleteProduct.fulfilled, (state, action) => {
-          state.loading = false;
-          state.products = state.products.filter((product) => product._id !== action.payload);
-        })
+      // Fetch products
+      .addCase(fetchAdminProducts.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAdminProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products = action.payload;
+      })
+      .addCase(fetchAdminProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch products";
+      })
+
+      // Create product
+      .addCase(createProduct.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = null;
+      })
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products.push(action.payload.newProduct || action.payload);
+        state.success = action.payload.msg || "Product created successfully!";
+      })
+      .addCase(createProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to add product";
+      })
+
+      // Update product
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.products.findIndex(p => p._id === action.payload._id);
+        if (index !== -1) {
+          state.products[index] = action.payload;
+        }
+        state.success = "Product updated successfully!";
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to update product";
+      })
+
+      // Delete product
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products = state.products.filter(p => p._id !== action.payload);
+        state.success = "Product deleted successfully!";
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to delete product";
+      });
   }
 });
 
+export const { clearStatus } = adminProductsSlice.actions;
 export default adminProductsSlice.reducer;

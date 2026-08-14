@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import toast from 'react-hot-toast';
-import { createProduct } from '../../redux/slices/adminProductsSlice';
+import { clearStatus, createProduct } from '../../redux/slices/adminProductsSlice';
+import { useEffect } from 'react';
 
 const AddNewProductPage = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, error } = useSelector(state => state.adminProducts);
+    const { success, loading, error } = useSelector(state => state.adminProducts);
 
     const [productData, setProductData] = useState({
         name: "",
@@ -69,19 +70,23 @@ const AddNewProductPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createProduct(productData))
-            .unwrap()
-            .then(() => {
-                toast.success("Product created successfully!");
-                navigate("/admin/products");
-            })
-        .catch((err) => {
-            toast.error(`Failed to create product: ${err}`);
-        })
-    }
+        dispatch(createProduct(productData));
+    };
     
+    useEffect(() => {
+        if (success) {
+            toast.success(success);
+            dispatch(clearStatus());
+            navigate("/admin/products");
+        }
+        if (error) {
+            toast.error(error);
+            dispatch(clearStatus());
+        }
+    }, [success, error, dispatch, navigate]);
+
+
     if(loading) return <p className='text-2xl text-green-300 p-3'>Loading...</p>
-    if(error) return <p className='text-red-500 text-2xl p-3'>Error: {error}</p>
 
     return (
         <section className='max-w-7xl mx-auto p-6 shadow-md rounded-md text-gray-700'>
