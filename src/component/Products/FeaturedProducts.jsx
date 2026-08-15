@@ -10,14 +10,17 @@ const FeaturedProducts = () => {
         <div className='relative mx-auto hidden lg:flex overflow-hidden rounded-2x lg:flex-row items-center text-amber-950'>
             {/* left side */}
             <div className='lg:w-2/3 text-center p-8 lg:text-left z-50 absolute top-1/2 -translate-y-1/2'>
-                <h2 className='text-md tracking-wider mb-2'>
-                    COMFORT AND STYLE
-                </h2>
+                <div className='flex gap-5 items-center mb-2'>
+                    <h2 className='text-md tracking-wider'>
+                        COMFORT AND STYLE
+                    </h2>
+                    <p className='h-0.5 w-35 bg-amber-900/40'></p>
+                </div>
                 <h2 className='text-4xl text-gray-900 lg:text-6xl font-bold mb-6'>
-                    Apparel made for <br /> <span className='text-5xl'>your <span className='italic text-amber-600'>every day life</span></span>
+                    Timeless pieces<br /> <span className='text-5xl'>inspired by <br /><span className='italic text-amber-600'>African heritage</span></span>
                 </h2>
                 <p className='text-lg mb-6 w-1/2'>
-                    Discover high-quality clothing that effortlessly blends fashion and function. Designed to always make you look and feel great.
+                    Discover high-quality clothing that effortlessly blends fashion and function. Crafted with culture for modern era.
                 </p>
                <button className='w-50 bg-amber-600 hover:bg-amber-700 transition py-2.5 rounded-md'>
                     <Link to="/collections/all" className='text-gray-900 w-full flex justify-center items-center gap-3'>
@@ -43,10 +46,10 @@ const FeaturedProducts = () => {
                     Comfort and style
                 </h2>
                 <h2 className='text-3xl lg:text-5xl font-bold text-gray-300 mb-6'>
-                    Apparel made for your every day life
+                    Timeless pieces inspired by African heritage.
                 </h2>
                 <p className='text-gray-400 text-sm mb-6'>
-                    Discover high-quality clothing that effortlessly blends fashion and function. Designed to always make you look and feel great.
+                    Discover high-quality clothing that effortlessly blends fashion and function. Crafted with culture for modern era.
                 </p>
                 <Link 
                     to="/collections/all"
