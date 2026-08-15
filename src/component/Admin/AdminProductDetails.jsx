@@ -45,10 +45,10 @@ const AdminProductDetails = () => {
 
           <div className="flex items-center space-x-4">
             <span className="text-xl font-semibold text-gray-700">
-              N{selectedProduct.discountPrice}
+              N{selectedProduct.price.toLocaleString()}
             </span>
             <span className="text-sm line-through text-gray-400">
-              N{selectedProduct.price}
+              N{selectedProduct.discountPrice.toLocaleString()}
             </span>
           </div>
 

@@ -103,7 +103,7 @@ const ProductTabs = React.memo(({ product, reviews, reviewsLoading }) => {
                             <td className='py-3 pl-4 text-gray-700'>Brand</td>
                             <td className='py-3 pl-4'>{product.brand}</td>
                         </tr>
-                        <tr>
+                        <tr className="bg-gray-50">
                             <td className='py-3 pl-4'>Material</td>
                             <td className='py-3 pl-4'>{product.material}</td>
                         </tr>
@@ -111,7 +111,7 @@ const ProductTabs = React.memo(({ product, reviews, reviewsLoading }) => {
                             <td className='py-3 pl-4'>Sizes</td>
                             <td className='py-3 pl-4'>{product.sizes.join(", ")}</td>
                         </tr>
-                        <tr>
+                        <tr className="bg-gray-50">
                             <td className='py-3 pl-4'>Colors</td>
                             <td className='py-3 pl-4'>{product.colors.join(", ")}</td>
                         </tr>

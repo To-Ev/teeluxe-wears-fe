@@ -110,7 +110,7 @@ const ProductsDetails = ({ productId }) => {
                 {/* Product Details */}
                 <div className='flex flex-col h-full'>
                     {/* Top */}
-                    <div className='flex flex-col lg:flex-row'>
+                    <div className='flex flex-col lg:flex-row items-stretch'>
                         {/* Left */}
                         <div className='flex flex-1 mb-5 lg:mb-0 flex-col md:flex-row'>
                             {/* Thumbnails images */}
@@ -128,15 +128,15 @@ const ProductsDetails = ({ productId }) => {
                                 }
                             </div>
                             {/* Main Image */}
-                            <div className='mb-4'>
+                            <div className='flex-1 flex items-center justify-center mb-4 md:mb-0'>
                                 <img   
                                 src={mainImage} 
                                 alt="Main Image" 
-                                className='rounded-lg w-full max-w-lg h-full object-cover'
+                                className='rounded-lg w-full max-w-lg md:aspect-4/5 h-full object-cover'
                                 />
                             </div>
                             {/*Mobile Thumbnails */}
-                            <div className='flex md:hidden flex-row space-x-4 mb-4 overscroll-x-scroll'>
+                            <div className='flex md:hidden flex-row space-x-4 mb-4 md:mb-0 overscroll-x-scroll'>
                                 {
                                     selectedProduct.images.map((image, index) =>(
                                         <div key={index} className={`w-20 h-20 border rounded-lg mb-3 overflow-hidden ${mainImage === image.url ? 'border-black' : 'border-gray-500'}`}>
@@ -152,84 +152,86 @@ const ProductsDetails = ({ productId }) => {
                         </div>
                         {/* Right side */}
                         <div className='lg:w-1/2 lg:ml-10 mx-auto w-full flex-1'>
-                            <h1 className='font-semibold text-4xl mb-2 text-gray-700'>
+                            <h1 className='font-semibold text-4xl mb-3 text-gray-700'>
                                 {selectedProduct.name}
                             </h1>
                             {/* Stars rating and reviews */}
-                            <div className='flex items-center text-gray-700 mb-3'>
+                            <div className='flex items-center text-gray-700 mb-4'>
                                 <StarRating rating={selectedProduct.rating} />
                                 <p className='ml-3 text-sm font-semibold text-gray-500'>{selectedProduct.rating}</p>
                                 <p className='text-sm'>({selectedProduct.numReviews} reviews)</p>
                             </div>
                             {/* Price */}
-                            <div className='flex gap-3 items-end mb-3'>
+                            <div className='flex gap-3 items-end mb-4'>
                                 <p className='text-3xl text-gray-600 font-semibold'>
-                                    N{selectedProduct.price}
+                                    N{selectedProduct.price.toLocaleString()}
                                 </p>
                                 <p className='text-lg text-gray-500 line-through'>
                                 {selectedProduct.discountPrice > 0 ? 
-                                `N${selectedProduct.discountPrice}` : ""}
+                                `N${selectedProduct.discountPrice.toLocaleString()}` : ""}
                                 </p>
                             </div>
-                            <p className='text-gray-800 mb-2 pb-5  border-b border-gray-200'>
+                            <p className='text-gray-800 mb-2 pb-5 border-b border-gray-200'>
                                 {selectedProduct.description}
                             </p>
-                            {/* selected colors */}
-                            <div className='mb-4 mt-5'>
-                                <p className='text-gray-700 font-semibold mb-2'>Colors: <span className='font-medium'>{selectedColor}</span></p>
-                                <div className='flex gap-3 mt-1'>
-                                    {selectedProduct.colors.map((color, index) =>(
-                                        <button key={index}
-                                            className={`w-8 h-8 rounded-full cursor-pointer 
-                                            ${selectedColor === color 
-                                            ? 'border-2 border-white ring-2 ring-black' 
-                                            : 'border border-white'}`}
-                                            style={
-                                                {backgroundColor: color,
-                                                filter: 'brightness(0.6)',
-                                            }}
-                                            onClick={() =>{setSelectedColor(color)}}
-                                        >
-                                        </button>
-                                    ))}
+                            <div className='flex flex-col justify-between h-3/5'>
+                                {/* selected colors */}
+                                <div className='mb-4 mt-5'>
+                                    <p className='text-gray-700 font-semibold mb-2'>Colors: <span className='font-medium'>{selectedColor}</span></p>
+                                    <div className='flex gap-3 mt-1'>
+                                        {selectedProduct.colors.map((color, index) =>(
+                                            <button key={index}
+                                                className={`w-8 h-8 rounded-full cursor-pointer 
+                                                ${selectedColor === color 
+                                                ? 'border-2 border-white ring-2 ring-black' 
+                                                : 'border border-white'}`}
+                                                style={
+                                                    {backgroundColor: color,
+                                                    filter: 'brightness(0.6)',
+                                                }}
+                                                onClick={() =>{setSelectedColor(color)}}
+                                            >
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                            {/* selected Sizes */}
-                            <div className='mb-4'>
-                                <p className='text-gray-700 font-semibold mb-3'>Sizes: <span className='font-medium'>{selectedSize}</span></p>
-                                <div className='flex gap-3 mt-1'>
-                                    {selectedProduct.sizes.map((size, index) =>(
-                                        <button 
-                                            onClick={() => {setSelectedSize(size)}}
-                                            key={index}
-                                            className={`text-sm cursor-pointer font-semibold px-5 py-2 border border-gray-200 rounded text-gray-900  transition ${selectedSize === size ? 'bg-black text-white' : ''}`}>
-                                                {size}
-                                        </button>
-                                    ))}
+                                {/* selected Sizes */}
+                                <div className='mb-4'>
+                                    <p className='text-gray-700 font-semibold mb-3'>Sizes: <span className='font-medium'>{selectedSize}</span></p>
+                                    <div className='flex gap-3 mt-1'>
+                                        {selectedProduct.sizes.map((size, index) =>(
+                                            <button 
+                                                onClick={() => {setSelectedSize(size)}}
+                                                key={index}
+                                                className={`text-sm cursor-pointer font-semibold px-5 py-2 border border-gray-200 rounded text-gray-900  transition ${selectedSize === size ? 'bg-black text-white' : ''}`}>
+                                                    {size}
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Add to cart Button and Quantity*/}
-                            <div className='flex items-start justify-center flex-col lg:flex-row'>
-                                <div className='w-2/5 flex mb-4 items-center flex-none gap-3 mt-3'>
-                                    <button className='border border-gray-200 px-5 py-1 rounded text-3xl cursor-pointer text-gray-700'
-                                    onClick={() =>handleQuantityChange("minus")}
-                                    >-</button>
-                                    <span className='mx-1 text-xl font-semibold border px-5 py-2 rounded border-gray-200 text-gray-600'>{selectedQuantity}</span>
-                                    <button className='border border-gray-200 px-4 py-1 rounded text-3xl cursor-pointer text-gray-700'
-                                    onClick={() =>handleQuantityChange("plus")}
-                                    >+</button>
+                                {/* Add to cart Button and Quantity*/}
+                                <div className='flex items-start justify-center flex-col lg:flex-row'>
+                                    <div className='w-2/5 flex items-center flex-none gap-3 mt-3 lg:mb-0 mb-3'>
+                                        <button className='border border-gray-200 px-5 py-0 lg:py-1 rounded text-3xl cursor-pointer text-gray-700'
+                                        onClick={() =>handleQuantityChange("minus")}
+                                        >-</button>
+                                        <span className='mx-1 text-xl font-semibold border px-5 py-1 lg:py-2 rounded border-gray-200 text-gray-600'>{selectedQuantity}</span>
+                                        <button className='border border-gray-200 px-4 py-0 lg:py-1 rounded text-3xl cursor-pointer text-gray-700'
+                                        onClick={() =>handleQuantityChange("plus")}
+                                        >+</button>
+                                    </div>
+                                    <button 
+                                        onClick={() =>handleAddToCart()}
+                                        disabled={isButtonAllowed}
+                                        className={`grow w-full mt-3 lg:w-3/5 bg-black text-white rounded-lg px-6 py-3 cursor-pointer ${isButtonAllowed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-900'}`}>
+                                            {isButtonAllowed ? ('Please wait...') : (
+                                                <span className="flex items-center justify-center gap-2">
+                                                <FiShoppingBag className='w-6 h-6'/> Add to Cart
+                                                </span>
+                                            )}
+                                    </button>
                                 </div>
-                                <button 
-                                    onClick={() =>handleAddToCart()}
-                                    disabled={isButtonAllowed}
-                                    className={`grow w-full mt-3 lg:w-3/5 bg-black text-white rounded-lg px-6 py-3 cursor-pointer mb-4 ${isButtonAllowed ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-900'}`}>
-                                        {isButtonAllowed ? ('Please wait...') : (
-                                            <span className="flex items-center justify-center gap-2">
-                                            <FiShoppingBag className='w-6 h-6'/> Add to Cart
-                                            </span>
-                                        )}
-                                </button>
                             </div>
                         </div>
                     </div>

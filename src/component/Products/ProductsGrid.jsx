@@ -27,7 +27,7 @@ const ProductGrid = ({products, loading, error}) => {
                             />
                         </div>
                         <h2 className='mb-1 px-2 text-md font-semibold'>{product.name}</h2>
-                        <p className='text-md px-2 tracking-tighter pb-2'>N {product.price}</p>
+                        <p className='text-md px-2 tracking-tighter pb-2'>N {product.price.toLocaleString()}</p>
                     </div>
                 </Link>
             )

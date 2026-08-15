@@ -41,12 +41,11 @@ function App() {
           <Route path='order-confirmation' element={<OrderConfirmationPage />}/>
           <Route path='orders/:id' element={<OrderDetailsPage />}/>
           <Route path='my-orders' element={<MyOrderPage />}/>
-
         </Route>
-          <Route path='/admin' element={
-            <ProtectedRoute roles={ROLES_LIST.Admin}>
-              <AdminLayout />
-            </ProtectedRoute>}> //Admin Layout
+        <Route path='/admin' element={
+          <ProtectedRoute roles={ROLES_LIST.Admin}>
+            <AdminLayout />
+          </ProtectedRoute>}> //Admin Layout
           <Route index element={<AdminHomePage />}/> 
           <Route path='users' element={<UserManagement />}/> 
           <Route path='products' element={<ProductManagement />}/> 
