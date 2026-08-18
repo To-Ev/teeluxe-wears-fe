@@ -94,7 +94,7 @@ const Navbar = () => {
             </div>
             {/* Mid Bar */}
             <div className='flex-1 flex justify-start md:justify-center'>
-                <Link to='/' className='text-4xl sm:text-5xl font-semibold text-amber-300'>
+                <Link to='/' className='text-4xl sm:text-5xl font-semibold text-amber-200'>
                     <i className="icon-Derayo"></i>
                 </Link>
             </div>
@@ -123,7 +123,7 @@ const Navbar = () => {
                     to="/profile"
                     className="hover:text-amber-300 md:hidden transition"
                 >
-                    <HiOutlineUser className="h-5 w-5 text-white" />
+                    <HiOutlineUser className="h-5 w-5 text-white hover:text-amber-300" />
                 </Link>
 
                 {/* Cart */}
@@ -134,7 +134,7 @@ const Navbar = () => {
                     <HiOutlineShoppingBag className="h-5 w-5 text-white" />
                     CART
                     {cartItemCount > 0 && (
-                    <span className="absolute -top-1 text-xs bg-[#ea9d0e] rounded-full px-2 py-0.5 text-white">
+                    <span className="absolute -top-2 left-2 text-xs bg-amber-200 rounded-full px-2 py-0.5 text-gray-600">
                         {cartItemCount}
                     </span>
                     )}
@@ -144,9 +144,9 @@ const Navbar = () => {
                     onClick={toggleCartDrawer}
                     className="relative hover:text-amber-300 cursor-pointer md:hidden transition"
                 >
-                    <HiOutlineShoppingBag className="h-5 w-5 text-white" />
+                    <HiOutlineShoppingBag className="h-5 w-5 text-white hover:text-amber-300" />
                     {cartItemCount > 0 && (
-                    <span className="absolute -top-1 text-xs bg-[#eaaf0e] rounded-full px-2 py-0.5 text-white">
+                    <span className="absolute -top-1 text-xs bg-amber-200 rounded-full px-2 py-0.5 text-gray-600">
                         {cartItemCount}
                     </span>
                     )}

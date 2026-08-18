@@ -64,7 +64,7 @@ const SearchBar = () => {
             className="md:hidden cursor-pointer text-gray-200 hover:text-amber-300 transition"
             onClick={() => setIsOpen(!isOpen)}
             >
-            <HiMagnifyingGlass className="w-5 h-5 cursor-pointer text-white" />
+            <HiMagnifyingGlass className="w-5 h-5 cursor-pointer text-white hover:text-amber-300" />
             </button>
         </>
         )}

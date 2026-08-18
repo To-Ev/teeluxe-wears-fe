@@ -20,7 +20,7 @@ const FeaturedProducts = () => {
                     Timeless pieces<br /> <span className='text-5xl'>inspired by <br /><span className='italic text-amber-600'>African heritage</span></span>
                 </h2>
                 <p className='text-lg mb-6 w-1/2'>
-                    Discover high-quality clothing that effortlessly blends fashion and function. Crafted with culture for modern era.
+                    Discover high-quality clothing that effortlessly blends fashion and function. Crafted with culture for modern woman.
                 </p>
                <button className='w-50 bg-amber-600 hover:bg-amber-700 transition py-2.5 rounded-md'>
                     <Link to="/collections/all" className='text-gray-900 w-full flex justify-center items-center gap-3'>
@@ -49,7 +49,7 @@ const FeaturedProducts = () => {
                     Timeless pieces inspired by African heritage.
                 </h2>
                 <p className='text-gray-400 text-sm mb-6'>
-                    Discover high-quality clothing that effortlessly blends fashion and function. Crafted with culture for modern era.
+                    Discover high-quality clothing that effortlessly blends fashion and function. Crafted with culture for modern woman.
                 </p>
                 <Link 
                     to="/collections/all"

@@ -1,6 +1,6 @@
 import React from 'react'
 import Hero from '../component/Layout/Hero'
-import GenderSelectionSection from '../component/Products/GenderSelectionSection'
+import SectionSelectionPage from '../component/Products/SectionSelectionPage'
 import NewArrivals from '../component/Products/NewArrivals'
 import ProductsDetails from '../component/Products/ProductsDetails'
 import ProductsGrid from '../component/Products/ProductsGrid'
@@ -44,7 +44,7 @@ const Home = () => {
   return (
     <div className=''>
       <Hero />
-      <GenderSelectionSection />
+      <SectionSelectionPage />
       <NewArrivals />
       {/* Best seller Products */}
       <h1 className='text-3xl font-semibold text-center mb-4 text-gray-700'>
