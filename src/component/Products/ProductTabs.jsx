@@ -144,8 +144,8 @@ const ProductTabs = React.memo(({ product, reviews, reviewsLoading }) => {
                             <FaStar
                             className={`text-5xl cursor-pointer ${
                                 star <= (hoverRating || selectedRating)
-                                ? "text-yellow-400"
-                                : "text-gray-300"
+                                ? "text-gray-600"
+                                : "text-gray-200"
                             }`}
                             />
                         </button>
@@ -180,7 +180,7 @@ const ProductTabs = React.memo(({ product, reviews, reviewsLoading }) => {
                             <span className="text-sm text-gray-500">{star} star</span>
                             <div className="w-3/5 bg-gray-200 rounded-full h-2">
                                 <div
-                                className="bg-yellow-400 h-2 rounded-full"
+                                className="bg-gray-600 h-2 rounded-full"
                                 style={{ width: `${percentage}%` }}
                                 ></div>
                             </div>

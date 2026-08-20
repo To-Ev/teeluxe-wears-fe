@@ -52,19 +52,19 @@ const SearchBar = () => {
         <>
             {/* Desktop: icon + text */}
             <button
-            className="hidden md:flex gap-1.5 items-center cursor-pointer font-semibold text-xs text-gray-200 hover:text-amber-300 transition"
+            className="hidden md:flex gap-1.5 items-center cursor-pointer font-semibold text-xs text-amber-50 hover:text-amber-200 transition"
             onClick={() => setIsOpen(!isOpen)}
             >
-            <HiMagnifyingGlass className="w-5 h-5 cursor-pointer text-white" />
+            <HiMagnifyingGlass className="w-5 h-5 cursor-pointer text-amber-50" />
             SEARCH
             </button>
 
             {/* Mobile: icon only */}
             <button
-            className="md:hidden cursor-pointer text-gray-200 hover:text-amber-300 transition"
+            className="md:hidden cursor-pointer text-amber-50 hover:text-amber-200 transition"
             onClick={() => setIsOpen(!isOpen)}
             >
-            <HiMagnifyingGlass className="w-5 h-5 cursor-pointer text-white hover:text-amber-300" />
+            <HiMagnifyingGlass className="w-5 h-5 cursor-pointer text-amber-50 hover:text-amber-200" />
             </button>
         </>
         )}

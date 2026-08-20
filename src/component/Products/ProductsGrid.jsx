@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom'
+import StarRating from './StarRating';
 
 const ProductGrid = ({products, loading, error}) => {
     if(loading) {
@@ -26,8 +27,17 @@ const ProductGrid = ({products, loading, error}) => {
                                 className='w-full h-full object-cover rounded-lg'
                             />
                         </div>
-                        <h2 className='mb-1 px-2 text-md font-semibold'>{product.name}</h2>
-                        <p className='text-md px-2 tracking-tighter pb-2'>N {product.price.toLocaleString()}</p>
+                        <div className='flex items-start justify-between'>
+                            <div>
+                                <h2 className='mb-1 px-2 text-md font-semibold'>{product.name}</h2>
+                                <p className='text-lg px-2 font-semibold tracking-tighter pb-2'>N {product.price.toLocaleString()}</p>
+                            </div>
+                            {/* Stars rating and reviews */}
+                            <div className='flex items-center pr-1.5 text-gray-700 mb-4'>
+                                <StarRating rating={product.rating} />
+                                <p className='text-sm'>({product.numReviews})</p>
+                            </div>
+                        </div>
                     </div>
                 </Link>
             )
@@ -37,3 +47,5 @@ const ProductGrid = ({products, loading, error}) => {
 }
 
 export default ProductGrid
+
+  

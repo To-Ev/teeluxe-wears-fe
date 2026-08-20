@@ -12,34 +12,34 @@ const TopBar = () => {
   const { user } = useSelector(state => state.auth);
 
   return (
-    <div className="bg-gray-950 text-white ">
+    <div className="bg-gray-950 text-amber-100 ">
       <div className="container mx-auto flex justify-between items-center py-3 px-4">
         <div className='hidden md:flex item-center space-x-4'>
           <a 
             href="https://www.facebook.com/share/1EJJMMaqtr/?mibextid=wwXIfr" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-amber-300'>
+            className='hover:text-amber-200'>
             <TbBrandMeta className='h-5 w-5'/>
           </a>
           <a 
             href="https://www.instagram.com/derayo.ng?igsh=NXh2b2lid2ZvbWZ4" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-amber-300'>
+            className='hover:text-amber-200'>
             <IoLogoInstagram className='h-5 w-5'/>
           </a>
           <a 
             href="#" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-amber-300'>
+            className='hover:text-amber-200'>
             <RiTwitterXLine className='h-5 w-4'/>
           </a>
           <a href="https://wa.me/971529004793" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className='hover:text-amber-300'>
+            className='hover:text-amber-200'>
             <FaWhatsapp className='h-5 w-4'/>
           </a>
         </div>
@@ -47,7 +47,7 @@ const TopBar = () => {
           <span>Update your wardrobe and elevate your style</span>
         </div>
         <div className='text-sm hidden md:block'>
-          <Link to={user ? "/my-orders" : "/login"} className='hover:text-amber-300'>
+          <Link to={user ? "/my-orders" : "/login"} className='hover:text-amber-200'>
             TRACK ORDER
           </Link>
         </div>

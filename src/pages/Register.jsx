@@ -109,7 +109,7 @@ const Register = () => {
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </span>
                 </div>
-                <button type='submit' className='bg-gray-800 w-full p-3 text-white rounded-3xl hover:bg-gray-900 transition cursor-pointer font-semibold mb-4'
+                <button type='submit' className='bg-gray-800 w-full p-3 text-amber-50 rounded-3xl hover:bg-gray-900 transition cursor-pointer font-semibold mb-4'
                 >
                     {loading ? "Please wait..." : "Sign up"}
                 </button>
@@ -121,7 +121,7 @@ const Register = () => {
         {/* Right */}
         <div className='relative hidden md:block w-1/2'>
             <div className='absolute p-8 text-white bg-black/40 w-full h-full'>
-                <div className='text-9xl mt-40 mb-2'>
+                <div className='text-7xl lg:text-9xl mt-40 mb-2'>
                     <i className="icon-Derayo"></i>
                 </div>
                 <div>

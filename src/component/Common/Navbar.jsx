@@ -31,17 +31,17 @@ const Navbar = () => {
 
   return (
     <div className="w-full m-0 p-0">
-        <nav className={`w-full flex items-center justify-between py-2 sm:px-4 px-2 z-30
+        <nav className={`w-full flex items-center justify-between py-2 sm:px-4 px-3 z-30
         ${isHome ? "absolute bg-blend-multiply" : "relative bg-gray-900"}`}>
             {/* Left bar */}
-            <div className='hidden md:flex gap-3 text-gray-200 flex-1'>
-                <div className="hidden md:flex gap-3 text-gray-200 flex-1">
+            <div className='hidden md:flex gap-3 text-amber-50 flex-1'>
+                <div className="hidden md:flex gap-3 flex-1">
                     <Link
                         to="/collections/all?New In"
                         className={`text-xs font-semibold uppercase transition pb-1 ${
                         activeNewIn
-                            ? "text-amber-300 border-b-2 border-amber-300"
-                            : "hover:text-amber-300"
+                            ? "text-amber-200 border-b-2 border-amber-200"
+                            : "hover:text-amber-200"
                         }`}
                     >
                         NEW IN
@@ -51,8 +51,8 @@ const Navbar = () => {
                         to="/collections/all?category=Two Piece Sets"
                         className={`text-xs font-semibold uppercase transition pb-1 ${
                         activeCategory === "Two Piece Sets"
-                            ? "text-amber-300 border-b-2 border-amber-300"
-                            : "hover:text-amber-300"
+                            ? "text-amber-200 border-b-2 border-amber-200"
+                            : "hover:text-amber-200"
                         }`}
                     >
                         2-Pcs-SETS
@@ -62,8 +62,8 @@ const Navbar = () => {
                         to="/collections/all?category=Bubus"
                         className={`text-xs font-semibold uppercase transition pb-1 ${
                         activeCategory === "Bubus"
-                            ? "text-amber-300 border-b-2 border-amber-300"
-                            : "hover:text-amber-300"
+                            ? "text-amber-200 border-b-2 border-amber-200"
+                            : "hover:text-amber-200"
                         }`}
                     >
                         BÚBÚS
@@ -73,8 +73,8 @@ const Navbar = () => {
                         to="/collections/all?category=Kaftans"
                         className={`text-xs font-semibold uppercase transition pb-1 ${
                         activeCategory === "Kaftans"
-                            ? "text-amber-300 border-b-2 border-amber-300"
-                            : "hover:text-amber-300"
+                            ? "text-amber-200 border-b-2 border-amber-200"
+                            : "hover:text-amber-200"
                         }`}
                     >
                         KAFTANS
@@ -84,8 +84,8 @@ const Navbar = () => {
                         to="/collections/all?category=Aso Oke"
                         className={`text-xs font-semibold uppercase transition pb-1 ${
                         activeCategory === "Aso Oke"
-                            ? "text-amber-300 border-b-2 border-amber-300"
-                            : "hover:text-amber-300"
+                            ? "text-amber-200 border-b-2 border-amber-200"
+                            : "hover:text-amber-200"
                         }`}
                     >
                         AṢỌ ÒKÈ
@@ -94,26 +94,26 @@ const Navbar = () => {
             </div>
             {/* Mid Bar */}
             <div className='flex-1 flex justify-start md:justify-center'>
-                <Link to='/' className='text-4xl sm:text-5xl font-semibold text-amber-200'>
+                <Link to='/' className='text-3xl sm:text-5xl font-semibold text-amber-200'>
                     <i className="icon-Derayo"></i>
                 </Link>
             </div>
             {/* Right Icons */}
-            <div className="flex items-center justify-end space-x-2 sm:space-x-4 text-gray-200 flex-1">
+            <div className="flex items-center justify-end space-x-3 sm:space-x-4 text-amber-50 flex-1">
                 {user && user.roles?.Admin === ROLES_LIST.Admin  && (
                     <Link
                     to="/admin"
-                    className="block bg-black rounded px-2 py-0.5 text-sm sm:px-2 sm:py-0.5 text-amber-500"
+                    className="block bg-black rounded px-2 py-0.5 text-sm sm:px-2 sm:py-0.5 text-amber-200"
                     >
                     Admin
                     </Link>
                 )}
-
+    
                 {/* Profile */}
                 {/* Desktop: icon + text */}
                 <Link
                     to="/profile"
-                    className="hover:text-amber-300 hidden md:flex items-center gap-1.5 text-xs font-semibold transition"
+                    className="hover:text-amber-200 hidden md:flex items-center gap-1.5 text-xs font-semibold transition"
                 >
                     <HiOutlineUser className="h-5 w-5 text-white" />
                     PROFILE
@@ -121,15 +121,15 @@ const Navbar = () => {
                 {/* Mobile: icon only */}
                 <Link
                     to="/profile"
-                    className="hover:text-amber-300 md:hidden transition"
+                    className="hover:text-amber-200 md:hidden transition"
                 >
-                    <HiOutlineUser className="h-5 w-5 text-white hover:text-amber-300" />
+                    <HiOutlineUser className="h-5 w-5 text-white hover:text-amber-200" />
                 </Link>
 
                 {/* Cart */}
                 <button
                     onClick={toggleCartDrawer}
-                    className="relative hover:text-amber-300 cursor-pointer hidden md:flex items-center text-xs gap-1.5 font-semibold transition"
+                    className="relative hover:text-amber-200 cursor-pointer hidden md:flex items-center text-xs gap-1.5 font-semibold transition"
                 >
                     <HiOutlineShoppingBag className="h-5 w-5 text-white" />
                     CART
@@ -142,9 +142,9 @@ const Navbar = () => {
                 {/* Mobile: icon only */}
                 <button
                     onClick={toggleCartDrawer}
-                    className="relative hover:text-amber-300 cursor-pointer md:hidden transition"
+                    className="relative hover:text-amber-200 cursor-pointer md:hidden transition"
                 >
-                    <HiOutlineShoppingBag className="h-5 w-5 text-white hover:text-amber-300" />
+                    <HiOutlineShoppingBag className="h-5 w-5 text-white hover:text-amber-200" />
                     {cartItemCount > 0 && (
                     <span className="absolute -top-1 text-xs bg-amber-200 rounded-full px-2 py-0.5 text-gray-600">
                         {cartItemCount}
@@ -164,7 +164,7 @@ const Navbar = () => {
 
                 {/* NavBar (hamburger) */}
                 <button className="md:hidden cursor-pointer" onClick={toggleNavDrawer}>
-                    <HiBars3BottomRight className="h-6 w-6 text-gray-200" />
+                    <HiBars3BottomRight className="h-6 w-6 text-amber-50" />
                 </button>
             </div>
 

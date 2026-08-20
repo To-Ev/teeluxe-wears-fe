@@ -5,6 +5,7 @@ import { closeYear, fetchAdminOrders } from '../redux/slices/adminOrderSlice';
 import { fetchAdminProducts } from '../redux/slices/adminProductsSlice';
 import toast from 'react-hot-toast';
 import ClosingLogsTable from '../component/Admin/ClosingLogsTable';
+import { FaLock } from 'react-icons/fa';
 
 const AdminHomePage = () => {
 
@@ -117,9 +118,9 @@ const AdminHomePage = () => {
       <div className="mt-6 flex w-full justify-end">
         <button
           onClick={() => setShowModal(true)}
-          className="mt-6 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 cursor-pointer transition"
+          className="flex items-center gap-2 mt-6 px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 cursor-pointer transition"
         >
-          End of Year Closing
+          <FaLock /> End of Year Closing
         </button>
       </div>
 
