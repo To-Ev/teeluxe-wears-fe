@@ -20,7 +20,7 @@ const Hero = () => {
           <p 
           className='text-lg font-thin tracking-wider mb-9'>Timeless pieces inspired by African heritage crafted with <br /> culture for the modern era for sophisticated use.
           </p>
-          <button className='w-60 hover:bg-amber-300 transition bg-amber-200 py-2 rounded-md'>
+          <button className='w-60 hover:bg-amber-200 transition bg-amber-100 py-2 rounded-md'>
             <Link to="/collections/all" className='text-gray-900 w-full flex items-center justify-center gap-3'>
               SHOP THE COLLECTION <FaLongArrowAltRight />
             </Link>
