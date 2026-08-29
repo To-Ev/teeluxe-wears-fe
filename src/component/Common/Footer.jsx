@@ -27,10 +27,20 @@ const Footer = () => {
     // Show toast notifications when success/error changes
     useEffect(() => {
         if (success) {
-        toast.success(success);
+            toast.success(
+                "Welcome! 🎉 You've subscribed successfully. Please check your Spam folder for our email. If you find it there, press 'Not Spam' so future emails always land in your inbox.",
+                {
+                    position: "top-center",
+                    autoClose: 15000, // 15 seconds
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                }
+            );
         }
         if (error) {
-        toast.error(error);
+            toast.error(error);
         }
     }, [success, error]);
 
