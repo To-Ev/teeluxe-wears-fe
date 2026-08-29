@@ -35,7 +35,7 @@ const newsletterSlice = createSlice({
       })
       .addCase(subscribeNewsletter.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.err;
+        state.error = action.payload || "Failed to subscribe to newsletter";
       });
   },
 });
