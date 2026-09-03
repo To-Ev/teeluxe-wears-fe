@@ -185,9 +185,7 @@ const UserManagement = () => {
                             <td className="p-4 text-gray-900 whitespace-nowrap">
                                 {user.name}
                                 <div className="flex items-center gap-2 text-xs font-bold text-gray-500">
-                                    {Object.keys(user.roles)
-                                    .map((roleKey) => roleKey.substring(0, 2)) // take first 2 characters
-                                    .join(" / ")} {/* join with slash */}
+                                    {Object.keys(user.roles).join(" / ")}
                                 </div>
                             </td>
                             <td className='p-4'>{user.email}</td>
