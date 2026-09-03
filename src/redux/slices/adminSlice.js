@@ -44,10 +44,10 @@ export const addUser = createAsyncThunk(
 
 // Update User info
 export const updateUser = createAsyncThunk(
-    "admin/updateUser", async ({ id, name, email, role }, { rejectWithValue }) => {
+    "admin/updateUser", async ({ id, name, email, roles }, { rejectWithValue }) => {
         try {
             const response = await api.put(
-                `${API_URL}/admin/users/${id}`, { name, email, role }, {
+                `${API_URL}/admin/users/${id}`, { name, email, roles }, {
                 headers: {
                     Authorization: USER_TOKEN,
                 }

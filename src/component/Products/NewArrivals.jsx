@@ -68,6 +68,7 @@ const NewArrivals = () => {
                         <img 
                             src={product?.images[0].url} 
                             alt={product?.images[0].altText || product.name} 
+                            loading="lazy"
                             className='w-full h-80 object-cover rounded-lg'
                             draggable="false"
                         />

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addUser, deleteUser, fetchUsers, updateUser } from '../../redux/slices/adminSlice';
 import ROLES_LIST from '../../ROLES_LIST';
+import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash, FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 
 const UserManagement = () => {
@@ -58,29 +59,35 @@ const UserManagement = () => {
         }
     };
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
 
-        dispatch(addUser(formData));
-        
-        setFormData({
+        try {
+            await dispatch(addUser(formData)).unwrap(); // unwrap to catch errors
+            toast.success("User added successfully!");
+            setFormData({
             name: "",
             email: "",
             password: "",
-            roles: {
-                User: ROLES_LIST.User
-            }
-        });
-    }
-
-    const handleRoleChange = (userId, newRole) => {
-        const roleKey = newRole.charAt(0).toUpperCase() + newRole.slice(1); // "Admin"
-        const updatedRoles = {
-            ...users.find(u => u._id === userId).roles,
-            [roleKey]: ROLES_LIST[roleKey]
+            roles: { User: ROLES_LIST.User }
+            });
+        } catch (err) {
+            toast.error(`Failed to add user: ${err.message || err}`);
         };
+    };
 
-        dispatch(updateUser({ id: userId, roles: updatedRoles }));
+    const handleRoleChange = async (userId, newRole) => {
+        try {
+            const roleKey = newRole.charAt(0).toUpperCase() + newRole.slice(1); // "Admin"
+            const updatedRoles = {
+                ...users.find(u => u._id === userId).roles,
+                [roleKey]: ROLES_LIST[roleKey]
+            };
+            await dispatch(updateUser({ id: userId, roles: updatedRoles })).unwrap();
+            toast.success("Role updated successfully!");
+        } catch (err) {
+            toast.error(`Failed to update role: ${err.message || err}`);
+        }
     };
 
   return (
@@ -175,18 +182,27 @@ const UserManagement = () => {
                 <tbody>
                     {users.map((user, index) =>(
                         <tr key={index} className='border-b border-gray-50 hover:bg-gray-50'>
-                            <td className="p-4 text-gray-900 whitespace-nowrap">{user.name}</td>
+                            <td className="p-4 text-gray-900 whitespace-nowrap">
+                                {user.name}
+                                <div className="flex items-center gap-2 text-xs font-bold text-gray-500">
+                                    {Object.keys(user.roles)
+                                    .map((roleKey) => roleKey.substring(0, 2)) // take first 2 characters
+                                    .join(" / ")} {/* join with slash */}
+                                </div>
+                            </td>
                             <td className='p-4'>{user.email}</td>
+                            {/* Roles update */}
                             <td className="p-4">
-                                <select 
-                                    value={user.roles} 
+                                <select
+                                    value={Object.keys(user.roles)[0]} // show first role
                                     onChange={(e) => handleRoleChange(user._id, e.target.value)}
-                                    className='p-2 border border-gray-400 rounded'
+                                    className="p-2 border border-gray-400 rounded"
                                 >
                                     <option value="Customer">Customer</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Courier">Courier</option>
                                 </select>
+
                             </td>
                             <td className="p-4">
                                 <button 

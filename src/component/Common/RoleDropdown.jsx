@@ -22,13 +22,13 @@ const RoleDropdown = ({ user }) => {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-40 bg-gray-800 rounded shadow-lg z-50">
-          <ul className="flex flex-col text-amber-50">
+        <div className="absolute -right-10 mt-2 w-40 backdrop-blur-sm rounded-lg shadow-lg z-50">
+          <ul className="flex flex-col text-amber-200">
             {hasAdmin && (
               <li>
                 <Link
                   to="/admin"
-                  className="block px-4 py-2 hover:bg-gray-700"
+                  className="block px-4 py-2 rounded-lg border-b border-gray-200/10 hover:bg-gray-200/50"
                   onClick={() => setOpen(false)}
                 >
                   Admin
@@ -39,7 +39,7 @@ const RoleDropdown = ({ user }) => {
               <li>
                 <Link
                   to="/courier"
-                  className="block px-4 py-2 hover:bg-gray-700"
+                  className="block px-4 py-2 rounded-lg hover:bg-gray-200/50"
                   onClick={() => setOpen(false)}
                 >
                   Courier

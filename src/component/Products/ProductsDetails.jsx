@@ -174,7 +174,7 @@ const ProductsDetails = ({ productId }) => {
                             <p className='text-gray-800 mb-2 pb-5 border-b border-gray-200'>
                                 {selectedProduct.description}
                             </p>
-                            <div className='flex flex-col justify-between h-3/5'>
+                            <div className='flex flex-col gap-10 h-3/5'>
                                 {/* selected colors */}
                                 <div className='mb-4 mt-5'>
                                     <p className='text-gray-700 font-semibold mb-2'>Colors: <span className='font-medium'>{selectedColor}</span></p>

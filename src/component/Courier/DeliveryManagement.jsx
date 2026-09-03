@@ -29,7 +29,7 @@ const DeliveryManagement = () => {
         <tbody>
           {deliveries.map((d) => (
             <tr key={d.id} 
-            onClick={() => handleRowClick(d._id)}
+            onClick={() => handleRowClick(d.id)}
             className="border-t border-gray-100 hover:bg-gray-50 cursor-pointer">
               <td className="p-3">{d.id}</td>
               <td className="p-3">{d.destination}</td>
