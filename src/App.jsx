@@ -23,6 +23,11 @@ import AdminOrderPageDetails from './component/Admin/AdminOrderPageDetails '
 import ROLES_LIST from './ROLES_LIST'
 import './assets/styles/style.css';
 import AdminProductDetails from './component/Admin/AdminProductDetails'
+import CourierLayout from './component/Courier/CourierLayout'
+import CourierHomePage from './component/Courier/CourierHomePage'
+import DeliveryManagement from './component/Courier/DeliveryManagement'
+import DeliveryDetailsPage from './component/Courier/DeliveryDetailsPage'
+import ActiveRoutesPage from './component/Courier/ActiveRoutesPage'
 
 
 function App() {
@@ -55,6 +60,16 @@ function App() {
           <Route path="orders/:id" element={<AdminOrderPageDetails />} />
           <Route path="products/:id" element={<AdminProductDetails />} />
         </Route>
+        <Route path='/courier' element={
+          <ProtectedRoute roles={ROLES_LIST.Courier}>
+            <CourierLayout />
+          </ProtectedRoute>}>
+          <Route index element={<CourierHomePage />} />
+          <Route path='deliveries' element={<DeliveryManagement />} />
+          <Route path='deliveries/:id' element={<DeliveryDetailsPage />} />
+          <Route path='active-routes' element={<ActiveRoutesPage />} />
+        </Route>
+
       </Routes>
       <Toaster position='top-right'/>
     </>

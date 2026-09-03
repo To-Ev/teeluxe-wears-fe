@@ -6,6 +6,7 @@ import CartDrawer from '../Layout/CartDrawer';
 import { IoMdClose } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import ROLES_LIST from '../../ROLES_LIST';
+import RoleDropdown from './RoleDropdown'
 
 const Navbar = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -100,15 +101,9 @@ const Navbar = () => {
             </div>
             {/* Right Icons */}
             <div className="flex items-center justify-end space-x-3 sm:space-x-4 text-amber-50 flex-1">
-                {user && user.roles?.Admin === ROLES_LIST.Admin  && (
-                    <Link
-                    to="/admin"
-                    className="block bg-black rounded px-2 py-0.5 text-sm sm:px-2 sm:py-0.5 text-amber-200"
-                    >
-                    Admin
-                    </Link>
-                )}
-    
+                {/* admin dashboard*/}
+                {<RoleDropdown user={user} />}
+
                 {/* Profile */}
                 {/* Desktop: icon + text */}
                 <Link
