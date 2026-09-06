@@ -185,14 +185,14 @@ const UserManagement = () => {
                             <td className="p-4 text-gray-900 whitespace-nowrap">
                                 {user.name}
                                 <div className="flex items-center gap-2 text-xs font-bold text-gray-500">
-                                    {Object.keys(user.roles).join(" / ")}
+                                    {user.roles ? Object.keys(user.roles).join(" / ") : "No roles"}
                                 </div>
                             </td>
                             <td className='p-4'>{user.email}</td>
                             {/* Roles update */}
                             <td className="p-4">
                                 <select
-                                    value={Object.keys(user.roles)[0]} // show first role
+                                    value={user.roles ? Object.keys(user.roles)[0] : "Customer"}// show first role
                                     onChange={(e) => handleRoleChange(user._id, e.target.value)}
                                     className="p-2 border border-gray-400 rounded"
                                 >
