@@ -55,7 +55,7 @@ const OrderManagement = () => {
                     #{order._id}
                   </td>
                   <td className="p-4">{order.user?.name || "Guest"}</td>
-                  <td className="p-4">N{order.totalPrice.toFixed(2)}</td>
+                  <td className="p-4">N{Number(order.totalPrice.toFixed(2)).toLocaleString()}</td>
                   <td className="p-4">
                     <select 
                       value={order.status} 

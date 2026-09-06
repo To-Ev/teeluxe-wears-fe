@@ -56,7 +56,7 @@ const ProductManagement = () => {
                                     >{product.name}
                                 </Link>
                             </td>
-                            <td className="p-4">N{product.price}</td>
+                            <td className="p-4">N{Number(product.price).toLocaleString()}</td>
                             <td className="p-4">{product.sku}</td>
                             <td className="flex flex-col gap-1 sm:flex-row p-4">
                                 <Link 

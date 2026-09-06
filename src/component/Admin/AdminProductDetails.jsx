@@ -47,9 +47,13 @@ const AdminProductDetails = () => {
             <span className="text-xl font-semibold text-gray-700">
               N{selectedProduct?.price.toLocaleString()}
             </span>
-            <span className="text-sm line-through text-gray-400">
-              N{selectedProduct?.discountPrice.toLocaleString()}
-            </span>
+            {
+              selectedProduct?.discountPrice && (
+                <span className="text-sm line-through text-gray-400">
+                  N{selectedProduct?.discountPrice?.toLocaleString()}
+                </span>
+              )
+            }
           </div>
 
           <p className="text-sm text-gray-700">

@@ -59,7 +59,7 @@ const AdminHomePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="p-4 shadow-md rounded-lg">
             <h2 className='text-xl font-semibold'>Revenue</h2>
-            <p className='text-2xl'>N{totalSales.toFixed(2)}</p>
+            <p className='text-2xl'>N{Number(totalSales.toFixed(2)).toLocaleString()}</p>
           </div>
           <div className="p-4 shadow-md rounded-lg">
             <h2 className='text-xl font-semibold'>Total Orders</h2>
@@ -99,7 +99,7 @@ const AdminHomePage = () => {
                   className='border-b border-gray-200 hover:bg-gray-50 cursor-pointer'>
                   <td className='p-4'>#{order._id}</td>
                   <td className='p-4'>{order.user?.name || "Guest"}</td>
-                  <td className='p-4'>N{order.totalPrice.toFixed(2)}</td>
+                  <td className='p-4'>N{Number(order.totalPrice.toFixed(2)).toLocaleString()}</td>
                   <td className='p-4'>{order.status}</td>
                 </tr>
                 ))
