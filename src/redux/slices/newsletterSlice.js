@@ -21,7 +21,12 @@ const newsletterSlice = createSlice({
     success: null,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    resetNewsletterState: (state) => {
+      state.success = null;
+      state.error = null;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(subscribeNewsletter.pending, (state) => {
@@ -39,5 +44,7 @@ const newsletterSlice = createSlice({
       });
   },
 });
+
+export const { resetNewsletterState } = newsletterSlice.actions;
 
 export default newsletterSlice.reducer;

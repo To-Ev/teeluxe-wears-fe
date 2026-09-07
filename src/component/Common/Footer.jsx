@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { subscribeNewsletter } from '../../redux/slices/newsletterSlice';
+import { subscribeNewsletter, resetNewsletterState } from '../../redux/slices/newsletterSlice';
 
 const Footer = () => {
 
@@ -29,20 +29,15 @@ const Footer = () => {
         if (success) {
             toast.success(
                 "Welcome! 🎉 You've subscribed successfully. Please check your Spam folder for our email. If you find it there, press 'Not Spam' so future emails always land in your inbox.",
-                {
-                    position: "top-center",
-                    autoClose: 15000, // 15 seconds
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                }
+                {duration: 15000}
             );
+            dispatch(resetNewsletterState()); // reset success/error
         }
         if (error) {
             toast.error(error);
+            dispatch(resetNewsletterState());
         }
-    }, [success, error]);
+    }, [success, error, dispatch]);
 
   return (
     <footer className='py-12 border-t border-gray-300 bg-gray-50'>

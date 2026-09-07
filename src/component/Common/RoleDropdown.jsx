@@ -16,7 +16,7 @@ const RoleDropdown = ({ user }) => {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="bg-black rounded cursor-pointer px-2 py-1 text-sm text-amber-200"
+        className="bg-black rounded cursor-pointer px-2 py-1 text-xs sm:text-sm text-amber-200"
       >
         Dashboard
       </button>
