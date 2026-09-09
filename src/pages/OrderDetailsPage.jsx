@@ -91,9 +91,9 @@ const OrderDetailsPage = () => {
                                                 className='text-blue-500 hover:underline'>{item.name}
                                             </Link>
                                         </td>
-                                        <td className='py-2 px-4'>N{item.price}</td>
+                                        <td className='py-2 px-4'>N{item.price.toLocaleString()}</td>
                                         <td className='py-2 px-4'>{item.quantity}</td>
-                                        <td className='py-2 px-4'>N{item.price * item.quantity}</td>
+                                        <td className='py-2 px-4'>N{(item.price * item.quantity).toLocaleString()}</td>
                                     </tr>
                                 ))}
                             </tbody>

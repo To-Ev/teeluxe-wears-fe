@@ -62,7 +62,7 @@ const MyOrderPage = () => {
                                     `${order.shippingAddress.city}, ${order.shippingAddress.country}` : 'N/A'}
                                 </td>
                                 <td className='p-2 sm:p-4'>{order.orderItems.length}</td>
-                                <td className='p-2 sm:p-4'>N{order.totalPrice.toFixed(2)}</td>
+                                <td className='p-2 sm:p-4'>N{order.totalPrice.toLocaleString()}</td>
                                 <td className='p-2 sm:p-4'>
                                     <span 
                                     className={`rounded text-xs px-3 py-2 ${order.isPaid ? `bg-green-100 text-green-500` : 'bg-red-100 text-red-500'}`}>
