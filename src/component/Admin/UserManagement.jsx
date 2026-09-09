@@ -182,7 +182,7 @@ const UserManagement = () => {
                 <tbody>
                     {users.map((user, index) =>(
                         <tr key={index} className='border-b border-gray-50 hover:bg-gray-50'>
-                            <td className="p-4 text-gray-900 whitespace-nowrap">
+                            <td className="p-4 text-gray-600 font-semibold whitespace-nowrap">
                                 {user.name}
                                 <div className="flex items-center gap-2 text-xs font-bold text-gray-500">
                                     {user.roles ? Object.keys(user.roles).join(" / ") : "No roles"}
