@@ -24,7 +24,8 @@ const CheckOut = () => {
     country: "",
     phone: "",
     city: ""
-  })
+  });
+  
   const [checkOutId, setCheckOutId] = useState(null);
 
   // ensure cart is loaded before proceeding

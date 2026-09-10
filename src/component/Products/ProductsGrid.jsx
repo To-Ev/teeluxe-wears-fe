@@ -7,7 +7,7 @@ const ProductGrid = ({products, loading, error}) => {
     }
 
     if(error) {
-        return <p className='text-center text-red-400 text-2xl p-3'>Error fetching products! check network connection.</p>
+        return <p className='text-center text-red-400 text-2xl p-3'>{error}</p>
     }
 
     if (!loading && !error && (!products || products.length === 0)) {

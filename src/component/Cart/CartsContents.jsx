@@ -2,6 +2,7 @@ import React from 'react'
 import { RiDeleteBin3Fill, RiDeleteBin3Line } from 'react-icons/ri'
 import { useDispatch } from 'react-redux'
 import { removeFromCart, updateCartItem } from '../../redux/slices/cartSlice';
+import toast from 'react-hot-toast';
 
 const CartsContents = ({ cart, userId, guestId }) => {
 
@@ -24,9 +25,26 @@ const CartsContents = ({ cart, userId, guestId }) => {
     }
   };
 
-  const handleRemoveFromCart = (productId, size, color) =>{
-    dispatch(removeFromCart({productId, userId, guestId, size, color}))
+  const handleRemoveFromCart = async (productId, size, color) => {
+    try {
+      const resultAction = await dispatch(
+        removeFromCart({ productId, userId, guestId, size, color })
+      );
+
+      if (removeFromCart.fulfilled.match(resultAction)) {
+        toast.success('Item removed from cart successfully!', {
+          position: "top-center",
+          duration: 3000,
+        });
+      } else {
+        toast.error(resultAction.payload || 'Failed to remove item from cart. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error removing item from cart:', error);
+      toast.error(error.response?.data?.err || 'Failed to remove item from cart. Please try again.');
+    }
   };
+
 
   return (
     <div>

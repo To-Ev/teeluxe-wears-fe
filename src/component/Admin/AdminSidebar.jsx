@@ -2,7 +2,7 @@ import React from 'react'
 import { FaBoxOpen, FaClipboard, FaClipboardList, FaSignOutAlt, FaStore, FaUser } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { removeFromCart } from '../../redux/slices/cartSlice'
+import { clearCart, removeFromCart } from '../../redux/slices/cartSlice'
 import { logoutUser } from '../../redux/slices/authSlice'
 
 const AdminSidebar = () => {
@@ -11,6 +11,8 @@ const AdminSidebar = () => {
 
     const handleLogout = () =>{
         dispatch(logoutUser());
+        dispatch(clearCart());
+        localStorage.removeItem("user");
         dispatch(removeFromCart());
         navigate("/");
     };
