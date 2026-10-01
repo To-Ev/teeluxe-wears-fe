@@ -44,7 +44,7 @@ const TopBar = () => {
           </a>
         </div>
         <div className='text-sm text-center grow'>
-          <span>Update your wardrobe and elevate your style</span>
+          <span>Elevated fashion inspired by culture, crafted for modern lifestyles</span>
         </div>
         <div className='text-sm hidden md:block'>
           <Link to={user ? "/my-orders" : "/login"} className='hover:text-amber-200'>

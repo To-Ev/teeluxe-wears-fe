@@ -18,7 +18,7 @@ const Hero = () => {
           </h1>
           <div className='w-30 h-0.5 bg-amber-200/70 mb-6'></div>
           <p 
-          className='text-lg font-thin tracking-wider mb-9'>Timeless pieces inspired by African heritage crafted with <br /> culture for the modern era for sophisticated use.
+          className='text-lg font-thin tracking-wider mb-9'>Timeless pieces inspired by African heritage crafted with <br /> crafted with culture and designed for modern sophistication.
           </p>
           <button className='w-60 hover:bg-amber-200 transition bg-amber-100 py-2 rounded-md'>
             <Link to="/collections/all" className='text-gray-900 w-full flex items-center justify-center gap-3'>
@@ -36,7 +36,7 @@ const Hero = () => {
             African<br/> <span className='text-amber-200 italic text-6xl'>Heritage</span>
           </h1>
           <p 
-          className='text-md sm:text-sm tracking-tighter md:text-lg sm:mb-5 mb-6'>Timeless pieces inspired by African heritage crafted with culture for the modern era for sophisticated use
+          className='text-md sm:text-sm tracking-tighter md:text-lg sm:mb-5 mb-6'>Timeless pieces inspired by African heritage, thoughtfully crafted for the modern lifestyle.
           </p>
           <Link to="/collections/all" className='px-6 py-3 rounded-md font-semibold bg-amber-100 cursor-pointer text-gray-900 transition duration-300'>Shop Now</Link>
         </div>
