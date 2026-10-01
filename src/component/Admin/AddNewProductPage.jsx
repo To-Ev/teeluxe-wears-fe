@@ -21,6 +21,7 @@ const AddNewProductPage = () => {
         countInStock: 0,
         sku: "",
         category: "",
+        gender: "",
         brand: "",
         sizes: [],
         colors: [],
@@ -175,6 +176,20 @@ const AddNewProductPage = () => {
                         <option value="Bubus">BÚBÚS</option>
                         <option value="Kaftans">KAFTANS</option>
                         <option value="Aso Oke">AṢỌ ÒKÈ</option>
+                    </select>
+                </div>
+                {/* Gender  */}
+                <div className='mb-6'>
+                    <label className='block font-semibold mb-2'>Gender</label>
+                    <select
+                        name='gender'
+                        value={productData.gender}
+                        onChange={handleChange}
+                        className="w-full rounded-md focus:outline-green-200 bg-gray-100 p-3">
+                        <option value="">Choose Gender</option>
+                        <option value="Men">Men</option>
+                        <option value="Women">Women</option>
+                        <option value="Unisex">Unisex</option>
                     </select>
                 </div>
                 {/* Section  */}

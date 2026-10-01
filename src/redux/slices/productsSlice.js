@@ -9,6 +9,7 @@ export const fetchByFilters = createAsyncThunk(
         size,
         color,
         section,
+        gender,
         minPrice,
         maxPrice,
         sortBy,
@@ -23,6 +24,7 @@ export const fetchByFilters = createAsyncThunk(
         if (size) queryParams.append("size", size);
         if (color) queryParams.append("color", color);
         if (section) queryParams.append("section", section);
+        if (gender) queryParams.append("gender", gender);
         if (minPrice) queryParams.append("minPrice", minPrice);
         if (maxPrice) queryParams.append("maxPrice", maxPrice);
         if (sortBy) queryParams.append("sortBy", sortBy);

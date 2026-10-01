@@ -7,7 +7,7 @@ const ProductGrid = ({products, loading, error}) => {
     }
 
     if(error) {
-        return <p className='text-center text-red-400 text-2xl p-3'>{error}</p>
+        return <p className='text-center text-gray-400 text-2xl p-3'>{error}</p>
     }
 
     if (!loading && !error && (!products || products.length === 0)) {
@@ -31,7 +31,13 @@ const ProductGrid = ({products, loading, error}) => {
                         <div className='flex items-start justify-between'>
                             <div>
                                 <h2 className='mb-1 px-2 text-md font-semibold'>{product.name}</h2>
-                                <p className='text-lg px-2 font-semibold tracking-tighter pb-2'>N {product.price.toLocaleString()}</p>
+                                <p className='text-lg px-2 font-semibold tracking-tighter pb-2'>
+                                    {Number(product.price).toLocaleString('en-NG', {
+                                        style: 'currency',
+                                        currency: 'NGN',
+                                        maximumFractionDigits: 0,
+                                    })}
+                                </p>
                             </div>
                             {/* Stars rating and reviews */}
                             <div className='flex items-center pr-1.5 text-gray-700 mb-4'>

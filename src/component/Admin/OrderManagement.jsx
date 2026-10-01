@@ -46,7 +46,7 @@ const OrderManagement = () => {
           </thead>
           <tbody>
             {orders.length > 0 ? (
-              orders.map((order =>(
+              orders.map((order) => (
                 <tr 
                   key={order._id}
                   className='border-b border-gray-200 hover:bg-gray-50 cursor-pointer'
@@ -55,7 +55,13 @@ const OrderManagement = () => {
                     #{order._id}
                   </td>
                   <td className="p-4">{order.user?.name || "Guest"}</td>
-                  <td className="p-4">N{Number(order.totalPrice.toFixed(2)).toLocaleString()}</td>
+                  <td className="p-4">
+                    {Number(order.totalPrice).toLocaleString('en-NG', {
+                      style: 'currency',
+                      currency: 'NGN',
+                      maximumFractionDigits: 0,
+                    })}
+                  </td>
                   <td className="p-4">
                     <select 
                       value={order.status} 
@@ -81,7 +87,7 @@ const OrderManagement = () => {
                     </button>
                   </td>
                 </tr>
-              )))
+              ))
             ): (<tr>
                   <td colSpan={5} className='p-4 text-lg text-center text-gray-500'>
                     No orders Found.

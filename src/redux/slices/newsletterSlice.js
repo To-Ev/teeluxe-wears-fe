@@ -6,10 +6,22 @@ export const subscribeNewsletter = createAsyncThunk(
   "newsletter/subscribe",
   async (email, { rejectWithValue }) => {
     try {
+      
       const { data } = await api.post("/subscribe", { email });
       return data;
+
     } catch (err) {
-      return rejectWithValue(err.response?.data?.err || "Failed to subscribe to newsletter");
+      if (err.code === "ECONNABORTED") {
+        return rejectWithValue(
+          "Request timed out. Your subscription may have been saved."
+        );
+      }
+
+      return rejectWithValue(
+        err.response?.data?.err ||
+        err.message ||
+        "Failed to subscribe to newsletter"
+      );
     }
   }
 );

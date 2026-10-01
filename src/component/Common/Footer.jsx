@@ -29,7 +29,24 @@ const Footer = () => {
         if (success) {
             toast.success(
                 "Welcome! 🎉 You've subscribed successfully. Please check your Spam folder for our email. If you find it there, press 'Not Spam' so future emails always land in your inbox.",
-                {duration: 15000}
+                {
+                    position: "top-center",
+                    duration: 15000,
+                    style: {
+                        background: "#111827",
+                        color: "#F9FAFB",
+                        border: "1px solid #D4AF37",
+                        borderRadius: "14px",
+                        padding: "16px 20px",
+                        fontWeight: "500",
+                        boxShadow: "0 12px 30px rgba(0,0,0,0.25)",
+                        maxWidth: "480px",
+                    },
+                        iconTheme: {
+                        primary: "#D4AF37",
+                        secondary: "#111827",
+                    },
+                }
             );
             dispatch(resetNewsletterState()); // reset success/error
         }

@@ -45,18 +45,26 @@ const AdminProductDetails = () => {
 
           <div className="flex items-center space-x-4">
             <span className="text-xl font-semibold text-gray-700">
-              N{selectedProduct?.price.toLocaleString()}
+              {Number(selectedProduct?.price).toLocaleString('en-NG', {
+                style: 'currency',
+                currency: 'NGN',
+                maximumFractionDigits: 0,
+              })}
             </span>
             {
               selectedProduct?.discountPrice && (
                 <span className="text-sm line-through text-gray-400">
-                  N{selectedProduct?.discountPrice?.toLocaleString()}
+                  {Number(selectedProduct?.discountPrice).toLocaleString('en-NG', {
+                    style: 'currency',
+                    currency: 'NGN',
+                    maximumFractionDigits: 0,
+                  })}
                 </span>
               )
             }
           </div>
 
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-700 font-semibold">
             In Stock: <span className="font-medium">{selectedProduct?.countInStock}</span>
           </p>
 
@@ -80,6 +88,10 @@ const AdminProductDetails = () => {
                 {color}
               </span>
             ))}
+          </div>
+
+          <div className="text-sm text-gray-700 font-semibold">
+            Gender: <span className="font-medium">{selectedProduct?.gender}</span>
           </div>
         </div>
       </div>

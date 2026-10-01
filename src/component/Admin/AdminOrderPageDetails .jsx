@@ -115,9 +115,21 @@ const AdminOrderPageDetails = () => {
                         {item.name}
                       </Link>
                     </td>
-                    <td className="py-2 px-4">N{item.price}</td>
+                    <td className="py-2 px-4">
+                      {Number(item.price).toLocaleString('en-NG', {
+                        style: 'currency',
+                        currency: 'NGN',
+                        maximumFractionDigits: 0,
+                      })}
+                    </td>
                     <td className="py-2 px-4">{item.quantity}</td>
-                    <td className="py-2 px-4">N{item.price * item.quantity}</td>
+                    <td className="py-2 px-4">
+                      {Number(item.price * item.quantity).toLocaleString('en-NG', {
+                        style: 'currency',
+                        currency: 'NGN',
+                        maximumFractionDigits: 0,
+                      })}
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -4,19 +4,21 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 const FilterSideBar = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [priceRange, setPriceRange] = useState([0, 200000]);
   const navigate = useNavigate()
   const [filter, setFilter] = useState({
     category: "",
     section: "",
+    gender: "",
     brands: [],
     size: [],
     materials: [],
     minPrice: 0,
-    maxPrice: 100000,
+    maxPrice: 200000,
   });
   const category = ["Two Piece Sets", "Bubus", "Kaftans", "Aso Oke"]
   const size = ["XS", "S", "M", "L", "XL", "XXL"]
+  const gender = ["Men", "Women", "Unisex"];
   const materials = [
     "Cotton",
     "Wool",
@@ -43,14 +45,15 @@ const FilterSideBar = () => {
     setFilter({
       category: params.category || "",
       section: params.section || "",
+      gender: params.gender || "",
       size: params.size ? params.size.split(",") : [],
       brands: params.brands ? params.brands.split(",") : [],
       materials: params.materials ? params.materials.split(",") : [],
       color: params.color || "",
       minPrice: params.minPrice ? Number(params.minPrice) : 0,
-      maxPrice: params.maxPrice ? Number(params.maxPrice) : 1000,
+      maxPrice: params.maxPrice ? Number(params.maxPrice) : 200000,
     });
-    setPriceRange([0, params.maxPrice || 1000])
+    setPriceRange([0, params.maxPrice || 200000])
   }, [searchParams]);
 
   const handleInputChange = (e) => {
@@ -128,6 +131,30 @@ const FilterSideBar = () => {
           }
         </div>
 
+        {/* Gender filter */}
+        <div className="p-3">
+          <label className="text-gray-600 text-md block mb-2">
+            Gender
+          </label>
+
+          {gender.map((item) => (
+            <div key={item} className="flex items-center">
+              <input
+                name="gender"
+                type="radio"
+                value={item}
+                checked={filter.gender === item}
+                onChange={handleInputChange}
+                className="h-4 w-4 accent-red-400 cursor-pointer"
+              />
+
+              <span className="text-lg ml-2 tracking-tighter">
+                {item}
+              </span>
+            </div>
+          ))}
+        </div>
+        
         {/* section filter  */}
         <div className='p-3'>
           <label className='text-gray-600 text-md block mb-2'>Section</label>
@@ -224,14 +251,20 @@ const FilterSideBar = () => {
         <div className='p-6'>
           <label className='block mb-2'>Price Range</label>
           <input 
-            type="range" name='priceRange' step={1000} min={0} max={100000}
+            type="range" name='priceRange' step={5000} min={0} max={200000}
             value={priceRange[1]}
             onChange={handlePriceChange}
             className='w-full bg-gray-400 appearance-none rounded-lg h-2'
           />
           <div className='flex justify-between font-semibold cursor-pointer text-sm'>
             <span>N0</span>
-            <span>N{priceRange[1]}</span>
+            <span>
+              {Number(priceRange[1]).toLocaleString('en-NG', {
+                style: 'currency',
+                currency: 'NGN',
+                maximumFractionDigits: 0,
+              })}
+            </span>
           </div>
         </div>
       </div>

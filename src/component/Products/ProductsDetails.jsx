@@ -164,11 +164,20 @@ const ProductsDetails = ({ productId }) => {
                             {/* Price */}
                             <div className='flex gap-3 items-end mb-4'>
                                 <p className='text-3xl text-gray-600 font-semibold'>
-                                    N{selectedProduct.price.toLocaleString()}
+                                   {Number(selectedProduct.price).toLocaleString('en-NG', {
+                                        style: 'currency',
+                                        currency: 'NGN',
+                                        maximumFractionDigits: 0,
+                                    })}
                                 </p>
                                 <p className='text-lg text-gray-500 line-through'>
-                                {selectedProduct.discountPrice > 0 ? 
-                                `N${selectedProduct.discountPrice.toLocaleString()}` : ""}
+                                {selectedProduct.discountPrice > 0 ?  
+                                `${Number(selectedProduct.discountPrice).toLocaleString('en-NG', {
+                                        style: 'currency',
+                                        currency: 'NGN',
+                                        maximumFractionDigits: 0,
+                                    })}`
+                                : ""}
                                 </p>
                             </div>
                             <p className='text-gray-800 mb-2 pb-5 border-b border-gray-200'>
