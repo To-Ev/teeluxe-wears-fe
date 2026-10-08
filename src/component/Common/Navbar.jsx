@@ -15,7 +15,11 @@ const Navbar = () => {
     const { user } = useSelector(state => state.auth);
 
     const location = useLocation();
-    const isHome = location.pathname === "/";
+
+    const transparentPages = ["/","/about", "/derayoFaq", '/features'];
+    const useTransparentNav = transparentPages.includes(location.pathname);
+
+    // const isHome = location.pathname === "/";
     const searchParams = new URLSearchParams(location.search);
     const activeCategory = searchParams.get("category");
     const activeNewIn = location.search.includes("New In");
@@ -31,9 +35,9 @@ const Navbar = () => {
     }
 
   return (
-    <div className="w-full m-0 p-0">
+    <div className="w-full m-0 p-0 font-sans">
         <nav className={`w-full flex items-center justify-between py-2 sm:px-4 px-3 z-30
-        ${isHome ? "absolute bg-blend-multiply" : "relative bg-gray-900"}`}>
+        ${useTransparentNav ? "absolute bg-blend-multiply" : "relative bg-gray-900"}`}>
             {/* Left bar */}
             <div className='hidden md:flex gap-3 text-amber-50 flex-1'>
                 <div className="hidden md:flex gap-3 flex-1">

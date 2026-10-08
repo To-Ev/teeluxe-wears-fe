@@ -59,8 +59,9 @@ const Footer = () => {
   return (
     <footer className='py-12 border-t border-gray-300 bg-gray-50'>
         <div className='container mx-auto grid grid-cols-1 text-center md:grid-cols-3 gap-8 px-4 lg:px-0'>
-            <div className='md:pl-3'>
-                <h3 className='text-lg text-gray-800 mb-4'>Newsletter</h3>
+            {/* Newsletter */}
+            <div className='md:pl-3 font-sans font-medium'>
+                <h3 className='text-lg text-gray-700 mb-4'>Newsletter</h3>
                 <p className='text-gray-500 mb-4'>Be the first to hear about New product, Exclusive events and Online offers</p>
                 <form className="flex justify-center" onSubmit={handleSubmit}>
                     <label className="flex w-full relative">
@@ -82,15 +83,16 @@ const Footer = () => {
                     </label>
                 </form>
             </div>
-            <div>
+            {/* Support */}
+            <div className='font-sans font-medium'>
                 <h3 className="text-lg text-gray-800 mb-4">Support</h3>
-                <Link to="#" className='text-gray-500 mb-4 block'>Contact us</Link>
-                <Link to="#" className='text-gray-500 mb-4 block'>About us</Link>
-                <Link to="#" className='text-gray-500 mb-4 block'>FAQ</Link>
-                <Link to="#" className='text-gray-500 mb-4 block'>Features</Link>
+                <Link to="/about" className='text-gray-500 mb-4 block hover:text-gray-800'>About us</Link>
+                <Link to="/derayoFaq" className='text-gray-500 mb-4 block hover:text-gray-800'>FAQ</Link>
+                <Link to="/features" className='text-gray-500 mb-4 block hover:text-gray-800'>Features</Link>
             </div>
-            <div>
-                <h3 className="text-lg text-gray-800 mb-4">Follow us</h3>
+            {/* Follow Us */}
+            <div className='font-sans font-medium'>
+                <h3 className="text-lg text-gray-700 mb-4 font-sans font-medium">Follow us</h3>
                 <div className='flex space-x-3 space-y-4 justify-center'>
                     <a 
                     href="https://www.facebook.com/share/1EJJMMaqtr/?mibextid=wwXIfr" 
@@ -119,12 +121,12 @@ const Footer = () => {
                 </div>
                 <p className='text-gray-400 text-lg mb-1'>Call us</p>
                 <a href="tel:+2347062821063" className='text-gray-500 hover:text-gray-700'>
-                    <FiPhoneCall className=' h-5 w-5 inline-block mr-3'/>
+                    <FiPhoneCall className=' h-5 w-5 inline-block mr-3 font-mono'/>
                     (+234) 706 2821 063
                 </a>
             </div>
         </div>
-        <div className='container mx-auto mt-10'>
+        <div className='container mx-auto mt-10 font-sans font-medium'>
             <p className='text-gray-500 text-center'>
                 ©️ {new Date().getFullYear()}, <i className="icon-Derayo"></i>. All right reserved.
             </p>

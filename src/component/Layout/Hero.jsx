@@ -5,7 +5,7 @@ import { FaLongArrowAltRight } from "react-icons/fa"
 
 const Hero = () => {
   return (
-    <section className='relative min-h-full'>
+    <section className='relative min-h-full font-sans'>
       <img src={rabbitImg} alt="rabbitImg" 
       className='w-full h-screen sm:h-full object-cover'/>
 
@@ -18,7 +18,7 @@ const Hero = () => {
           </h1>
           <div className='w-30 h-0.5 bg-amber-200/70 mb-6'></div>
           <p 
-          className='text-lg font-thin tracking-wider mb-9'>Timeless pieces inspired by African heritage crafted with <br /> crafted with culture and designed for modern sophistication.
+          className='text-lg font-normal tracking-wider mb-9'>Timeless pieces inspired by African heritage crafted with <br /> culture and designed for modern sophistication.
           </p>
           <button className='w-60 hover:bg-amber-200 transition bg-amber-100 py-2 rounded-md'>
             <Link to="/collections/all" className='text-gray-900 w-full flex items-center justify-center gap-3'>

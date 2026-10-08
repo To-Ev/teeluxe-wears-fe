@@ -12,7 +12,7 @@ const TopBar = () => {
   const { user } = useSelector(state => state.auth);
 
   return (
-    <div className="bg-gray-950 text-amber-100 ">
+    <div className="bg-gray-950 text-amber-100">
       <div className="container mx-auto flex justify-between items-center py-3 px-4">
         <div className='hidden md:flex item-center space-x-4'>
           <a 
@@ -43,7 +43,7 @@ const TopBar = () => {
             <FaWhatsapp className='h-5 w-4'/>
           </a>
         </div>
-        <div className='text-sm text-center grow'>
+        <div className='text-sm text-center font-light grow'>
           <span>Elevated fashion inspired by culture, crafted for modern lifestyles</span>
         </div>
         <div className='text-sm hidden md:block'>

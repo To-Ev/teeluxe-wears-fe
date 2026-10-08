@@ -5,7 +5,7 @@ import { FaLongArrowAltRight } from "react-icons/fa"
 
 const FeaturedProducts = () => {
   return (
-    <section className='py-12 px-4 h-full lg:px-0'>
+    <section className='py-12 px-4 h-full lg:px-0 font-sans'>
         {/* Desktop Screen */}
         <div className='relative mx-auto hidden lg:flex overflow-hidden rounded-2x lg:flex-row items-center text-amber-50'>
             <div className='w-full h-full absolute bg-black/10'></div>

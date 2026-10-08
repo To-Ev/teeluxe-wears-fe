@@ -28,6 +28,9 @@ import CourierHomePage from './component/Courier/CourierHomePage'
 import DeliveryManagement from './component/Courier/DeliveryManagement'
 import DeliveryDetailsPage from './component/Courier/DeliveryDetailsPage'
 import ActiveRoutesPage from './component/Courier/ActiveRoutesPage'
+import AboutUs from './component/Common/AboutUs'
+import FAQPage from './component/Common/FAQPage'
+import Features from './component/Common/Features'
 
 
 function App() {
@@ -46,6 +49,9 @@ function App() {
           <Route path='order-confirmation' element={<OrderConfirmationPage />}/>
           <Route path='orders/:id' element={<OrderDetailsPage />}/>
           <Route path='my-orders' element={<MyOrderPage />}/>
+          <Route path='about' element={<AboutUs />}/>
+          <Route path='derayoFaq' element={<FAQPage />}/>
+          <Route path='features' element={<Features />}/>
         </Route>
         <Route path='/admin' element={
           <ProtectedRoute roles={ROLES_LIST.Admin}>
